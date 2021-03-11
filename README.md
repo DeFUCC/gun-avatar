@@ -1,5 +1,7 @@
 # Avatar generator for GUN public keys
 
+![avatars](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatars.gif)
+
 It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. It converts key symbols to coordinates and colors (with alpha) for a couple of circles, that are placed on one side of a square canvas. Then the canvas gets reflected to create a nice symmetric 'face' to be used as an avatar for a gun user.
 
 ## Install
