@@ -15,8 +15,7 @@ npm i gun-avatar
 You can just add `avatar` class to an img tag and add `data-pub` attribute with the pub key. Then just adding the `import 'gun-avatar'` to your script will fill them all with base64 picture data. You can style the avatar as you want.
 
 ```html
-    <img class="gun-avatar"
-      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
+<img class="gun-avatar" data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
 ```
 
 ### 2. JS function
@@ -39,5 +38,5 @@ document.addEventListener('DOMContentLoaded', () => {
 - [ ] add more options to customize the view of the avatars
   - [ ] contrast, saturation
   - [ ] dark mode
-- [ ] adjustable ouyput size for smaller picture strings
+- [ ] adjustable ouput size for smaller picture strings
 
