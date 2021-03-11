@@ -1,6 +1,17 @@
-const cache = {}
+const cache = {} // stores already generated avatars
 
-export default function (pub, size = 800) {
+// add src base64 to every <img class="avatar" data-pub="YourUserPub">
+
+document.addEventListener('DOMContentLoaded', () => {
+  let avatars = document.getElementsByClassName('gun-avatar')
+  for (let img of avatars) {
+    img.src = gunAvatar(img.dataset.pub)
+  }
+})
+
+// actual generator function, returns the base64 string
+
+export function gunAvatar(pub, size = 800) {
   if (!pub) return
   if (cache[pub]) return cache[pub]
 

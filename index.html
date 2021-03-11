@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-     <img id="avatar">
-    </div>
-    
-    <script type="module" src="/main.js"></script>
-    <script type="module">
-      import avatar from './main.js'
-      const pub = 'YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8'
-      document.addEventListener('DOMContentLoaded', () => {
-          document.getElementById("avatar").src = avatar(pub)
-          console.log(avatar(pub))
-      });      
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUN avatar generator</title>
+</head>
+
+<body>
+  <div id="app">
+    <img class="gun-avatar"
+      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
+  </div>
+
+  <script type="module" src="/main.js"></script>
+
+</body>
+
 </html>
