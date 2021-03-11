@@ -1,6 +1,24 @@
 {
   "name": "gun-avatar",
+  "description": "Avatar generator for GUN public keys",
   "version": "0.4.0",
+  "author": {
+    "name": "Davay",
+    "email": "davay@frkt.ru"
+  },
+  "repository": "github:DeFUCC/gun-avatar",
+  "bugs": {
+    "url": "https://github.com/DeFUCC/gun-avatar/issues",
+    "email": "davay@frkt.ru"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gun",
+    "sea",
+    "public key",
+    "visualizer",
+    "avatar"
+  ],
   "files": [
     "dist"
   ],
