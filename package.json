@@ -1,0 +1,23 @@
+{
+  "name": "gun-avatar",
+  "version": "0.1.0",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/gun-avatar.umd.js",
+  "module": "./dist/gun-avatar.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/gun-avatar.es.js",
+      "require": "./dist/gun-avatar.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.0.5"
+  }
+}
