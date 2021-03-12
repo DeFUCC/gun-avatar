@@ -32,7 +32,7 @@ export function gunAvatar(pub, size = 800) {
   ctx.scale(-1, 1)
   ctx.translate(-size / 2, 0)
   ctx.drawImage(canvas, size / 2, 0, size, size, 0, 0, size, size)
-
+  cache[size] = cache[size] || {}
   cache[size][pub] = canvas.toDataURL()
   return cache[size][pub]
 }
