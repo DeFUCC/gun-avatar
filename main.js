@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 export function gunAvatar(pub, size = 800) {
   if (!pub) return
-  if (cache[pub]) return cache[pub]
+  if (cache?.[size]?.[pub]) return cache[size][pub]
 
   const canvas = document.createElement('canvas')
   canvas.width = canvas.height = size
