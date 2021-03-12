@@ -5,7 +5,7 @@ const cache = {} // stores already generated avatars
 document.addEventListener('DOMContentLoaded', () => {
   let avatars = document.getElementsByClassName('gun-avatar')
   for (let img of avatars) {
-    img.src = gunAvatar(img.dataset.pub)
+    img.src = gunAvatar(img.dataset.pub, img.dataset.size || 200)
   }
 })
 
@@ -23,15 +23,15 @@ export function gunAvatar(pub, size = 800) {
   const decoded = split.map((single) => decodeUrlSafeBase64(single))
 
   drawGradient(ctx, decoded[0][42], decoded[1][42], size)
-  drawCircles(decoded[0], ctx, size, 350)
+  drawCircles(decoded[0], ctx, size, 0.42 * size)
   ctx.globalCompositeOperation = 'lighter'
-  drawCircles(decoded[1], ctx, size, 100)
+  drawCircles(decoded[1], ctx, size, 0.125 * size)
 
   let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
   ctx.globalCompositeOperation = 'source-over'
   ctx.scale(-1, 1)
-  ctx.translate(-400, 0)
-  ctx.drawImage(canvas, 400, 0, 800, 800, 0, 0, size, size)
+  ctx.translate(-size / 2, 0)
+  ctx.drawImage(canvas, size / 2, 0, size, size, 0, 0, size, size)
 
   cache[pub] = canvas.toDataURL()
   return cache[pub]
