@@ -33,8 +33,8 @@ export function gunAvatar(pub, size = 800) {
   ctx.translate(-size / 2, 0)
   ctx.drawImage(canvas, size / 2, 0, size, size, 0, 0, size, size)
 
-  cache[pub] = canvas.toDataURL()
-  return cache[pub]
+  cache[size][pub] = canvas.toDataURL()
+  return cache[size][pub]
 }
 
 function drawGradient(ctx, top, bottom, size) {
