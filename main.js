@@ -5,13 +5,17 @@ const cache = {} // stores already generated avatars
 document.addEventListener('DOMContentLoaded', () => {
   let avatars = document.getElementsByClassName('gun-avatar')
   for (let img of avatars) {
-    img.src = gunAvatar(img.dataset.pub, img.dataset.size || 200)
+    img.src = gunAvatar(
+      img.dataset.pub,
+      img.dataset.size || 200,
+      img.dataset.dark,
+    )
   }
 })
 
 // actual generator function, returns the base64 string
 
-export function gunAvatar(pub, size = 800) {
+export function gunAvatar(pub, size = 800, dark = false) {
   if (!pub) return
   if (cache?.[size]?.[pub]) return cache[size][pub]
 
@@ -22,12 +26,11 @@ export function gunAvatar(pub, size = 800) {
   const split = pub.split('.')
   const decoded = split.map((single) => decodeUrlSafeBase64(single))
 
-  drawGradient(ctx, decoded[0][42], decoded[1][42], size)
+  drawGradient(ctx, decoded[0][42], decoded[1][42], size, dark)
   drawCircles(decoded[0], ctx, size, 0.42 * size)
   ctx.globalCompositeOperation = 'lighter'
   drawCircles(decoded[1], ctx, size, 0.125 * size)
 
-  let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
   ctx.globalCompositeOperation = 'source-over'
   ctx.scale(-1, 1)
   ctx.translate(-size / 2, 0)
@@ -37,10 +40,12 @@ export function gunAvatar(pub, size = 800) {
   return cache[size][pub]
 }
 
-function drawGradient(ctx, top, bottom, size) {
+function drawGradient(ctx, top, bottom, size, dark = false) {
   var gradient = ctx.createLinearGradient(0, 0, 0, size)
-  gradient.addColorStop(0, `hsl(0,0%,${70 + top * 30}%)`)
-  gradient.addColorStop(1, `hsl(0,0%,${70 + bottom * 30}%)`)
+  let offset = 70
+  if (dark) offset = 0
+  gradient.addColorStop(0, `hsl(0,0%,${offset + top * 30}%)`)
+  gradient.addColorStop(1, `hsl(0,0%,${offset + bottom * 30}%)`)
 
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, size, size)

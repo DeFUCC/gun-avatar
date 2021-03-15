@@ -2,7 +2,14 @@
 
 ![avatars](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatars.gif)
 
-It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. It converts key symbols to coordinates and colors (with alpha) for a couple of circles, that are placed on one side of a square canvas. Then the canvas gets reflected to create a nice symmetric 'face' to be used as an avatar for a gun user.
+It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
+
+So the steps to generate a unique picture for the key are like that:
+
+1. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
+2. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the HSLA model (h,s,l,a). We place these circles on one side of a square canvas. 
+3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
+4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
 ## Installation
 ### npm / pnpm
@@ -15,7 +22,7 @@ Add `<script src="https://unpkg.com/gun-avatar"></script>` to your html
 
 ### 1. HTML img tag with `data-pub` attribute
 
-Add the script to the page and then add `gun-avatar` class to an img tag along with add `data-pub` attribute with the pub key. `gun-avatar` automatically finds them on page and fills with corresponding base64 picture data. You can set `data-size` in px and style the avatar with css as you want.
+Add the script to the page and then add `gun-avatar` class to an img tag along with add `data-pub` attribute with the pub key. `gun-avatar` automatically finds them on page and fills with corresponding base64 picture data. You can set `data-size` in px and style the avatar with css as you want. Also there's `data-dark` option to generate a dark version of the same avatar. You can add `.gun-avatar {border-radius: 100%}` to tour css to make it round.
 
 ```html
 <script src="https://unpkg.com/gun-avatar"></script>
@@ -42,6 +49,5 @@ document.addEventListener('DOMContentLoaded', () => {
 - [ ] make the mirroring canvas work in Safari - currently it's not doing it properly
 - [x] make adjustable canvas size with consistent result
 - [ ] add more options to customize the view of the avatars
-  - [ ] contrast, saturation
-  - [ ] dark mode
+  - [x] dark mode
 
