@@ -1,5 +1,7 @@
 const cache = {} // stores already generated avatars
 
+import './patch.js'
+
 // add src base64 to every <img class="avatar" data-pub="YourUserPub">
 
 document.addEventListener('DOMContentLoaded', () => {
