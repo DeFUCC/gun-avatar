@@ -11,16 +11,26 @@ So the steps to generate a unique picture for the key are like that:
 3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
 4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
-## Installation
-### npm / pnpm
-`npm i gun-avatar` in a build environment 
+## How to install?
 
-### browser
+### npm / pnpm
+Run `npm i gun-avatar` in a build environment. Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or just `import 'gun-avatar'` for custom element use.
+
+### Browser
 Add `<script src="https://unpkg.com/gun-avatar"></script>` to your html
 
-## Usage
+## How to use?
 
-### 1. HTML img tag with `data-pub` attribute
+### 1. Custom HTML element
+
+After you add the script to the page you get a custom element `<gun-avatar />` for ease of use. The attributes are reactive to changes. Set `dark` attribute if you need a dark version of the avatar. Set `round` attribute to get a rounded image. Also `size` in pixels is available. 
+
+```html
+<script src="https://unpkg.com/gun-avatar"></script>
+<gun-avatar pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8" size="300" round dark />
+```
+
+### 2. HTML img tag with `data-pub` attribute
 
 Add the script to the page and then add `gun-avatar` class to an img tag along with add `data-pub` attribute with the pub key. `gun-avatar` automatically finds them on page and fills with corresponding base64 picture data. You can set `data-size` in px and style the avatar with css as you want. Also there's `data-dark` option to generate a dark version of the same avatar. You can add `.gun-avatar {border-radius: 100%}` to tour css to make it round.
 
@@ -29,7 +39,7 @@ Add the script to the page and then add `gun-avatar` class to an img tag along w
 <img class="gun-avatar" data-size="200" data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
 ```
 
-### 2. JS function
+### 3. JS function
 
 Install the `gun-avatar` package and import the `gunAvatar` function. Then you can use it to generate the base64 string to place into the src attribute with your favourite library or vanilla js. Function get two parameters: `pub` and `size` in px.
 

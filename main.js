@@ -2,18 +2,56 @@ const cache = {} // stores already generated avatars
 
 import './patch.js'
 
-// add src base64 to every <img class="avatar" data-pub="YourUserPub">
-
-document.addEventListener('DOMContentLoaded', () => {
-  let avatars = document.getElementsByClassName('gun-avatar')
-  for (let img of avatars) {
-    img.src = gunAvatar(
-      img.dataset.pub,
-      img.dataset.size || 200,
-      img.dataset.dark,
-    )
+if (document) {
+  // <gun-avatar pub="***" custom element
+  class Avatar extends HTMLElement {
+    constructor() {
+      super()
+      this.attachShadow({ mode: 'open' })
+      this.img = document.createElement('img')
+      this.shadowRoot.append(this.img)
+    }
+    render() {
+      this.pub = this.hasAttribute('pub')
+        ? this.getAttribute('pub')
+        : '1234123455Ute2tFhdjDQgzR-1234lfSlZxgEZKuquI.2F-j1234434U1234Asj-5lxnECG5TDyuPD8gEiuI123'
+      this.size = this.hasAttribute('size') ? this.getAttribute('size') : 400
+      this.round =
+        this.hasAttribute('round') || this.getAttribute('round') == ''
+          ? true
+          : false
+      if (this.round) {
+        this.img.style.borderRadius = '100%'
+      } else {
+        this.img.style.borderRadius = '0%'
+      }
+      this.dark =
+        this.hasAttribute('dark') || this.getAttribute('dark') == ''
+          ? true
+          : false
+      this.img.src = gunAvatar(this.pub, this.size, this.dark)
+    }
+    connectedCallback() {
+      this.render()
+    }
+    static get observedAttributes() {
+      return ['pub', 'round', 'size', 'dark']
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.render()
+    }
   }
-})
+
+  customElements.define('gun-avatar', Avatar)
+
+  // add src base64 to every <img class="avatar" data-pub="YourUserPub">
+  document.addEventListener('DOMContentLoaded', () => {
+    let avatars = document.getElementsByClassName('gun-avatar')
+    for (let img of avatars) {
+      img.src = gunAvatar(img.dataset.pub, img.dataset.size, img.dataset.dark)
+    }
+  })
+}
 
 // actual generator function, returns the base64 string
 
