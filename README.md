@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ### ROAD MAP
 
-- [ ] make the mirroring canvas work in Safari - currently it's not doing it properly
+- [x] make the mirroring canvas work in Safari 
 - [x] make adjustable canvas size with consistent result
-- [ ] add more options to customize the view of the avatars
+- [x] add more options to customize the view of the avatars
   - [x] dark mode
 
