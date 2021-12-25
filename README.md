@@ -17,11 +17,7 @@ So the steps to generate a unique picture for the key are like that:
 
 Run `npm i gun-avatar` in a build environment. Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or just `import 'gun-avatar'` for custom element use.
 
-### Browser
-
-Add `<script src="https://cdn.skypack.dev/gun-avatar"></script>` to your html
-
-## How to use?
+## How to use Gun-avatar?
 
 ### 1. Custom HTML element
 
