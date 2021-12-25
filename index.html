@@ -30,9 +30,12 @@
       data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
   </div>
 
-  <script type="module" src="/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-  <script>
+  <script type="module">
+    import {mountElement, mountClass} from './main.js'
+    mountElement()
+    mountClass()
+    
     let avatar = document.getElementById('avatar')
     SEA.pair().then(p => avatar.setAttribute('pub', p.pub))
     avatar.addEventListener('click', () => {
