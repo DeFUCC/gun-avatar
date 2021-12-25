@@ -11,6 +11,8 @@ So the steps to generate a unique picture for the key are like that:
 3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
 4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
+[Try it on codepen](https://codepen.io/Davay/pen/eYGeGMZ)
+
 ## How to install?
 
 ### npm / pnpm
