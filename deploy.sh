@@ -1,4 +1,4 @@
-cd dist
+cd demo
 
 git init
 git remote add origin git@github.com:davay42/gun-avatar.git 

@@ -1,11 +1,14 @@
-const path = require('path')
+import path from "path";
+import { defineConfig } from "vite";
 
-module.exports = {
+export default defineConfig({
+  base: "./",
   build: {
+    outDir: "./dist",
     lib: {
-      entry: path.resolve(__dirname, 'main.js'),
-      name: 'gun-avatar',
+      entry: path.resolve(__dirname, "main.js"),
+      name: "gun-avatar",
     },
     rollupOptions: {},
   },
-}
+});

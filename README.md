@@ -38,6 +38,8 @@ After you add the script to the page you get a custom element `<gun-avatar />` f
 />
 ```
 
+You can set up a custom element name with `mountElement('avatar')`
+
 ### 2. HTML img tag with `data-pub` attribute
 
 Add the script to the page and then add `gun-avatar` class to an img tag along with add `data-pub` attribute with the pub key. `gun-avatar` automatically finds them on page and fills with corresponding base64 picture data. You can set `data-size` in px and style the avatar with css as you want. Also there's `data-dark` option to generate a dark version of the same avatar. You can add `.gun-avatar {border-radius: 100%}` to tour css to make it round.
@@ -53,6 +55,8 @@ Add the script to the page and then add `gun-avatar` class to an img tag along w
   data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
 />
 ```
+
+You can set up a custom class name with `mountClass('avatar')`
 
 ### 3. JS function
 
@@ -75,4 +79,5 @@ document.addEventListener("DOMContentLoaded", () => {
 - [x] make adjustable canvas size with consistent result
 - [x] add more options to customize the view of the avatars
 - [x] custom element mount
-  - [x] dark mode
+- [x] dark mode
+- [x] editable class and element to mount

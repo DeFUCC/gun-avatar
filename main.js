@@ -2,17 +2,17 @@ const cache = {}; // stores already generated avatars
 
 import "./patch.js";
 
-export function mountClass() {
+export function mountClass(elClass = "gun-avatar") {
   // add src base64 to every <img class="avatar" data-pub="YourUserPub">
   document.addEventListener("DOMContentLoaded", () => {
-    let avatars = document.getElementsByClassName("gun-avatar");
+    let avatars = document.getElementsByClassName(elClass);
     for (let img of avatars) {
       img.src = gunAvatar(img.dataset.pub, img.dataset.size, img.dataset.dark);
     }
   });
 }
 
-export function mountElement() {
+export function mountElement(elName = "gun-avatar") {
   let initiated = false;
   if (!document || initiated) return;
 
@@ -55,7 +55,7 @@ export function mountElement() {
     }
   }
 
-  customElements.define("gun-avatar", Avatar);
+  customElements.define(elName, Avatar);
 
   initiated = true;
 }
