@@ -33,10 +33,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "page": "vite build --mode page",
     "serve": "vite preview --port=5005",
     "deploy": "sh deploy.sh"
   },
   "devDependencies": {
-    "vite": "^2.5.6"
+    "vite": "^2.7.13"
   }
 }

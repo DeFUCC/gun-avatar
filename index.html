@@ -17,20 +17,26 @@
     <p>Click on the avatar to generate a new SEA pub key</p>
 
     <gun-avatar style="cursor:pointer" id="avatar"
-      pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8" size="300" round />
+      pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8" size="300" round ></gun-avatar>
   </div>
 
   <div>
-    <h4>img.gun-avatar with data-pub attribute</h4>
-
-    <img class="gun-avatar" data-size="100"
-      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
-
-    <img class="gun-avatar" data-dark="true" data-size="50"
-      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
+    <h3>Room avatars</h3>
+    <gun-avatar style="cursor:pointer;" id="room"
+    pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8" size="400" draw="squares" reflect="false" ></gun-avatar>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+  <div>
+    <h4>Light and dark modes</h4>
+
+    <img class="gun-avatar" data-size="200"
+      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8">
+
+    <img class="gun-avatar" data-dark="true" data-size="200"
+      data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8" >
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/sea.js" type="module"></script>
   <script type="module">
     import {mountElement, mountClass} from './main.js'
     mountElement()
@@ -40,6 +46,11 @@
     SEA.pair().then(p => avatar.setAttribute('pub', p.pub))
     avatar.addEventListener('click', () => {
       SEA.pair().then(p => avatar.setAttribute('pub', p.pub))
+    })
+    let room = document.getElementById('room')
+    SEA.pair().then(p => room.setAttribute('pub', p.pub))
+    room.addEventListener('click', () => {
+      SEA.pair().then(p => room.setAttribute('pub', p.pub))
     })
   </script>
   <style>

@@ -35,6 +35,7 @@ After you add the script to the page you get a custom element `<gun-avatar />` f
   size="300"
   round
   dark
+  draw="circles"
 />
 ```
 
@@ -52,6 +53,7 @@ Add the script to the page and then add `gun-avatar` class to an img tag along w
 <img
   class="gun-avatar"
   data-size="200"
+  data-draw="squares"
   data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
 />
 ```
@@ -60,7 +62,7 @@ You can set up a custom class name with `mountClass('avatar')`
 
 ### 3. JS function
 
-Install the `gun-avatar` package and import the `gunAvatar` function. Then you can use it to generate the base64 string to place into the src attribute with your favourite library or vanilla js. Function get two parameters: `pub` and `size` in px.
+Install the `gun-avatar` package and import the `gunAvatar` function. Then you can use it to generate the base64 string to place into the src attribute with your favourite library or vanilla js. Function gets an object with options: `pub` , `size` in px, `draw` mode, `dark` of not, `reflect` or not.
 
 ```javascript
 import { gunAvatar } from "https://cdn.skypack.dev/gun-avatar";
@@ -69,8 +71,25 @@ const pub =
   "YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8";
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("avatar").src = gunAvatar(pub, 200);
+  document.getElementById("avatar").src = gunAvatar({ pub, size: 200 });
 });
+```
+
+### MODES
+
+1. **Circles** - the default mode.
+
+2. **Squares** - gradient squares over blurred ones (useful for rooms)
+
+![rooms](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/rooms.gif)
+
+```html
+<gun-avatar
+  pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+  size="300"
+  reflect="false"
+  draw="squares"
+></gun-avatar>
 ```
 
 ### ROAD MAP
@@ -81,3 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
 - [x] custom element mount
 - [x] dark mode
 - [x] editable class and element to mount
+- [x] add more draw modes
+  - [x] `circles`
+  - [x] `squares`
