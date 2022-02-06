@@ -41,17 +41,28 @@
     import {mountElement, mountClass} from './main.js'
     mountElement()
     mountClass()
-    
+    function setAttr(elem) {
+      SEA.pair().then(p => elem.setAttribute('pub', p.pub))
+    }
+
     let avatar = document.getElementById('avatar')
-    SEA.pair().then(p => avatar.setAttribute('pub', p.pub))
-    avatar.addEventListener('click', () => {
-      SEA.pair().then(p => avatar.setAttribute('pub', p.pub))
-    })
     let room = document.getElementById('room')
-    SEA.pair().then(p => room.setAttribute('pub', p.pub))
-    room.addEventListener('click', () => {
-      SEA.pair().then(p => room.setAttribute('pub', p.pub))
+
+    let avatars = setInterval(()=> setAttr(avatar), 1200)
+    let rooms = setInterval(()=> setAttr(room), 1000)
+    
+    
+    avatar.addEventListener('click', () => {
+      clearInterval(avatars)
+      setAttr(avatar)
     })
+
+    
+    room.addEventListener('click', () => {
+      clearInterval(rooms)
+      setAttr(room)
+    })
+
   </script>
   <style>
     .gun-avatar {
