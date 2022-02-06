@@ -1,7 +1,7 @@
 {
   "name": "gun-avatar",
   "description": "Avatar generator for GUN public keys",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": {
     "name": "Davay",
     "email": "davay@frkt.ru"
