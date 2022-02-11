@@ -37,7 +37,20 @@
     "serve": "vite preview --port=5005",
     "deploy": "sh deploy.sh"
   },
+  "dependencies": {
+    "@vueuse/core": "7.6.1",
+    "vue": "^3.2.30",
+    "gun": "^0.2020.1235"
+  },
   "devDependencies": {
-    "vite": "^2.8.0"
+    "@iconify/json": "^2.0.36",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "pug": "3.0.2",
+    "unplugin-icons": "^0.13.1",
+    "unplugin-vue-components": "^0.17.18",
+    "vite": "^2.8.1",
+    "vite-plugin-windicss": "^1.7.0",
+    "windicss": "^3.4.3",
+    "vitepress": "^0.22.0"
   }
 }

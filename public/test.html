@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUN avatar generator</title>
+
+    <script type="module">
+      import { mountElement, mountClass } from "../main.js";
+      mountElement();
+      mountClass();
+    </script>
+
+    <style>
+      .gun-avatar {
+        border-radius: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h3>User avatar</h3>
+      <gun-avatar
+        style="cursor: pointer"
+        id="avatar"
+        pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+        size="300"
+        round
+      ></gun-avatar>
+    </div>
+
+    <div>
+      <h3>Room avatar</h3>
+      <gun-avatar
+        style="cursor: pointer"
+        id="room"
+        pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+        size="400"
+        draw="squares"
+        reflect="false"
+      ></gun-avatar>
+    </div>
+    <div>
+      <h3>IMG tag with class and data-attributes</h3>
+      <img
+        class="gun-avatar"
+        data-size="200"
+        data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+      />
+      <img
+        class="gun-avatar"
+        data-size="200"
+        data-dark="true"
+        data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+      />
+    </div>
+  </body>
+</html>

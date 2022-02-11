@@ -5,6 +5,9 @@ export function mountClass(elClass = "gun-avatar") {
   document.addEventListener("DOMContentLoaded", () => {
     let avatars = document.getElementsByClassName(elClass);
     for (let img of avatars) {
+      if (img.dataset.round != "false") {
+        img.style.borderRadius = "100%";
+      }
       img.src = gunAvatar({
         pub: img.dataset.pub,
         size: img.dataset.size,
