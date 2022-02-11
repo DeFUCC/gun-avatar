@@ -1,5 +1,7 @@
 # Avatar generator for GUN public keys
 
+<a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
+
 ![avatars](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatars.gif)
 
 It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
@@ -35,6 +37,7 @@ After you add the script to the page you get a custom element `<gun-avatar />` f
   size="300"
   round
   dark
+  reflect
   draw="circles"
 />
 ```
@@ -54,6 +57,7 @@ Add the script to the page and then add `gun-avatar` class to an img tag along w
   class="gun-avatar"
   data-size="200"
   data-draw="squares"
+  data-reflect="false"
   data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
 />
 ```
