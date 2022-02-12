@@ -6,10 +6,17 @@
     "name": "Davay",
     "email": "davay@frkt.ru"
   },
-  "repository": "github:DeFUCC/gun-avatar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/defucc/gun-avatar.git"
+  },
   "bugs": {
-    "url": "https://github.com/DeFUCC/gun-avatar/issues",
-    "email": "davay@frkt.ru"
+    "url": "https://github.com/defucc/gun-avatar/issues"
+  },
+  "homepage": "https://gun-avatar.js.org",
+  "funding": {
+    "type": "ko-fi",
+    "url": "https://ko-fi.com/davay"
   },
   "license": "MIT",
   "keywords": [
