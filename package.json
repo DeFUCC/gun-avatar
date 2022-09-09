@@ -1,63 +1,63 @@
 {
-  "name": "gun-avatar",
-  "description": "Avatar generator for GUN public keys",
-  "version": "1.6.2",
-  "author": {
-    "name": "Davay",
-    "email": "davay@frkt.ru"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/defucc/gun-avatar.git"
-  },
-  "bugs": {
-    "url": "https://github.com/defucc/gun-avatar/issues"
-  },
-  "homepage": "https://gun-avatar.js.org",
-  "funding": {
-    "type": "ko-fi",
-    "url": "https://ko-fi.com/davay"
-  },
-  "license": "MIT",
-  "keywords": [
-    "gun",
-    "sea",
-    "public key",
-    "visualizer",
-    "avatar"
-  ],
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/gun-avatar.umd.js",
-  "module": "./dist/gun-avatar.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/gun-avatar.es.js",
-      "require": "./dist/gun-avatar.umd.js"
-    }
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "page": "vite build --mode page",
-    "serve": "vite preview --port=5005",
-    "deploy": "sh deploy.sh"
-  },
-  "dependencies": {
-    "@vueuse/core": "7.6.1",
-    "vue": "^3.2.30",
-    "gun": "^0.2020.1235"
-  },
-  "devDependencies": {
-    "@iconify/json": "^2.0.36",
-    "@vitejs/plugin-vue": "^2.2.0",
-    "pug": "3.0.2",
-    "unplugin-icons": "^0.13.1",
-    "unplugin-vue-components": "^0.17.18",
-    "vite": "^2.8.1",
-    "vite-plugin-windicss": "^1.7.0",
-    "windicss": "^3.4.3",
-    "vitepress": "^0.22.0"
-  }
+	"name": "gun-avatar",
+	"version": "1.6.2",
+	"description": "Avatar generator for GUN public keys",
+	"keywords": [
+		"gun",
+		"sea",
+		"public key",
+		"visualizer",
+		"avatar"
+	],
+	"homepage": "https://gun-avatar.js.org",
+	"bugs": {
+		"url": "https://github.com/defucc/gun-avatar/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/defucc/gun-avatar.git"
+	},
+	"funding": {
+		"type": "ko-fi",
+		"url": "https://ko-fi.com/davay"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Davay",
+		"email": "davay@frkt.ru"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/gun-avatar.es.js",
+			"require": "./dist/gun-avatar.umd.js"
+		}
+	},
+	"main": "./dist/gun-avatar.umd.js",
+	"module": "./dist/gun-avatar.es.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "vite build",
+		"deploy": "sh deploy.sh",
+		"dev": "vite",
+		"page": "vite build --mode page",
+		"serve": "vite preview --port=5005"
+	},
+	"dependencies": {
+		"@vueuse/core": "9.2.0",
+		"gun": "^0.2020.1238",
+		"vue": "^3.2.39"
+	},
+	"devDependencies": {
+		"@iconify/json": "^2.1.105",
+		"@vitejs/plugin-vue": "^3.1.0",
+		"pug": "3.0.2",
+		"unplugin-icons": "^0.14.9",
+		"unplugin-vue-components": "^0.22.4",
+		"vite": "^3.1.0",
+		"vite-plugin-windicss": "^1.8.7",
+		"vitepress": "1.0.0-alpha.13",
+		"windicss": "^3.5.6"
+	}
 }
