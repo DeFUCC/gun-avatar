@@ -26,14 +26,15 @@
 		"name": "Davay",
 		"email": "davay@frkt.ru"
 	},
+	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/gun-avatar.es.js",
-			"require": "./dist/gun-avatar.umd.js"
+			"import": "./dist/gun-avatar.js",
+			"require": "./dist/gun-avatar.umd.cjs"
 		}
 	},
-	"main": "./dist/gun-avatar.umd.js",
-	"module": "./dist/gun-avatar.es.js",
+	"main": "./dist/gun-avatar.umd.cjs",
+	"module": "./dist/gun-avatar.js",
 	"files": [
 		"dist"
 	],
