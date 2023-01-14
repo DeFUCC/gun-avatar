@@ -1,224 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="favicon.ico" />
-    <title>Gun Avatar</title>
-    <meta
-      name="description"
-      content="An easy way to visualize crypto kay pairs by SEA lib of GUN"
-    />
-    <meta name="theme-color" content="#ff0088" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@defucc" />
-    <meta name="twitter:creator" content="@defucc" />
-    <meta
-      name="twitter:title"
-      content="GUN-avatar deterministically visualizes SEA cryptographic public keys. "
-    />
-    <meta
-      name="twitter:description"
-      content="Plug a custom element, attach a class or just import a function to generate an avatar for a pub key is seconds."
-    />
-    <meta name="twitter:image" content="https://gun-avatar.js.org/avatar.png" />
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" href="favicon.ico" />
+		<title>Gun Avatar</title>
+		<meta
+			name="description"
+			content="An easy way to visualize crypto kay pairs by SEA lib of GUN"
+		/>
+		<meta name="theme-color" content="#ff0088" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@defucc" />
+		<meta name="twitter:creator" content="@defucc" />
+		<meta
+			name="twitter:title"
+			content="GUN-avatar deterministically visualizes SEA cryptographic public keys. "
+		/>
+		<meta
+			name="twitter:description"
+			content="Plug a custom element, attach a class or just import a function to generate an avatar for a pub key is seconds."
+		/>
+		<meta name="twitter:image" content="https://gun-avatar.js.org/avatar.png" />
+	</head>
 
-  <body>
-    <nav
-      class="header sticky top-0 w-full p-8 bg-dark-200 text-white text-2xl font-bold shadow-xl mb-8 flex flex-wrap gap-6 items-center"
-    >
-      <h1 class="flex-auto">Gun-avatar</h1>
+	<body>
+		<nav
+			class="header sticky top-0 w-full p-8 bg-dark-200 text-white text-2xl font-bold shadow-xl mb-8 flex flex-wrap gap-6 items-center"
+		>
+			<h1 class="flex-auto">Gun-avatar</h1>
 
-      <a
-        href="https://codepen.io/Davay/pen/eYGeGMZ"
-        title="Codepen playground"
-        target="_blank"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          aria-hidden="true"
-          role="img"
-          class="iconify iconify--la"
-          width="32"
-          height="32"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-        >
-          <path
-            d="M16 2.844l-.563.375l-12 8.031l-.437.281v8.938l.438.281l12 8.031l.562.375l.563-.375l12-8.031l.437-.281V11.53l-.438-.281l-12-8.031zm-1 3.062v5.438l-5.156 3.469l-4.031-2.72zm2 0l9.188 6.188l-4.032 2.719L17 11.342zm-1 7.188L20.344 16L16 18.906L11.656 16zm-11 .844L8.063 16L5 18.063zm22 0v4.124L23.937 16zm-17.125 3.25L15 20.655v5.438l-9.188-6.188zm12.25 0l4.063 2.718L17 26.094v-5.438z"
-            fill="currentColor"
-          ></path>
-        </svg>
-      </a>
+			<a
+				href="https://codepen.io/Davay/pen/eYGeGMZ"
+				title="Codepen playground"
+				target="_blank"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					aria-hidden="true"
+					role="img"
+					class="iconify iconify--la"
+					width="32"
+					height="32"
+					preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 32 32"
+				>
+					<path
+						d="M16 2.844l-.563.375l-12 8.031l-.437.281v8.938l.438.281l12 8.031l.562.375l.563-.375l12-8.031l.437-.281V11.53l-.438-.281l-12-8.031zm-1 3.062v5.438l-5.156 3.469l-4.031-2.72zm2 0l9.188 6.188l-4.032 2.719L17 11.342zm-1 7.188L20.344 16L16 18.906L11.656 16zm-11 .844L8.063 16L5 18.063zm22 0v4.124L23.937 16zm-17.125 3.25L15 20.655v5.438l-9.188-6.188zm12.25 0l4.063 2.718L17 26.094v-5.438z"
+						fill="currentColor"
+					></path>
+				</svg>
+			</a>
 
-      <a
-        href="https://www.npmjs.com/package/gun-avatar"
-        title="NPM package"
-        target="_blank"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          aria-hidden="true"
-          role="img"
-          class="iconify iconify--la"
-          width="32"
-          height="32"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-        >
-          <path
-            d="M0 10v11h9v2h7v-2h16V10H0zm1.777 1.777h7.114v7.668H7.11v-5.888H5.334v5.888H1.777v-7.668zm8.891 0H17.779v7.666h-3.556v1.78h-3.555v-9.446zm8.889 0H30.225v7.668h-1.78v-5.888h-1.777v5.888h-1.777v-5.888h-1.78v5.888h-3.554v-7.668zm-5.334 1.78v4.111H16v-4.111h-1.777z"
-            fill="currentColor"
-          ></path>
-        </svg>
-      </a>
-      <a
-        href="https://github.com/DeFUCC/gun-avatar"
-        title="GitHub repository"
-        target="_blank"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          aria-hidden="true"
-          role="img"
-          class="iconify iconify--la"
-          width="32"
-          height="32"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387c.602.11.82-.258.82-.578c0-.286-.011-1.04-.015-2.04c-3.34.723-4.043-1.609-4.043-1.609c-.547-1.387-1.332-1.758-1.332-1.758c-1.09-.742.082-.726.082-.726c1.203.086 1.836 1.234 1.836 1.234c1.07 1.836 2.808 1.305 3.492 1c.11-.777.422-1.305.762-1.605c-2.664-.301-5.465-1.332-5.465-5.93c0-1.313.469-2.383 1.234-3.223c-.121-.3-.535-1.523.117-3.175c0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0 1 16 9.805c1.02.004 2.047.136 3.004.402c2.293-1.55 3.297-1.23 3.297-1.23c.656 1.652.246 2.875.12 3.175c.77.84 1.231 1.91 1.231 3.223c0 4.61-2.804 5.621-5.476 5.922c.43.367.812 1.101.812 2.219c0 1.605-.011 2.898-.011 3.293c0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
-            fill="currentColor"
-          ></path>
-        </svg>
-      </a>
-    </nav>
-    <main>
-      <header class="px-6 max-w-30em">
-        <div class="m-4">
-          <gun-avatar
-            title="Click on the image to generate a new key pair"
-            style="cursor: pointer"
-            id="avatar"
-            pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-            size="200"
-            round
-          ></gun-avatar>
-        </div>
-        <h2 class="text-xl mb-4">
-          <strong>Gun-avatar</strong> is a public key visualization tool
-        </h2>
-        <h3 class="mb-6 text-lg">
-          It's intended to be used with
-          <a href="https://gun.eco" target="_blank">GUN</a> peer-to-peer
-          database for creating avatars of
-          <a href="https://gun.eco/docs/SEA" target="_blank">SEA</a>
-          cryptographic key pairs.
-        </h3>
-      </header>
+			<a
+				href="https://www.npmjs.com/package/gun-avatar"
+				title="NPM package"
+				target="_blank"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					aria-hidden="true"
+					role="img"
+					class="iconify iconify--la"
+					width="32"
+					height="32"
+					preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 32 32"
+				>
+					<path
+						d="M0 10v11h9v2h7v-2h16V10H0zm1.777 1.777h7.114v7.668H7.11v-5.888H5.334v5.888H1.777v-7.668zm8.891 0H17.779v7.666h-3.556v1.78h-3.555v-9.446zm8.889 0H30.225v7.668h-1.78v-5.888h-1.777v5.888h-1.777v-5.888h-1.78v5.888h-3.554v-7.668zm-5.334 1.78v4.111H16v-4.111h-1.777z"
+						fill="currentColor"
+					></path>
+				</svg>
+			</a>
+			<a
+				href="https://github.com/DeFUCC/gun-avatar"
+				title="GitHub repository"
+				target="_blank"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+					aria-hidden="true"
+					role="img"
+					class="iconify iconify--la"
+					width="32"
+					height="32"
+					preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 32 32"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387c.602.11.82-.258.82-.578c0-.286-.011-1.04-.015-2.04c-3.34.723-4.043-1.609-4.043-1.609c-.547-1.387-1.332-1.758-1.332-1.758c-1.09-.742.082-.726.082-.726c1.203.086 1.836 1.234 1.836 1.234c1.07 1.836 2.808 1.305 3.492 1c.11-.777.422-1.305.762-1.605c-2.664-.301-5.465-1.332-5.465-5.93c0-1.313.469-2.383 1.234-3.223c-.121-.3-.535-1.523.117-3.175c0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0 1 16 9.805c1.02.004 2.047.136 3.004.402c2.293-1.55 3.297-1.23 3.297-1.23c.656 1.652.246 2.875.12 3.175c.77.84 1.231 1.91 1.231 3.223c0 4.61-2.804 5.621-5.476 5.922c.43.367.812 1.101.812 2.219c0 1.605-.011 2.898-.011 3.293c0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
+						fill="currentColor"
+					></path>
+				</svg>
+			</a>
+		</nav>
+		<main>
+			<header class="px-6 max-w-30em">
+				<div class="m-4">
+					<gun-avatar
+						title="Click on the image to generate a new key pair"
+						style="cursor: pointer"
+						id="avatar"
+						pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+						size="200"
+						round
+					></gun-avatar>
+				</div>
+				<h2 class="text-xl mb-4">
+					<strong>Gun-avatar</strong> is a public key visualization tool
+				</h2>
+				<h3 class="mb-6 text-lg">
+					It's intended to be used with
+					<a href="https://gun.eco" target="_blank">GUN</a> peer-to-peer
+					database for creating avatars of
+					<a href="https://gun.eco/docs/SEA" target="_blank">SEA</a>
+					cryptographic key pairs.
+				</h3>
+			</header>
 
-      <div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
-        <h3 class="text-xl mb-2 font-bold flex items-center">
-          User avatars
-          <svg
-            class="cursor-pointer mx-2"
-            id="plus"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            width="32"
-            height="32"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 32 32"
-          >
-            <path
-              d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3zm0 2c6.086 0 11 4.914 11 11s-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5zm-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </h3>
-        <div class="flex flex-wrap gap-1 items-center">
-          <gun-avatar
-            style="cursor: pointer"
-            id="small"
-            pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-            size="36"
-            round
-          ></gun-avatar>
-        </div>
-      </div>
-      <h4 class="m-8 max-w-30em">
-        A key pair may represent a user or some kind of dedicated data space. So
-        <b>gun-avatar</b> can visualize a public key in two main modes. We use
-        circles and symmetry to represent a user account and use squares and no
-        symmetry to represent "rooms". It's userful to generate small icons and
-        huge backgrounds as well. You define the size.
-      </h4>
-      <gun-avatar
-        class="mx-8"
-        style="cursor: pointer"
-        id="room"
-        pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-        size="400"
-        draw="squares"
-        reflect="false"
-      ></gun-avatar>
+			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
+				<h3 class="text-xl mb-2 font-bold flex items-center">
+					User avatars
+					<svg
+						class="cursor-pointer mx-2"
+						id="plus"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						aria-hidden="true"
+						role="img"
+						width="32"
+						height="32"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 32 32"
+					>
+						<path
+							d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3zm0 2c6.086 0 11 4.914 11 11s-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5zm-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+							fill="currentColor"
+						></path>
+					</svg>
+				</h3>
+				<div class="flex flex-wrap gap-1 items-center">
+					<gun-avatar
+						style="cursor: pointer"
+						id="small"
+						pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+						size="36"
+						round
+					></gun-avatar>
+				</div>
+			</div>
+			<h4 class="m-8 max-w-30em">
+				A key pair may represent a user or some kind of dedicated data space. So
+				<b>gun-avatar</b> can visualize a public key in two main modes. We use
+				circles and symmetry to represent a user account and use squares and no
+				symmetry to represent "rooms". It's userful to generate small icons and
+				huge backgrounds as well. You define the size.
+			</h4>
+			<gun-avatar
+				class="mx-8"
+				style="cursor: pointer"
+				id="room"
+				pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+				size="400"
+				draw="squares"
+				reflect="false"
+			></gun-avatar>
 
-      <div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
-        <h3 class="text-xl mb-4 font-bold flex items-center">
-          Room avatars
-          <svg
-            class="cursor-pointer mx-2"
-            id="plusRoom"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            width="32"
-            height="32"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 32 32"
-          >
-            <path
-              d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3zm0 2c6.086 0 11 4.914 11 11s-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5zm-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </h3>
-        <div class="flex flex-wrap items-center gap-1">
-          <gun-avatar
-            style="cursor: pointer"
-            id="smallRoom"
-            pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-            size="60"
-            draw="squares"
-            reflect="false"
-          ></gun-avatar>
-        </div>
-      </div>
-      <div class="p-6">
-        <h5 class="my-4 text-lg">
-          You can implement <b>gun-avatar</b> in your project in either of 3
-          ways:
-        </h5>
-        <ol class="ml-4">
-          <li>
-            Mount a
-            <a href="https://www.webcomponents.org" target="_blank"
-              >Web component</a
-            >
-            and use it as a custom HTML element
-            <pre
-              class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
-            >
+			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
+				<h3 class="text-xl mb-4 font-bold flex items-center">
+					Room avatars
+					<svg
+						class="cursor-pointer mx-2"
+						id="plusRoom"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						aria-hidden="true"
+						role="img"
+						width="32"
+						height="32"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 32 32"
+					>
+						<path
+							d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3zm0 2c6.086 0 11 4.914 11 11s-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5zm-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+							fill="currentColor"
+						></path>
+					</svg>
+				</h3>
+				<div class="flex flex-wrap items-center gap-1">
+					<gun-avatar
+						style="cursor: pointer"
+						id="smallRoom"
+						pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+						size="60"
+						draw="squares"
+						reflect="false"
+					></gun-avatar>
+				</div>
+			</div>
+			<div class="p-6">
+				<h5 class="my-4 text-lg">
+					You can implement <b>gun-avatar</b> in your project in either of 3
+					ways:
+				</h5>
+				<ol class="ml-4">
+					<li>
+						Mount a
+						<a href="https://www.webcomponents.org" target="_blank"
+							>Web component</a
+						>
+						and use it as a custom HTML element
+						<pre
+							class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
+						>
   &lt;gun-avatar
       pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
       size="60"
@@ -227,14 +227,14 @@
       round
       dark
     &gt;&lt;/gun-avatar&gt;</pre
-            >
-          </li>
-          <li>
-            Mount all &lt;img&gt; elements with a certain <b>class</b> and
-            data-attributes on the page
-            <pre
-              class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
-            >
+						>
+					</li>
+					<li>
+						Mount all &lt;img&gt; elements with a certain <b>class</b> and
+						data-attributes on the page
+						<pre
+							class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
+						>
   &lt;img
       class="gun-avatar"
       data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
@@ -244,15 +244,15 @@
       data-round
       data-dark
     /&gt;</pre
-            >
-          </li>
-          <li>
-            Use the <b>gunAvatar()</b> function programmatically in your
-            Vue/React/Svelte/* app. Internally it uses HTML canvas, so be
-            careful with SSR.
-            <pre
-              class="rounded-xl my-2 bg-dark-100 p-4 text-white overflow-x-scroll"
-            >
+						>
+					</li>
+					<li>
+						Use the <b>gunAvatar()</b> function programmatically in your
+						Vue/React/Svelte/* app. Internally it uses HTML canvas, so be
+						careful with SSR.
+						<pre
+							class="rounded-xl my-2 bg-dark-100 p-4 text-white overflow-x-scroll"
+						>
   &lt;img
       :src="gunAvatar({
         size:900,
@@ -261,98 +261,94 @@
         reflect: false,
       })"
     /&gt;</pre
-            >
-          </li>
-        </ol>
-        <h5 class="text-xl my-6">
-          For documentation and implementation details please refer to the
-          <a href="https://github.com/DeFUCC/gun-avatar" target="_blank"
-            >GitHub repo</a
-          >
-        </h5>
-      </div>
-      <div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
-        <h4 class="text-xl mb-4 font-bold flex items-center">
-          User avatar: light and dark modes, no reflect
-        </h4>
-        <div class="flex flex-wrap gap-4">
-          <img
-            class="gun-avatar"
-            data-size="200"
-            data-reflect=""
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
+						>
+					</li>
+				</ol>
+				<h5 class="text-xl my-6">
+					For documentation and implementation details please refer to the
+					<a href="https://github.com/DeFUCC/gun-avatar" target="_blank"
+						>GitHub repo</a
+					>
+				</h5>
+			</div>
+			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
+				<h4 class="text-xl mb-4 font-bold flex items-center">
+					User avatar: light and dark modes, no reflect
+				</h4>
+				<div class="flex flex-wrap gap-4">
+					<img
+						class="gun-avatar"
+						data-size="200"
+						data-reflect=""
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
 
-          <img
-            class="gun-avatar"
-            data-dark="true"
-            data-size="200"
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
-          <img
-            class="gun-avatar"
-            data-size="200"
-            data-reflect="false"
-            data-round="false"
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
-        </div>
-      </div>
-      <div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
-        <h4 class="text-xl mb-4 font-bold flex items-center">
-          Rooms: light and dark modes, reflect
-        </h4>
-        <div class="flex flex-wrap gap-4">
-          <img
-            class="gun-avatar"
-            data-size="200"
-            data-draw="squares"
-            data-reflect="false"
-            data-round="false"
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
+					<img
+						class="gun-avatar"
+						data-dark="true"
+						data-size="200"
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
+					<img
+						class="gun-avatar"
+						data-size="200"
+						data-reflect="false"
+						data-round="false"
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
+				</div>
+			</div>
+			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
+				<h4 class="text-xl mb-4 font-bold flex items-center">
+					Rooms: light and dark modes, reflect
+				</h4>
+				<div class="flex flex-wrap gap-4">
+					<img
+						class="gun-avatar"
+						data-size="200"
+						data-draw="squares"
+						data-reflect="false"
+						data-round="false"
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
 
-          <img
-            class="gun-avatar"
-            data-draw="squares"
-            data-reflect="false"
-            data-round="false"
-            data-dark="true"
-            data-size="200"
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
-          <img
-            class="gun-avatar"
-            data-draw="squares"
-            data-dark="true"
-            data-size="200"
-            data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-          />
-        </div>
-      </div>
-      <div class="bg-dark-200 text-white text-center p-8">
-        MIT 2020-present<br />by <a href="https://github.com/davay42">davay</a>
-      </div>
-    </main>
+					<img
+						class="gun-avatar"
+						data-draw="squares"
+						data-reflect="false"
+						data-round="false"
+						data-dark="true"
+						data-size="200"
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
+					<img
+						class="gun-avatar"
+						data-draw="squares"
+						data-dark="true"
+						data-size="200"
+						data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					/>
+				</div>
+			</div>
+			<div class="bg-dark-200 text-white text-center p-8">
+				MIT 2020-present<br />by <a href="https://github.com/davay42">davay</a>
+			</div>
+		</main>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/gun/sea.js"
-      type="module"
-    ></script>
-    <script type="module" src="./src/app.js"></script>
-    <style>
-      html {
-        hyphens: auto;
-      }
+		<script type="module" src="./src/app.js"></script>
+		<style>
+			html {
+				hyphens: auto;
+			}
 
-      a {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-      li {
-        margin: 1em 0;
-        list-style: circle;
-      }
-    </style>
-  </body>
+			a {
+				font-weight: bold;
+				text-decoration: underline;
+			}
+			li {
+				margin: 1em 0;
+				list-style: circle;
+			}
+		</style>
+	</body>
 </html>

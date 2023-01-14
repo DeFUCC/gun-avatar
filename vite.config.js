@@ -44,6 +44,20 @@ export default defineConfig(({ command, mode }) => {
           entry: path.resolve(__dirname, "./src/main.js"),
           name: "gun-avatar",
         },
+        optimizeDeps: {
+          include: [
+            "gun",
+            "gun/gun",
+            "gun/sea",
+            "gun/sea.js",
+            "gun/lib/then",
+            "gun/lib/webrtc",
+            "gun/lib/radix",
+            "gun/lib/radisk",
+            "gun/lib/store",
+            "gun/lib/rindexed",
+          ],
+        },
       },
     };
   }
@@ -53,8 +67,37 @@ export default defineConfig(({ command, mode }) => {
       ...config,
       build: {
         outDir: "./demo",
+        optimizeDeps: {
+          include: [
+            "gun",
+            "gun/gun",
+            "gun/sea",
+            "gun/sea.js",
+            "gun/lib/then",
+            "gun/lib/webrtc",
+            "gun/lib/radix",
+            "gun/lib/radisk",
+            "gun/lib/store",
+            "gun/lib/rindexed",
+          ],
+        },
       },
     };
   }
   return config;
 });
+
+
+
+function moduleExclude(match) {
+  const m = (id) => id.indexOf(match) > -1;
+  return {
+    name: `exclude-${match}`,
+    resolveId(id) {
+      if (m(id)) return id;
+    },
+    load(id) {
+      if (m(id)) return `export default {}`;
+    },
+  };
+}
