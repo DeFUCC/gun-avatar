@@ -12,8 +12,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:site" content="@defucc" />
-		<meta name="twitter:creator" content="@defucc" />
+		<meta name="twitter:site" content="@davay42" />
+		<meta name="twitter:creator" content="@davay42" />
 		<meta
 			name="twitter:title"
 			content="GUN-avatar deterministically visualizes SEA cryptographic public keys. "
@@ -281,9 +281,10 @@
 						Use the <b>gunAvatar()</b> function programmatically in your
 						Vue/React/Svelte/* app. Internally it uses HTML canvas, so be
 						careful with SSR.
-						<pre
-							class="rounded-xl my-2 bg-dark-100 p-4 text-white overflow-x-scroll"
-						>
+						<div class="flex">
+							<pre
+								class="max-w-30em flex-auto rounded-xl my-2 bg-dark-100 p-4 text-white overflow-x-scroll"
+							>
   &lt;img
       :src="gunAvatar({
         size:100,
@@ -292,14 +293,15 @@
         reflect: false,
       })"
     /&gt;</pre
-						>
-						<div class="p-4">
-							<gun-avatar
-								pub="8TTuoQ4tEZx-aAtwVY9z6txwRkszn2or29DAAdd9SeU.-ejUfku4lBBVwYmXg8yYX3ghbnJt_5i2s1nPd_q6Rr4"
-								size="100"
-								draw="squares"
-								reflect="false"
-							></gun-avatar>
+							>
+							<div class="p-4">
+								<gun-avatar
+									pub="8TTuoQ4tEZx-aAtwVY9z6txwRkszn2or29DAAdd9SeU.-ejUfku4lBBVwYmXg8yYX3ghbnJt_5i2s1nPd_q6Rr4"
+									size="100"
+									draw="squares"
+									reflect="false"
+								></gun-avatar>
+							</div>
 						</div>
 					</li>
 				</ol>
@@ -374,7 +376,75 @@
 			</div>
 		</main>
 
-		<script type="module" src="./src/app.js"></script>
+		<script type="module">
+			import "virtual:windi.css";
+
+			import SEA from "gun/sea.js";
+
+			import { mountElement, mountClass } from "./src/main.js";
+			mountElement();
+			mountClass();
+
+			let avatar = document.getElementById("avatar");
+			let plus = document.getElementById("plus");
+			let small = document.getElementById("small");
+			let room = document.getElementById("room");
+			let plusRoom = document.getElementById("plusRoom");
+			let smallRoom = document.getElementById("smallRoom");
+
+			function newUser() {
+				SEA.pair().then((p) => {
+					const pair = JSON.stringify(p);
+					avatar.setAttribute("pub", p.pub);
+					let el = document.createElement("gun-avatar");
+					el.addEventListener("click", () => {
+						navigator.clipboard.writeText(pair);
+					});
+					el.setAttribute("pub", p.pub);
+					el.setAttribute("size", 36);
+					el.setAttribute("round", true);
+					el.setAttribute("title", p.pub);
+					el.classList.add("cursor-pointer");
+					small.parentNode.insertBefore(el, small.prevSibling);
+				});
+			}
+
+			function newRoom() {
+				SEA.pair().then((p) => {
+					const pair = JSON.stringify(p);
+					room.setAttribute("pub", p.pub);
+					let el = document.createElement("gun-avatar");
+					el.addEventListener("click", () => {
+						navigator.clipboard.writeText(pair);
+					});
+					el.setAttribute("pub", p.pub);
+					el.setAttribute("size", 60);
+					el.setAttribute("draw", "squares");
+					el.setAttribute("reflect", false);
+					el.classList.add("cursor-pointer");
+					smallRoom.parentNode.insertBefore(el, small.prevSibling);
+				});
+			}
+
+			let avatarInt = setInterval(() => newUser(), 2000);
+			let roomInt = setInterval(() => newRoom(), 4000);
+
+			avatar.addEventListener("click", () => {
+				newUser();
+			});
+
+			plus.addEventListener("click", () => {
+				newUser();
+			});
+
+			room.addEventListener("click", () => {
+				newRoom();
+			});
+
+			plusRoom.addEventListener("click", () => {
+				newRoom();
+			});
+		</script>
 		<style>
 			html {
 				hyphens: auto;
