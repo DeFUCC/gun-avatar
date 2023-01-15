@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
       WindiCSS({
         scan: {
           dirs: ["src"],
-          exclude: ["**/examples/**/*", "/node_modules/"],
+          exclude: ["/node_modules/"],
           fileExtensions: ["vue", "ts"],
         },
       }),
@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
         /* options */
       }),
       Components({
-        dirs: ["./"],
+        dirs: ["src"],
         extensions: ["html", "vue"],
         directoryAsNamespace: true,
         globalNamespaces: ["global"],

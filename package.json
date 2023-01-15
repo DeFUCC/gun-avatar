@@ -35,12 +35,12 @@
 	},
 	"main": "./dist/gun-avatar.umd.cjs",
 	"module": "./dist/gun-avatar.js",
-	"types": "./dist/main.d.ts",
+	"types": "./dist/types/main.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
-		"build": "vite build",
+		"build": "tsc && vite build",
 		"deploy": "sh deploy.sh",
 		"dev": "vite --mode page",
 		"page": "vite build --mode page",

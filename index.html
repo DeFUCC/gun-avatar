@@ -101,8 +101,8 @@
 			</a>
 		</nav>
 		<main>
-			<header class="px-6 max-w-30em">
-				<div class="m-4">
+			<header class="px-6 flex flex-wrap items-center">
+				<div class="my-4 mr-8">
 					<gun-avatar
 						title="Click on the image to generate a new key pair"
 						style="cursor: pointer"
@@ -112,19 +112,21 @@
 						round
 					></gun-avatar>
 				</div>
-				<h2 class="text-xl mb-4">
-					<strong>Gun-avatar</strong> is a public key visualization tool
-				</h2>
-				<h3 class="mb-6 text-lg">
-					It's intended to be used with
-					<a href="https://gun.eco" target="_blank">GUN</a> peer-to-peer
-					database for creating avatars of
-					<a href="https://gun.eco/docs/SEA" target="_blank">SEA</a>
-					cryptographic key pairs.
-				</h3>
+				<div class="max-w-30em">
+					<h2 class="text-xl mb-4">
+						<strong>Gun-avatar</strong> is a public key visualization tool
+					</h2>
+					<h3 class="mb-6 text-lg">
+						It's intended to be used with
+						<a href="https://gun.eco" target="_blank">GUN</a> peer-to-peer
+						database for creating avatars of
+						<a href="https://gun.eco/docs/SEA" target="_blank">SEA</a>
+						cryptographic key pairs.
+					</h3>
+				</div>
 			</header>
 
-			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
+			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-wrap" id="avatars">
 				<h3 class="text-xl mb-2 font-bold flex items-center">
 					User avatars
 					<svg
@@ -155,23 +157,27 @@
 					></gun-avatar>
 				</div>
 			</div>
-			<h4 class="m-8 max-w-30em">
-				A key pair may represent a user or some kind of dedicated data space. So
-				<b>gun-avatar</b> can visualize a public key in two main modes. We use
-				circles and symmetry to represent a user account and use squares and no
-				symmetry to represent "rooms". It's userful to generate small icons and
-				huge backgrounds as well. You define the size.
-			</h4>
-			<gun-avatar
-				class="mx-8"
-				style="cursor: pointer"
-				id="room"
-				pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-				size="400"
-				draw="squares"
-				reflect="false"
-			></gun-avatar>
-
+			<div class="flex flex-wrap items-center">
+				<gun-avatar
+					class="mx-8"
+					style="cursor: pointer"
+					id="room"
+					pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+					size="400"
+					draw="squares"
+					reflect="false"
+				></gun-avatar>
+				<div class="max-w-30em">
+					<h4 class="m-8">
+						A key pair may represent a user or some kind of dedicated data
+						space. So
+						<b>gun-avatar</b> can visualize a public key in two main modes. We
+						use circles and symmetry to represent a user account and use squares
+						and no symmetry to represent "rooms". It's userful to generate small
+						icons and huge backgrounds as well. You define the size.
+					</h4>
+				</div>
+			</div>
 			<div class="my-4 p-4 bg-light-900 shadow-lg flex flex-col" id="avatars">
 				<h3 class="text-xl mb-4 font-bold flex items-center">
 					Room avatars
@@ -216,35 +222,60 @@
 							>Web component</a
 						>
 						and use it as a custom HTML element
-						<pre
-							class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
-						>
+						<div class="flex items-center">
+							<pre
+								class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
+							>
   &lt;gun-avatar
       pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-      size="60"
+      size="100"
       draw="squares"
       reflect="false"
       round
       dark
     &gt;&lt;/gun-avatar&gt;</pre
-						>
+							>
+							<div class="p-4">
+								<gun-avatar
+									pub="8TTuoQ4tEZx-aAtwVY9z6txwRkszn2or29DAAdd9SeU.-ejUfku4lBBVwYmXg8yYX3ghbnJt_5i2s1nPd_q6Rr4"
+									size="100"
+									draw="squares"
+									reflect="false"
+									round
+									dark
+								></gun-avatar>
+							</div>
+						</div>
 					</li>
 					<li>
 						Mount all &lt;img&gt; elements with a certain <b>class</b> and
 						data-attributes on the page
-						<pre
-							class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
-						>
+						<div class="flex items-center">
+							<pre
+								class="my-2 rounded-xl bg-dark-100 p-4 text-white overflow-x-scroll"
+							>
   &lt;img
       class="gun-avatar"
       data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
-      data-size="60"
+      data-size="300"
       data-draw="circles"
       data-reflect="false"
       data-round
       data-dark
     /&gt;</pre
-						>
+							>
+							<div class="p-4">
+								<img
+									class="gun-avatar"
+									data-pub="O6_tdEg_zCSNO-nMWds2o-fjPgwqQ3sHyxczMiGwl50.zuMgYb93u6LrxWYTVIlIBFG7LkClU_FtOHlsNCbQDH8"
+									data-size="300"
+									data-draw="circles"
+									data-reflect="false"
+									data-round
+									data-dark
+								/>
+							</div>
+						</div>
 					</li>
 					<li>
 						Use the <b>gunAvatar()</b> function programmatically in your
@@ -255,13 +286,21 @@
 						>
   &lt;img
       :src="gunAvatar({
-        size:900,
+        size:100,
         draw: 'squares'
         dark: false,
         reflect: false,
       })"
     /&gt;</pre
 						>
+						<div class="p-4">
+							<gun-avatar
+								pub="8TTuoQ4tEZx-aAtwVY9z6txwRkszn2or29DAAdd9SeU.-ejUfku4lBBVwYmXg8yYX3ghbnJt_5i2s1nPd_q6Rr4"
+								size="100"
+								draw="squares"
+								reflect="false"
+							></gun-avatar>
+						</div>
 					</li>
 				</ol>
 				<h5 class="text-xl my-6">
