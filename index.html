@@ -375,11 +375,10 @@
 				MIT 2020-present<br />by <a href="https://github.com/davay42">davay</a>
 			</div>
 		</main>
-
+		<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
 		<script type="module">
-			import "virtual:windi.css";
-
-			import SEA from "gun/sea.js";
+			import "@unocss/reset/tailwind.css";
+			import "uno.css";
 
 			import { mountElement, mountClass } from "./src/main.js";
 			mountElement();

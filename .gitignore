@@ -3,3 +3,5 @@ node_modules
 dist
 demo
 public/types
+public/docs
+docs/.vitepress/cache

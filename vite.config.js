@@ -3,8 +3,10 @@ import { defineConfig } from "vite";
 import Components from "unplugin-vue-components/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-import WindiCSS from "vite-plugin-windicss";
 import Vue from "@vitejs/plugin-vue";
+import Unocss from 'unocss/vite'
+import { presetUno, presetIcons, transformerDirectives, extractorSplit } from "unocss";
+import extractorPug from '@unocss/extractor-pug'
 
 export default defineConfig({
   base: "./",
@@ -33,13 +35,23 @@ export default defineConfig({
         }
       }
     }),
-    WindiCSS({
-      scan: {
-        dirs: ["src/demo/"],
-        exclude: ["/node_modules/"],
-        fileExtensions: ["vue", "ts"],
-      },
-      config: { separator: "_", }
+    Unocss({
+      presets: [
+        presetIcons({
+          extraProperties: {
+            'display': 'inline-block',
+            'vertical-align': 'middle',
+          },
+        }),
+        presetUno()
+      ],
+      transformers: [
+        transformerDirectives(),
+      ],
+      extractors: [
+        extractorPug(),
+        extractorSplit,
+      ],
     }),
     Icons({
       /* options */
