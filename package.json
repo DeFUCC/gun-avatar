@@ -40,11 +40,11 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsc && vite build",
+		"build": "tsc && vite build --config vite.config.lib.js",
 		"deploy": "sh deploy.sh",
-		"dev": "vite --mode page",
-		"page": "vite build --mode page",
-		"serve": "vite preview --mode page --port=5005"
+		"dev": "vite",
+		"page": "vite build",
+		"serve": "vite preview --port=5005"
 	},
 	"dependencies": {
 		"@vueuse/core": "9.10.0",
