@@ -14,11 +14,7 @@ export default defineConfig({
 		siteTitle: 'Gun-avatar',
 		repo: "https://github.com/defucc/gun-avatar",
 		nav: [
-			{ text: 'NPM package', link: "https://www.npmjs.com/package/gun-avatar" },
-			{ text: 'Codepen playground', link: "https://codepen.io/Davay/pen/eYGeGMZ" },
-		],
-		socialLinks: [
-			{ icon: "github", link: "https://github.com/defucc/gun-avatar" },
+
 		],
 		footer: {
 			message: 'Released under the MIT License.',

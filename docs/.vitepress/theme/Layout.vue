@@ -7,5 +7,7 @@ const { Layout } = DefaultTheme
 <template lang="pug">
 Layout
 	template(#home-hero-image)
-		.text-20rem ✨
+		avatar-view
+	template(#nav-bar-content-before)
+		header-links
 </template>

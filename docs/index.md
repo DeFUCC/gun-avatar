@@ -3,7 +3,7 @@ title: Gun-Avatar
 layout: home
 hero:
   name: Gun-Avatar
-  text: Public key visualisation tool
+  text: Public key visualisation web-component
   tagline: User avatar and background generator
   image:
     src: /logo.png
