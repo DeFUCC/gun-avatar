@@ -1,8 +1,8 @@
 
 import Gun from "gun/gun";
 import SEA from "gun/sea.js";
-import { reactive } from "vue";
-
+import { reactive, computed, toRef } from "vue";
+import { useRefHistory } from '@vueuse/core'
 
 export const state = reactive({
 	pair: {
@@ -11,7 +11,10 @@ export const state = reactive({
 		epub: "GcA7UOQyRPo8GlG1PCTOfcOjwvfxNgvdAjILC7NM9gc.T7yZYjlb7iJWxokcI01oCGTGAK8XDBgks9hXA-FDkeY",
 		epriv: "Tr9_a9sWJbo7EI0ARB5VeptIBALFuVNkSkrRAuP8vQc",
 	},
+	pub: computed(() => state.pair.pub),
 	async generatePair() {
 		state.pair = await SEA.pair()
 	}
 })
+
+state.history = useRefHistory(toRef(state, 'pair'))
