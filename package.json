@@ -61,7 +61,6 @@
 		"pug": "3.0.2",
 		"unocss": "^0.48.4",
 		"unplugin-icons": "^0.15.1",
-		"unplugin-vue-components": "^0.22.12",
 		"vite": "^4.0.4",
 		"vitepress": "1.0.0-alpha.38"
 	}

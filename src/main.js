@@ -21,7 +21,7 @@ export function mountClass(elClass = "gun-avatar") {
 
 export function mountElement(elName = "gun-avatar") {
   let initiated = false;
-  if (!document || initiated) return;
+  if (initiated) return;
 
   // <gun-avatar pub="***" custom element
   class Avatar extends HTMLElement {
@@ -91,6 +91,7 @@ export function gunAvatar({
   reflect = true,
 } = {}) {
   if (!pub) return;
+  if (!document) return
   if (cache?.[draw]?.[size]?.[pub])
     return cache[dark ? "dark" : "light"][draw][size][pub];
 

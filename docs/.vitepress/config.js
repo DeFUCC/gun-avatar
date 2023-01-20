@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress";
 import Unocss from 'unocss/vite'
 import { presetUno, presetIcons, transformerDirectives, extractorSplit } from "unocss";
 import extractorPug from '@unocss/extractor-pug'
-import Components from "unplugin-vue-components/vite";
+
 
 export default defineConfig({
 	title: 'Gun-avatar',
@@ -34,13 +34,6 @@ export default defineConfig({
 	],
 	vite: {
 		plugins: [
-			Components({
-				dirs: ["./.vitepress/components/"],
-				extensions: ["html", "vue"],
-				globalNamespaces: ["global"],
-				include: [/\.vue$/, /\.vue\?vue/, /\.html$/, /\.md$/],
-				exclude: [/node_modules/, /\.git/],
-			}),
 			Unocss({
 				presets: [
 					presetIcons({

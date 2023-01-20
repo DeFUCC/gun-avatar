@@ -1,7 +1,5 @@
-<script setup>
-import { gunAvatar } from '../../../src/main'
-import { useCssVar } from '@vueuse/core'
-import { computed } from 'vue';
+<script  setup>
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
 	pub: { type: String, default: '' },
@@ -12,7 +10,16 @@ const props = defineProps({
 	round: { type: Boolean, default: true }
 })
 
-const avatar = computed(() => gunAvatar({ ...props }))
+const avatar = ref('')
+
+onMounted(() => {
+	import('../../../src/main').then(d => {
+		watch(props, p => {
+			avatar.value = d.gunAvatar({ ...props })
+		}, { immediate: true })
+	})
+
+})
 
 </script>
 

@@ -8,6 +8,7 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "./demo",
+    sourcemap: true
   },
   plugins: [
     Vue(),

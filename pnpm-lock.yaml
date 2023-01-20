@@ -10,7 +10,6 @@ specifiers:
   pug: 3.0.2
   unocss: ^0.48.4
   unplugin-icons: ^0.15.1
-  unplugin-vue-components: ^0.22.12
   vite: ^4.0.4
   vitepress: 1.0.0-alpha.38
   vue: ^3.2.45
@@ -28,7 +27,6 @@ devDependencies:
   pug: 3.0.2
   unocss: 0.48.4_vite@4.0.4
   unplugin-icons: 0.15.1
-  unplugin-vue-components: 0.22.12_vue@3.2.45
   vite: 4.0.4
   vitepress: 1.0.0-alpha.38
 
@@ -899,10 +897,6 @@ packages:
       '@babel/types': 7.17.0
     dev: true
 
-  /balanced-match/1.0.2:
-    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-    dev: true
-
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
@@ -910,12 +904,6 @@ packages:
 
   /body-scroll-lock/4.0.0-beta.0:
     resolution: {integrity: sha512-a7tP5+0Mw3YlUJcGAKUqIBkYYGlYxk2fnCasq/FUph1hadxlTRjF+gAcZksxANnaMnALjxEddmSi/H3OR8ugcQ==}
-    dev: true
-
-  /brace-expansion/2.0.1:
-    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
-    dependencies:
-      balanced-match: 1.0.2
     dev: true
 
   /braces/3.0.2:
@@ -1319,13 +1307,6 @@ packages:
   /mimic-fn/2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
-    dev: true
-
-  /minimatch/5.1.4:
-    resolution: {integrity: sha512-U0iNYXt9wALljzfnGkhFSy5sAC6/SCR3JrHrlsdJz4kF8MvhTRQNiC59iUi1iqsitV7abrNAJWElVL9pdnoUgw==}
-    engines: {node: '>=10'}
-    dependencies:
-      brace-expansion: 2.0.1
     dev: true
 
   /mrmime/1.0.1:
@@ -1754,32 +1735,6 @@ packages:
       local-pkg: 0.4.2
       unplugin: 1.0.1
     transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /unplugin-vue-components/0.22.12_vue@3.2.45:
-    resolution: {integrity: sha512-FxyzsuBvMCYPIk+8cgscGBQ345tvwVu+qY5IhE++eorkyvA4Z1TiD/HCiim+Kbqozl10i4K+z+NCa2WO2jexRA==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@babel/parser': ^7.15.8
-      vue: 2 || 3
-    peerDependenciesMeta:
-      '@babel/parser':
-        optional: true
-    dependencies:
-      '@antfu/utils': 0.7.2
-      '@rollup/pluginutils': 5.0.2
-      chokidar: 3.5.3
-      debug: 4.3.4
-      fast-glob: 3.2.12
-      local-pkg: 0.4.2
-      magic-string: 0.27.0
-      minimatch: 5.1.4
-      resolve: 1.22.1
-      unplugin: 1.0.1
-      vue: 3.2.45
-    transitivePeerDependencies:
-      - rollup
       - supports-color
     dev: true
 

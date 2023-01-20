@@ -11,7 +11,8 @@
  *
  **/
 
-;(() => {
+; (() => {
+  if (!document) return
   if (!needPoly()) {
     return
   }
