@@ -35,7 +35,7 @@
 	},
 	"main": "./dist/gun-avatar.umd.cjs",
 	"module": "./dist/gun-avatar.js",
-	"types": "./dist/types/main.d.ts",
+	"types": "./dist/types/index.d.ts",
 	"files": [
 		"dist"
 	],
@@ -50,18 +50,19 @@
 	},
 	"dependencies": {
 		"@unocss/reset": "0.48.4",
-		"@vueuse/core": "9.11.0",
+		"@vueuse/core": "9.11.1",
 		"gun": "0.2020.1239",
 		"vue": "^3.2.45"
 	},
 	"devDependencies": {
-		"@iconify/json": "^2.2.8",
+		"@iconify/json": "^2.2.10",
 		"@unocss/extractor-pug": "0.48.4",
 		"@vitejs/plugin-vue": "^4.0.0",
+		"@volar/vue-language-plugin-pug": "^1.0.24",
 		"pug": "3.0.2",
 		"unocss": "^0.48.4",
 		"unplugin-icons": "^0.15.1",
 		"vite": "^4.0.4",
-		"vitepress": "1.0.0-alpha.38"
+		"vitepress": "1.0.0-alpha.40"
 	}
 }

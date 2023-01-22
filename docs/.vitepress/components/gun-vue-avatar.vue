@@ -13,9 +13,9 @@ const props = defineProps({
 const avatar = ref('')
 
 onMounted(() => {
-	import('../../../src/main').then(d => {
+	import('../../../src/main').then(({ gunAvatar, mountElement }) => {
 		watch(props, p => {
-			avatar.value = d.gunAvatar({ ...props })
+			avatar.value = gunAvatar({ ...props })
 		}, { immediate: true })
 	})
 
@@ -23,6 +23,8 @@ onMounted(() => {
 
 </script>
 
-<template>
-	<img :src="avatar" />
+<template lang="pug">
+.flex.overflow-hidden
+	img(:src="avatar")
+// <gun-avatar :pub="pub" :size="200" />
 </template>

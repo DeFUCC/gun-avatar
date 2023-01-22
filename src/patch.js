@@ -11,7 +11,7 @@
  *
  **/
 
-; (() => {
+export default () => {
   if (!document) return
   if (!needPoly()) {
     return
@@ -128,4 +128,4 @@
       return source
     }
   }
-})()
+}

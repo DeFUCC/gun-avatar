@@ -32,6 +32,13 @@ export default defineConfig({
 		['meta', { name: 'twitter:creator', content: '@davay42' }],
 		['meta', { name: 'twitter:image', content: 'https://gun-avatar.js.org/avatar.png' }],
 	],
+	vue: {
+		template: {
+			compilerOptions: {
+				isCustomElement: tag => tag == 'gun-avatar'
+			}
+		}
+	},
 	vite: {
 		plugins: [
 			Unocss({
