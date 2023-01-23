@@ -1,6 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import GunVueAvatar from '../components/gun-vue-avatar.vue';
 import HeaderLinks from '../components/header-links.vue'
 import { useState } from '../composables/state'
@@ -10,6 +10,13 @@ const { Layout } = DefaultTheme
 const state = useState()
 
 const list = computed(() => [...state.history.history].reverse())
+
+onMounted(() => {
+	const loop = setInterval(() => {
+		state.generatePair()
+	}, 2000)
+})
+
 </script>
 
 <template lang="pug">
@@ -20,12 +27,12 @@ Layout
 				transition(name="fade")
 					.flex.items-center.image-src(
 						:key="state.pub"
-					)
-						gun-vue-avatar.rounded-full.glow(
+						)
+						gun-vue-avatar.rounded-full.glow.z-10(
 							:pub="state.pub"
 							:size="300"
 							)
-						gun-vue-avatar.rounded-full.cursor-pointer.z-2(
+						gun-vue-avatar.rounded-full.cursor-pointer.z-20(
 							:pub="state.pub"
 							:size="300"
 							)
@@ -47,6 +54,6 @@ Layout
 
 <style scoped lang="postcss">
 .glow {
-	@apply absolute transform scale-110 filter blur-2xl z-1;
+	@apply absolute transform scale-110 filter blur-2xl z-10;
 }
 </style>

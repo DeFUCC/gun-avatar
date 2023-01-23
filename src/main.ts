@@ -2,28 +2,31 @@
 
 const cache = {}; // stores already generated avatars
 
-// actual generator function, returns the base64 string
-
-export function gunAvatar({
-  pub,
-  size = 800,
-  dark = false,
-  draw = "circles",
-  reflect = true,
-}: {
+export interface AvatarOptions {
   pub: string
   size?: number
   dark: boolean
   draw: 'circles' | 'squares'
   reflect: boolean
-}): string {
-  if (!pub) return;
-  if (!validatePub(pub)) return
-  if (!document) return
+}
+
+// actual generator function, returns the base64 string
+
+export function gunAvatar({
+  pub,
+  size = 200,
+  dark = false,
+  draw = "circles",
+  reflect = true,
+}: AvatarOptions): string {
+
+  if (!validatePub(pub)) return ''
+  if (!document) return ''
+
   let mode = dark ? "dark" : "light";
-  const key = mode + draw + size + pub
+  const reflected = reflect ? 'ref' : 'noref'
+  const key = pub + mode + draw + size + reflected
   if (cache?.[key]) {
-    console.log('using cache')
     return cache[key]
   }
 
@@ -108,7 +111,7 @@ function drawGradient(
   ctx.fillRect(0, 0, size, size);
 }
 
-function drawSquares(data, ctx, size) {
+function drawSquares(data: number[], ctx: CanvasRenderingContext2D, size: number,) {
   const chunks = chunkIt(data, 14);
   chunks.forEach((chunk) => {
     if (chunk.length == 14) {
@@ -143,7 +146,8 @@ function drawSquares(data, ctx, size) {
   });
 }
 
-function drawCircles(data, ctx, size, radius) {
+function drawCircles(data: number[], ctx: CanvasRenderingContext2D, size: number, radius: number) {
+
   const chunks = chunkIt(data, 7);
   chunks.forEach((chunk) => {
     if (chunk.length == 7) {
@@ -164,7 +168,7 @@ function drawCircles(data, ctx, size, radius) {
   });
 }
 
-function decodeUrlSafeBase64(st) {
+function decodeUrlSafeBase64(st: string): number[] {
   const symbols =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
   const symbolArray = symbols.split("");
@@ -176,7 +180,7 @@ function decodeUrlSafeBase64(st) {
   return arr;
 }
 
-function chunkIt(list, chunkSize = 3) {
+function chunkIt(list: number[], chunkSize = 3) {
   return [...Array(Math.ceil(list.length / chunkSize))].map(() =>
     list.splice(0, chunkSize)
   );
