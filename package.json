@@ -40,13 +40,12 @@
 		"lib"
 	],
 	"scripts": {
-		"build": "tsc && vite build --config vite.config.lib.js",
-		"deploy": "sh deploy.sh",
-		"dev": "vite",
-		"page": "vite build",
-		"serve": "vite preview --port=5005",
-		"docs": "vitepress dev docs",
-		"build-docs": "vitepress build docs"
+		"dev": "vitepress dev docs",
+		"build": "vitepress build docs",
+		"build-lib": "vite build --config vite.config.lib.js && tsc ",
+		"serve": "vitepress preview docs --port=5005",
+		"test": "vite docs/public/tests",
+		"deploy": "sh deploy.sh"
 	},
 	"dependencies": {
 		"@unocss/reset": "0.48.4",

@@ -375,12 +375,19 @@
 				MIT 2020-present<br />by <a href="https://github.com/davay42">davay</a>
 			</div>
 		</main>
-		<script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-		<script type="module">
-			import "@unocss/reset/tailwind.css";
-			import "uno.css";
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
 
-			import { mountElement, mountClass } from "./src/index";
+		<script type="module">
+			import {
+				mountElement,
+				mountClass,
+			} from "https://esm.sh/v104/gun-avatar@1.8.0/es2022/gun-avatar.js";
+			import GUN from "https://esm.sh/v104/gun@0.2020.1239/gun";
+			import SEA from "https://esm.sh/v104/gun@0.2020.1239/es2022/sea.js";
 			mountElement();
 			mountClass();
 
