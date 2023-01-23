@@ -11,6 +11,12 @@ export const state = reactive({
 		epriv: "Tr9_a9sWJbo7EI0ARB5VeptIBALFuVNkSkrRAuP8vQc",
 	},
 	pub: computed(() => state.pair.pub),
+	options: {
+		size: 200,
+		reflect: true,
+		dark: false,
+		draw: 'circles'
+	},
 })
 
 state.history = useRefHistory(toRef(state, 'pair'))

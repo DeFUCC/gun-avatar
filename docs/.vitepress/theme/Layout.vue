@@ -3,6 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import { computed, onMounted } from 'vue';
 import GunVueAvatar from '../components/gun-vue-avatar.vue';
 import HeaderLinks from '../components/header-links.vue'
+import AvatarPlayground from '../components/avatar-playground.vue'
 import { useState } from '../composables/state'
 
 const { Layout } = DefaultTheme
@@ -45,11 +46,13 @@ Layout
 				.flex(
 					v-for="rec in list"
 					:key="rec"
-				)
+					)
 					gun-vue-avatar.rounded-full(
 						:pub="rec.snapshot.pub"
 						:size="50"
 						) {{ rec.snapshot.pub }}
+	template(#home-features-after)
+		AvatarPlayground
 </template>
 
 <style scoped lang="postcss">
