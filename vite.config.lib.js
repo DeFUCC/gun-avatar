@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    outDir: "./dist",
+    outDir: "./lib/",
     target: "esnext",
     lib: {
       entry: path.resolve(__dirname, "./src/index.ts"),

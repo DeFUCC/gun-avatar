@@ -7,7 +7,7 @@ import extractorPug from '@unocss/extractor-pug'
 export default defineConfig({
 	title: 'Gun-avatar',
 	titleTemplate: "Gun-avatar public key visualizer",
-	outDir: "../public/docs/",
+	outDir: "../dist/",
 	lang: 'en-US',
 	themeConfig: {
 		logo: '/avatar.png',

@@ -1,5 +1,9 @@
 # gun-avatar changelog
 
+## 1.8.0
+
+Typescript is introduced. The internal functions are more clean and readable. And new documentation web-site based on Vitepress is soon to be deployed.
+
 ## 1.6.0
 
 BREAKING CHANGE! Now the `gunAvatar()` function gets an options object instead of a line of params.

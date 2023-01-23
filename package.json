@@ -29,15 +29,15 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/gun-avatar.js",
-			"require": "./dist/gun-avatar.umd.cjs"
+			"import": "./lib/gun-avatar.js",
+			"require": "./lib/gun-avatar.umd.cjs"
 		}
 	},
-	"main": "./dist/gun-avatar.umd.cjs",
-	"module": "./dist/gun-avatar.js",
-	"types": "./dist/types/index.d.ts",
+	"main": "./lib/gun-avatar.umd.cjs",
+	"module": "./lib/gun-avatar.js",
+	"types": "./lib/types/index.d.ts",
 	"files": [
-		"dist"
+		"lib"
 	],
 	"scripts": {
 		"build": "tsc && vite build --config vite.config.lib.js",
