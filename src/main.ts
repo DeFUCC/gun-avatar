@@ -1,5 +1,3 @@
-
-
 const cache = {}; // stores already generated avatars
 
 export interface AvatarOptions {
@@ -63,7 +61,7 @@ export function gunAvatar({
 
 // FUNCTIONS
 
-function parsePub(pub: string) {
+export function parsePub(pub: string) {
   const split = pub.split(".");
   const decoded = split.map((single) => decodeUrlSafeBase64(single));
   return {
@@ -73,7 +71,7 @@ function parsePub(pub: string) {
   }
 }
 
-function validatePub(pub: string): boolean {
+export function validatePub(pub: string): boolean {
   if (
     pub
     && typeof pub == 'string'
@@ -86,6 +84,23 @@ function validatePub(pub: string): boolean {
   }
 }
 
+export function decodeUrlSafeBase64(st: string): number[] {
+  const symbols =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  const symbolArray = symbols.split("");
+  let arr = [];
+  let i = 0;
+  for (let letter of st) {
+    arr[i++] = symbolArray.indexOf(letter) / 64;
+  }
+  return arr;
+}
+
+export function chunkIt(list: number[], chunkSize = 3) {
+  return [...Array(Math.ceil(list.length / chunkSize))].map(() =>
+    list.splice(0, chunkSize)
+  );
+}
 
 function drawGradient(
   {
@@ -166,22 +181,4 @@ function drawCircles(data: number[], ctx: CanvasRenderingContext2D, size: number
       ctx.fill();
     }
   });
-}
-
-function decodeUrlSafeBase64(st: string): number[] {
-  const symbols =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-  const symbolArray = symbols.split("");
-  let arr = [];
-  let i = 0;
-  for (let letter of st) {
-    arr[i++] = symbolArray.indexOf(letter) / 64;
-  }
-  return arr;
-}
-
-function chunkIt(list: number[], chunkSize = 3) {
-  return [...Array(Math.ceil(list.length / chunkSize))].map(() =>
-    list.splice(0, chunkSize)
-  );
 }

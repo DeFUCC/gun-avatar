@@ -1,6 +1,6 @@
 
 import { reactive, computed, toRef, onMounted } from "vue";
-import { useRefHistory } from '@vueuse/core'
+import { useRefHistory, useIntervalFn } from '@vueuse/core'
 
 
 export const state = reactive({
@@ -22,7 +22,6 @@ export const state = reactive({
 	loop: 0,
 	setPair(pair) {
 		state.pair = pair
-		clearInterval(state.loop)
 	}
 })
 
@@ -38,7 +37,7 @@ export function useState() {
 			})
 		})
 		onMounted(() => {
-			state.loop = setInterval(() => {
+			state.loop = useIntervalFn(() => {
 				state.generatePair()
 			}, 2000)
 		})
