@@ -1,9 +1,10 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import GunVueAvatar from '../components/gun-vue-avatar.vue';
 import HeaderLinks from '../components/header-links.vue'
 import AvatarPlayground from '../components/avatar-playground.vue'
+import ShowKey from '../components/show-key.vue'
 import { useState } from '../composables/state'
 
 const { Layout } = DefaultTheme
@@ -12,11 +13,7 @@ const state = useState()
 
 const list = computed(() => [...state.history.history].reverse())
 
-onMounted(() => {
-	const loop = setInterval(() => {
-		state.generatePair()
-	}, 2000)
-})
+
 
 </script>
 
@@ -41,18 +38,20 @@ Layout
 	template(#nav-bar-content-before)
 		header-links
 	template(#home-hero-after)
+		show-key
 		.flex.flex-wrap.items-center.px-12.justify-start.max-w-1200px.m-auto.flex-column-reverse.gap-2.pb-12.flex-wrap-reverse
 			transition-group(name="fade")
 				.flex(
 					v-for="rec in list"
 					:key="rec"
 					)
-					gun-vue-avatar.rounded-full(
+					gun-vue-avatar.rounded-full.cursor-pointer(
 						:pub="rec.snapshot.pub"
 						:size="50"
+						@click="state.setPair(rec.snapshot)"
 						) {{ rec.snapshot.pub }}
 	template(#home-features-after)
-		AvatarPlayground
+		avatar-playground
 </template>
 
 <style scoped lang="postcss">

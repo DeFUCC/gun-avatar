@@ -6,9 +6,18 @@ const state = useState()
 
 <template lang='pug'>
 .p-12.max-w-1200px.m-auto 
-	h1.text-2xl.font-bold Playground
-	.flex.w-full.justify-between.gap-2.mt-8
-		.p-2.flex.flex-col.gap-2
+	h1.text-4xl.font-bold Playground
+	.flex.w-full.gap-2.mt-8
+		.p-8.h-60.w-60
+			transition(name="fade" mode="out-in")
+				.m-auto(:key="state.pub")
+					gun-vue-avatar.cursor-pointer(
+						:style="{borderRadius: (state.options.round ? 100000 : 0) + 'px'}"
+						:pub="state.pub"
+						v-bind="state.options"
+						@click="state.generatePair()"
+						)
+		.p-2.flex.flex-col.gap-2.w-80
 			select.p-2(v-model="state.options.draw")
 				option(value="circles") Circles
 				option(value="squares") Squares
@@ -19,9 +28,7 @@ const state = useState()
 			label.flex.gap-2
 				input(type="checkbox" v-model="state.options.reflect")
 				.text-lg Reflect
-		.p-2
-			gun-vue-avatar.rounded-full(
-				:pub="state.pub"
-				v-bind="state.options"
-			)
+			label.flex.gap-2
+				input(type="checkbox" v-model="state.options.round")
+				.text-lg Round
 </template>

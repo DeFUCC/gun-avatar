@@ -1,6 +1,7 @@
 
-import { reactive, computed, toRef } from "vue";
+import { reactive, computed, toRef, onMounted } from "vue";
 import { useRefHistory } from '@vueuse/core'
+
 
 export const state = reactive({
 	initiated: false,
@@ -15,8 +16,14 @@ export const state = reactive({
 		size: 200,
 		reflect: true,
 		dark: false,
-		draw: 'circles'
+		draw: 'circles',
+		round: true
 	},
+	loop: 0,
+	setPair(pair) {
+		state.pair = pair
+		clearInterval(state.loop)
+	}
 })
 
 state.history = useRefHistory(toRef(state, 'pair'))
@@ -24,14 +31,20 @@ state.history = useRefHistory(toRef(state, 'pair'))
 export function useState() {
 	if (!state.initiated && !import.meta.env.SSR) {
 		import('gun/gun').then(() => {
-			import('gun/sea').then(async (SEA) => {
+			import('gun/sea').then(async SEA => {
 				state.generatePair = async function () {
 					state.pair = await SEA.pair()
 				}
 			})
 		})
-
+		onMounted(() => {
+			state.loop = setInterval(() => {
+				state.generatePair()
+			}, 2000)
+		})
+		state.initiated = true
 	}
+
 	return state
 }
 

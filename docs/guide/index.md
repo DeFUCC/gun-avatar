@@ -6,9 +6,7 @@ title: Guide
 
 <a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
 
-[Try it on codepen](https://codepen.io/Davay/pen/eYGeGMZ)
-
-![avatar](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatars.gif)
+![avatar](/avatars.gif)
 
 It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
 
@@ -19,7 +17,7 @@ So the steps to generate a unique picture for the key are like that:
 3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
 4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
-![avatars](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatar-list.png)
+![avatars](/avatar-list.png)
 
 ## How to install?
 
@@ -91,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 2. **Squares** - gradient squares over blurred ones (useful for rooms)
 
-![rooms](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/rooms.gif)
+![rooms](/rooms.gif)
 
 ```html
 <gun-avatar
