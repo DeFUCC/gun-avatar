@@ -13,9 +13,7 @@
 
 export default () => {
   if (!document) return
-  if (!needPoly()) {
-    return
-  }
+  if (!needPoly()) return
 
   const proto = CanvasRenderingContext2D.prototype
   const original = proto.drawImage

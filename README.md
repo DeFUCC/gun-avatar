@@ -4,18 +4,19 @@
 
 [Try it on codepen](https://codepen.io/Davay/pen/eYGeGMZ)
 
-![avatar](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatars.gif)
+![avatar](https://gun-avatar.js.org/avatars.gif)
 
 It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
 
 So the steps to generate a unique picture for the key are like that:
 
-1. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
-2. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the HSLA model (h,s,l,a). We place these circles on one side of a square canvas.
-3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
-4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
+1. We split the public key in two halves by the dot `.`.
+2. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
+3. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the HSLA model (h,s,l,a). We place these circles on one side of a square canvas.
+4. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
+5. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
-![avatars](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/avatar-list.png)
+![avatars](https://gun-avatar.js.org/avatar-list.png)
 
 ## How to install?
 
@@ -31,16 +32,16 @@ After you add the script to the page you get a custom element `<gun-avatar />` f
 
 ```html
 <script type="module">
-  import { mountElement } from "https://cdn.skypack.dev/gun-avatar";
-  mountElement();
+	import { mountElement } from "https://cdn.skypack.dev/gun-avatar";
+	mountElement();
 </script>
 <gun-avatar
-  pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
-  size="300"
-  round
-  dark
-  reflect
-  draw="circles"
+	pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+	size="300"
+	round
+	dark
+	reflect
+	draw="circles"
 />
 ```
 
@@ -52,15 +53,15 @@ Add the script to the page and then add `gun-avatar` class to an img tag along w
 
 ```html
 <script type="module">
-  import { mountClass } from "https://cdn.skypack.dev/gun-avatar";
-  mountClass();
+	import { mountClass } from "https://cdn.skypack.dev/gun-avatar";
+	mountClass();
 </script>
 <img
-  class="gun-avatar"
-  data-size="200"
-  data-draw="squares"
-  data-reflect="false"
-  data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+	class="gun-avatar"
+	data-size="200"
+	data-draw="squares"
+	data-reflect="false"
+	data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
 />
 ```
 
@@ -74,10 +75,10 @@ Install the `gun-avatar` package and import the `gunAvatar` function. Then you c
 import { gunAvatar } from "https://cdn.skypack.dev/gun-avatar";
 
 const pub =
-  "YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8";
+	"YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8";
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("avatar").src = gunAvatar({ pub, size: 200 });
+	document.getElementById("avatar").src = gunAvatar({ pub, size: 200 });
 });
 ```
 
@@ -91,10 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ```html
 <gun-avatar
-  pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
-  size="300"
-  reflect="false"
-  draw="squares"
+	pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+	size="300"
+	reflect="false"
+	draw="squares"
 ></gun-avatar>
 ```
 
@@ -109,3 +110,4 @@ document.addEventListener("DOMContentLoaded", () => {
 - [x] add more draw modes
   - [x] `circles`
   - [x] `squares`
+  - [ ] `triangles`?
