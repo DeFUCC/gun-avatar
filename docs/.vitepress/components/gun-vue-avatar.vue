@@ -1,5 +1,7 @@
 <script  setup>
 import { ref, onMounted, watch } from 'vue';
+import { state } from '../composables/state';
+
 
 const props = defineProps({
 	pub: { type: String, default: '' },

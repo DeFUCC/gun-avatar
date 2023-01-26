@@ -1,6 +1,6 @@
 
 import { reactive, computed, toRef, onMounted } from "vue";
-import { useRefHistory, useIntervalFn } from '@vueuse/core'
+import { useRefHistory, useIntervalFn, useClipboard } from '@vueuse/core'
 
 
 export const state = reactive({
@@ -27,8 +27,13 @@ export const state = reactive({
 
 state.history = useRefHistory(toRef(state, 'pair'))
 
+const source = computed(() => JSON.stringify(state.pair))
+state.clip = useClipboard({ source })
+
 export function useState() {
-	if (!state.initiated && !import.meta.env.SSR) {
+
+	if (!state.initiated && !import.meta?.env?.SSR) {
+
 		import('gun/gun').then(() => {
 			import('gun/sea').then(async SEA => {
 				state.generatePair = async function () {
