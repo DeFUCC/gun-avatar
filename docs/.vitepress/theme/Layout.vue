@@ -118,3 +118,8 @@ Layout
 }
 </style>
 
+<style>
+.VPHome {
+	padding-bottom: 0 !important;
+}
+</style>

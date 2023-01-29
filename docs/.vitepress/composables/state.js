@@ -34,7 +34,7 @@ const source = computed(() => JSON.stringify(state.pair))
 state.clip = useClipboard({ source })
 
 export function useState() {
-	if (import.meta.env.PROD) return state
+	if (import.meta.env.SSR) return state
 	if (!state.initiated) {
 
 		import('gun/gun').then(() => {
