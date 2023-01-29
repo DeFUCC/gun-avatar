@@ -6,9 +6,9 @@
 
 ![avatar](https://gun-avatar.js.org/avatars.gif)
 
-It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
+Gun-Avatar takes a public key `string` 88 symbols long and creates a `base64` encoded picture to be set as a source for an `<img>` tag.
 
-So the steps to generate a unique picture for the key are like that:
+SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`. So the steps to generate a unique picture for the key are like that:
 
 1. We split the public key in two halves by the dot `.`.
 2. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
@@ -22,7 +22,13 @@ So the steps to generate a unique picture for the key are like that:
 
 ### npm / pnpm
 
-Run `npm i gun-avatar` in a build environment. Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or just `import 'gun-avatar'` for custom element use.
+Install the script from `npm` with a tool of your choice.
+
+```shell
+npm i gun-avatar
+```
+
+Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or simply `import 'gun-avatar'` for custom element use.
 
 ## How to use Gun-avatar?
 

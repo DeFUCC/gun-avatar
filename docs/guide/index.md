@@ -4,13 +4,13 @@ title: Guide
 
 # Avatar generator for GUN public keys
 
-<a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
-
 ![avatar](/avatars.gif)
 
-It takes a public key of 88 symbols and creates a base64 code to be set to an img tag. SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`.
+<a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
 
-So the steps to generate a unique picture for the key are like that:
+Gun-Avatar takes a public key `string` 88 symbols long and creates a `base64` encoded picture to be set as a source for an `<img>` tag.
+
+SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`. So the steps to generate a unique picture for the key are like that:
 
 1. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
 2. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the HSLA model (h,s,l,a). We place these circles on one side of a square canvas.
@@ -21,11 +21,17 @@ So the steps to generate a unique picture for the key are like that:
 
 ## How to install?
 
-### npm / pnpm
+### npm / pnpm / yarn
 
-Run `npm i gun-avatar` in a build environment. Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or just `import 'gun-avatar'` for custom element use.
+Install the script from `npm` with a tool of your choice.
 
-## How to use Gun-avatar?
+```shell
+npm i gun-avatar
+```
+
+Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or simply `import 'gun-avatar'` for custom element use.
+
+## How to use?
 
 ### 1. Custom HTML element
 
