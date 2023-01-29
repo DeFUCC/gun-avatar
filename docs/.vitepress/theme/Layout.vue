@@ -52,8 +52,8 @@ Layout
 			transition(name="fade" mode="out-in")
 				gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
 					@click="state.generatePair()"
-					:pub="state.pub"
-					v-bind="state.options")
+					:size="300"
+					:pub="state.pub")
 			.card.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(
