@@ -1,6 +1,6 @@
 {
 	"name": "gun-avatar",
-	"version": "1.9.0",
+	"version": "1.9.1",
 	"description": "Avatar generator for GUN public keys",
 	"keywords": [
 		"gun",
