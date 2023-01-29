@@ -1,15 +1,15 @@
 /* FADE */
 
 .fade {
-	transition: all 0.8s ease;
+	transition: all 0.3s ease;
 }
 
 .fade-enter-active {
-	transition: all 0.4s ease;
+	transition: all 0.2s ease;
 }
 .fade-leave-active {
 	opacity: 0;
-	transition: all 0.3s ease;
+	transition: all 0.2s ease;
 }
 
 .fade-leave-to {

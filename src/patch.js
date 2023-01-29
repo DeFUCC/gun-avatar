@@ -12,7 +12,7 @@
  **/
 
 export default () => {
-  if (!document) return
+  if (!CanvasRenderingContext2D) return
   if (!needPoly()) return
 
   const proto = CanvasRenderingContext2D.prototype

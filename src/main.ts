@@ -21,9 +21,7 @@ export function gunAvatar({
   if (!validatePub(pub)) return ''
   if (!document) return ''
 
-  let mode = dark ? "dark" : "light";
-  const reflected = reflect ? 'ref' : 'noref'
-  const key = pub + mode + draw + size + reflected
+  const key = JSON.stringify(arguments[0])
   if (cache?.[key]) {
     return cache[key]
   }

@@ -31,4 +31,14 @@ const state = useState()
 			label.flex.gap-2
 				input(type="checkbox" v-model="state.options.round")
 				.text-lg Round
+			.flex.items-center.justify-center.gap-4.text-4xl
+				.button(
+					@click="state.options.reflect = !state.options.reflect"
+					:style="{opacity: state.options.reflect ? 1 : .4}"						)
+					.i-codicon-mirror
+				.button(
+					@click="state.options.draw = state.options.draw =='squares'? 'circles': 'squares'"						)
+					transition(name="fade" mode="out-in")
+						.i-ph-squares-four(v-if="state.options.draw =='squares'")
+						.i-ph-circles-four(v-else)
 </template>

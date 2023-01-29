@@ -1,6 +1,7 @@
 
 import { reactive, computed, toRef, onMounted } from "vue";
-import { useRefHistory, useIntervalFn, useClipboard } from '@vueuse/core'
+import { useRefHistory, useIntervalFn, useClipboard, useDark, onKeyStroke } from '@vueuse/core'
+import { parsePub } from "../../../src/main";
 
 
 export const state = reactive({
@@ -12,14 +13,16 @@ export const state = reactive({
 		epriv: "Tr9_a9sWJbo7EI0ARB5VeptIBALFuVNkSkrRAuP8vQc",
 	},
 	pub: computed(() => state.pair.pub),
+	parsed: computed(() => parsePub(state.pub)),
 	options: {
 		size: 200,
 		reflect: true,
-		dark: false,
+		dark: useDark(),
 		draw: 'circles',
 		round: true
 	},
-	loop: 0,
+	loop: {},
+	interval: 2000,
 	setPair(pair) {
 		state.pair = pair
 	}
@@ -31,20 +34,34 @@ const source = computed(() => JSON.stringify(state.pair))
 state.clip = useClipboard({ source })
 
 export function useState() {
-
-	if (!state.initiated && !import.meta?.env?.SSR) {
+	if (import.meta.env.PROD) return state
+	if (!state.initiated) {
 
 		import('gun/gun').then(() => {
 			import('gun/sea').then(async SEA => {
+
 				state.generatePair = async function () {
 					state.pair = await SEA.pair()
 				}
+				onKeyStroke('Enter', () => {
+					state.generatePair()
+				})
 			})
 		})
+
 		onMounted(() => {
-			state.loop = useIntervalFn(() => {
-				state.generatePair()
-			}, 2000)
+			import('../../../src/index').then(({ gunAvatar, mountElement }) => {
+				state.gunAvatar = gunAvatar
+			})
+			state.loop = useIntervalFn(async () => {
+				await state.generatePair()
+			}, 2000, { immediate: true })
+			onKeyStroke('ArrowLeft', () => {
+				state.history.undo()
+			})
+			onKeyStroke('ArrowRight', () => {
+				state.history.redo()
+			})
 		})
 		state.initiated = true
 	}

@@ -1,7 +1,8 @@
 <script  setup>
-import { ref, onMounted, watch } from 'vue';
-import { state } from '../composables/state';
+import { ref, onMounted, watch, computed } from 'vue';
+import { useState } from '../composables/state';
 
+const state = useState()
 
 const props = defineProps({
 	pub: { type: String, default: '' },
@@ -12,21 +13,12 @@ const props = defineProps({
 	round: { type: Boolean, default: true }
 })
 
-const avatar = ref('')
+const avatar = computed(() => state?.gunAvatar?.({ ...props }))
 
-onMounted(() => {
-	import('../../../src/main').then(({ gunAvatar, mountElement }) => {
-		watch(props, p => {
-			avatar.value = gunAvatar({ ...props })
-		}, { immediate: true })
-	})
-
-})
 
 </script>
 
 <template lang="pug">
 .flex.overflow-hidden
 	img(:src="avatar")
-// <gun-avatar :pub="pub" :size="200" />
 </template>
