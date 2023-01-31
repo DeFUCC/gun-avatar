@@ -37,17 +37,15 @@ export function useState() {
 	if (import.meta.env.SSR) return state
 	if (!state.initiated) {
 
-		import('gun/gun').then(() => {
-			import('gun/sea').then(async SEA => {
-
-				state.generatePair = async function () {
-					state.pair = await SEA.pair()
-				}
-				onKeyStroke('Enter', () => {
-					state.generatePair()
-				})
+		import('gun/sea/pair.js').then(async SEA => {
+			state.generatePair = async function () {
+				state.pair = await SEA.default()
+			}
+			onKeyStroke('Enter', () => {
+				state.generatePair()
 			})
 		})
+
 
 		onMounted(() => {
 			import('../../../src/index').then(({ gunAvatar, mountElement }) => {

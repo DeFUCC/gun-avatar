@@ -30,9 +30,9 @@ export function gunAvatar({
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
 
-  const { decoded, top, bottom } = parsePub(pub)
+  const { decoded, finals } = parsePub(pub)
 
-  drawGradient({ ctx, top, bottom, size, dark });
+  drawGradient({ ctx, top: finals[0], bottom: finals[1], size, dark });
 
   if (draw == "squares") {
     ctx.filter = "blur(20px)";
@@ -59,16 +59,6 @@ export function gunAvatar({
 
 // FUNCTIONS
 
-export function parsePub(pub: string) {
-  const split = pub.split(".");
-  const decoded = split.map((single) => decodeUrlSafeBase64(single));
-  return {
-    decoded,
-    top: decoded[0][42],
-    bottom: decoded[1][42]
-  }
-}
-
 export function validatePub(pub: string): boolean {
   if (
     pub
@@ -82,9 +72,31 @@ export function validatePub(pub: string): boolean {
   }
 }
 
+export function parsePub(pub: string) {
+  const split = pub.split(".");
+  const decoded = split.map((single) => decodeUrlSafeBase64(single));
+  const finals = decoded.map(d => d[42])
+  const averages = decoded.map(e => e.reduce((acc, d) => acc + d) / e.length)
+  const angles = split.map(part => fromB64(part) % 360)
+  const colors = split.map((s, i) => `hsl(${angles[i]} ${finals[i] * 100}% ${averages[i] * 100}%)`)
+  return {
+    finals,
+    decoded,
+    angles,
+    averages,
+    colors,
+  }
+}
+
+// https://datatracker.ietf.org/doc/html/rfc4648#section-5
+const symbols =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+export function toB64(x: number): string { return x.toString(2).split(/(?=(?:.{6})+(?!.))/g).map(v => symbols[parseInt(v, 2)]).join("") }
+
+export function fromB64(x: string): number { return x.split("").reduce((s, v) => s * 64 + symbols.indexOf(v), 0) }
+
 export function decodeUrlSafeBase64(st: string): number[] {
-  const symbols =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
   const symbolArray = symbols.split("");
   let arr = [];
   let i = 0;
@@ -104,8 +116,8 @@ function drawGradient(
   {
     ctx,
     top = 0,
-    size = 200,
     bottom = 150,
+    size = 200,
     dark = false,
   }: {
     ctx: CanvasRenderingContext2D,

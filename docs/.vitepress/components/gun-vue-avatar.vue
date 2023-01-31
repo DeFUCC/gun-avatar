@@ -18,7 +18,6 @@ const avatar = computed(() => state?.gunAvatar?.({ ...props }))
 
 </script>
 
-<template lang="pug">
-.flex.overflow-hidden
-	img(:src="avatar")
+<template>
+	<div class="flex overflow-hidden"><img :src="avatar"></div>
 </template>

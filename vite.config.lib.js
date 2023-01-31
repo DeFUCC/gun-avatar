@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig } from "vite";
 
+
 export default defineConfig({
   build: {
     outDir: "./lib/",
@@ -10,4 +11,5 @@ export default defineConfig({
       name: "gun-avatar",
     },
   },
+  plugins: []
 })

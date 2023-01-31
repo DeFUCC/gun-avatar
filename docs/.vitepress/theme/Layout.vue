@@ -15,9 +15,7 @@ const list = computed(() => [...state.history.history].reverse())
 
 <template lang="pug">
 Layout
-	template
 	template(#home-hero-image)
-
 		.flex(@click="state.generatePair()")
 			transition(name="fade")
 				.flex.items-center.image-src(
@@ -66,8 +64,9 @@ Layout
 						.h-8.flex.w-full.gap-1px(
 							:class="{'items-end': a == 0}"
 							v-for="(arr,a) in state.parsed.decoded" :key="a")
-							.p-0.dark-bg-light-900.flex-1.bg-dark-100.rounded.transition(
-								:style="{height:num*100+'%'}"
+							.p-0.dark-bg-light-900.flex-1.bg-dark-100.rounded(
+								style="transition: all 0.4s ease"
+								:style="{height:num*100+'%', backgroundColor: state.parsed.colors[a]}"
 								v-for="(num,n) in arr" :key="n")
 				.flex.items-center.justify-center.gap-2.flex-wrap
 					.button(
