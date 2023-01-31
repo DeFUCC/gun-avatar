@@ -15,7 +15,7 @@ export function gunAvatar({
   size = 200,
   dark = false,
   draw = "circles",
-  reflect = true,
+  reflect = true
 }: AvatarOptions): string {
 
   if (!validatePub(pub)) return ''
