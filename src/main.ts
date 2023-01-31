@@ -3,9 +3,9 @@ const cache = {}; // stores already generated avatars
 export interface AvatarOptions {
   pub: string
   size?: number
-  dark: boolean
-  draw: 'circles' | 'squares'
-  reflect: boolean
+  dark?: boolean
+  draw?: 'circles' | 'squares'
+  reflect?: boolean
 }
 
 // actual generator function, returns the base64 string
