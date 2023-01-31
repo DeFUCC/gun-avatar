@@ -71,7 +71,6 @@
 		"clean": true,
 		"dts": true,
 		"outDir": "lib",
-		"minify": true,
 		"format": [
 			"esm"
 		]
