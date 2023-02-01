@@ -117,3 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
   - [x] `circles`
   - [x] `squares`
   - [ ] `triangles`?
+- [x] Fully [typed](https://www.typescriptlang.org/)
+- [x] Vitepress [documentation](https://vitepress.vuejs.org/guide/theme-introduction#layout-slots)
+- [ ] dynamic favicon
+  - [ ] https://community.frontity.org/t/how-to-target-favicon-dynamic-favicon/5558/2
+  - [ ] https://stackoverflow.com/questions/47533358/base64-icons-favicon
