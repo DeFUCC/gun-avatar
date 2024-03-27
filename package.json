@@ -34,7 +34,7 @@
 	"files": [
 		"lib"
 	],
-	"packageManager": "pnpm@8.13.1",
+	"packageManager": "pnpm@8.15.5",
 	"scripts": {
 		"dev": "vitepress dev docs",
 		"build": "vitepress build docs",
@@ -44,23 +44,23 @@
 		"deploy": "sh deploy.sh"
 	},
 	"dependencies": {
-		"@unocss/reset": "^0.58.2",
-		"@vueuse/core": "^10.7.1",
+		"@unocss/reset": "^0.58.7",
+		"@vueuse/core": "^10.9.0",
 		"gun": "^0.2020.1239",
-		"vue": "^3.4.3"
+		"vue": "^3.4.21"
 	},
 	"devDependencies": {
-		"@iconify/json": "^2.2.163",
-		"@unocss/extractor-pug": "^0.58.2",
-		"@vitejs/plugin-vue": "^4.6.2",
+		"@iconify/json": "^2.2.196",
+		"@unocss/extractor-pug": "^0.58.7",
+		"@vitejs/plugin-vue": "^5.0.4",
 		"@volar/vue-language-plugin-pug": "^1.6.5",
 		"pug": "^3.0.2",
-		"tsup": "^8.0.1",
-		"typescript": "^5.3.3",
-		"unocss": "^0.58.2",
-		"unplugin-icons": "^0.18.1",
-		"vite": "^5.0.10",
-		"vitepress": "^1.0.0-rc.34"
+		"tsup": "^8.0.2",
+		"typescript": "^5.4.3",
+		"unocss": "^0.58.7",
+		"unplugin-icons": "^0.18.5",
+		"vite": "^5.0.13",
+		"vitepress": "^1.0.1"
 	},
 	"tsup": {
 		"entry": [
