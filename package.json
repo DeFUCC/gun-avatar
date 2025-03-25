@@ -15,16 +15,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/defucc/gun-avatar.git"
-	},
-	"funding": {
-		"type": "github",
-		"url": "https://github.com/sponsors/davay42"
+		"url": "https://github.com/DeFUCC/gun-avatar"
 	},
 	"license": "MIT",
 	"author": {
-		"name": "Davay",
-		"email": "davay@frkt.ru"
+		"name": "Davay42",
+		"email": "davay@defucc.me"
 	},
 	"type": "module",
 	"exports": "./lib/index.js",

@@ -4,11 +4,14 @@ import { computed } from 'vue';
 import GunVueAvatar from '../components/gun-vue-avatar.vue';
 import AvatarPlayground from '../components/avatar-playground.vue'
 import { state } from '../composables/state'
+import { useFavicon } from '@vueuse/core';
 
 const { Layout } = DefaultTheme
 
 
 const list = computed(() => [...state.history.history].reverse())
+
+useFavicon(() => state.gunAvatar({ pub: state.pub, size: 32, draw: 'squares', reflect: false, dark: state.options.dark }))
 
 
 </script>

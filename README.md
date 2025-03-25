@@ -1,4 +1,4 @@
-# Zero dependency user avatar generator for GUN SEA public keys
+# Avatar generator for GUN SEA public keys
 
 <a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
 
@@ -7,6 +7,12 @@
 ![avatar](https://gun-avatar.js.org/avatars.gif)
 
 Gun-Avatar takes a public key `string` 88 symbols long and creates a `base64` encoded picture to be set as a source for an `<img>` tag.
+
+- Zero dependencies
+- 9.5 Kb filesize
+- ES6 modules and web-components
+
+## How does it work?
 
 SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`. So the steps to generate a unique picture for the key are like that:
 
@@ -120,5 +126,3 @@ document.addEventListener("DOMContentLoaded", () => {
 - [x] Fully [typed](https://www.typescriptlang.org/)
 - [x] Vitepress [documentation](https://vitepress.vuejs.org/guide/theme-introduction#layout-slots)
 - [ ] dynamic favicon
-  - [ ] https://community.frontity.org/t/how-to-target-favicon-dynamic-favicon/5558/2
-  - [ ] https://stackoverflow.com/questions/47533358/base64-icons-favicon
