@@ -21,22 +21,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Enable Corepack
-        run: |
-          corepack enable
-          corepack pnpm install
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack pnpm install
 
       - name: Build project
         run: pnpm run build-lib
 
       - name: Publish library
         run: npm publish --provenance --access public
-        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_REGISTRY: "https://registry.npmjs.org"
