@@ -11,7 +11,7 @@ const { Layout } = DefaultTheme
 
 const list = computed(() => [...state.history.history].reverse())
 
-useFavicon(() => state.gunAvatar({ pub: state.pub, size: 32, draw: 'squares', reflect: false, dark: state.options.dark }))
+useFavicon(() => state?.gunAvatar?.({ pub: state.pub, size: 256, dark: state.options.dark }))
 
 
 </script>
@@ -24,11 +24,15 @@ Layout
 				.flex.items-center.image-src(
 					:key="state.pub"
 					)
-					gun-vue-avatar.rounded-full.glow.z-10(
+					gun-vue-avatar.absolute.transform.scale-700.filter.blur-1000px.z-5.op-5(
 						:pub="state.pub"
 						:size="300"
 						)
-					gun-vue-avatar.rounded-full.cursor-pointer.z-20(
+					gun-vue-avatar.absolute.transform.scale-130.filter.blur-200px.z-10.op-70(
+						:pub="state.pub"
+						:size="300"
+						)
+					gun-vue-avatar.cursor-pointer.z-20(
 						:pub="state.pub"
 						:size="300"
 						)
@@ -49,7 +53,8 @@ Layout
 	template(#home-features-after)
 		.my-16.w-full.min-h-100vh.bg-cover.bg-fixed.flex.items-center.justify-center.flex-wrap(
 			style="transition: all ease 1s;"
-			:style="{backgroundImage:`url(${state?.gunAvatar?.({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark})})`}")
+			:style="{backgroundImage:`url(${state?.gunAvatar?.({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
+			)
 			transition(name="fade" mode="out-in")
 				gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
 					@click="state.generatePair()"
@@ -107,10 +112,6 @@ Layout
 </template>
 
 <style scoped lang="postcss">
-.glow {
-	@apply absolute transform scale-110 filter blur-2xl z-10;
-}
-
 .button {
 	@apply text-2xl rounded-full border border-dark-100 w-12 h-12 flex items-center justify-center opacity-60 hover-opacity-100 transition cursor-pointer dark-border-light-100;
 }

@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 - [x] make the mirroring canvas work in Safari
 - [x] make adjustable canvas size with consistent result
+- [x] clipping mask rounding
 - [x] add more options to customize the view of the avatars
 - [x] custom element mount
 - [x] dark mode

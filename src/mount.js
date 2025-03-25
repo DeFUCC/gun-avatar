@@ -1,12 +1,7 @@
 import { gunAvatar } from './main'
 
-/**
- * Mounts gun-avatar functionality to existing img elements with a specified class
- * @param {string} [elClass="gun-avatar"] - Class name to look for
- */
 export function mountClass(elClass = "gun-avatar") {
   document.addEventListener("DOMContentLoaded", () => {
-    /** @type {HTMLCollectionOf<HTMLImageElement>} */
     let avatars = document.getElementsByClassName(elClass);
     for (let i in avatars) {
       const img = avatars[i];
@@ -24,18 +19,12 @@ export function mountClass(elClass = "gun-avatar") {
   });
 }
 
-/**
- * Mounts a custom gun-avatar web component
- * @param {string} [elName="gun-avatar"] - Name for the custom element
- */
+
 export function mountElement(elName = "gun-avatar") {
   let initiated = false;
   if (initiated) return;
 
-  /**
-   * Gun Avatar Custom Element
-   * @customElement gun-avatar
-   */
+
   class Avatar extends HTMLElement {
     constructor() {
       super();
@@ -45,9 +34,7 @@ export function mountElement(elName = "gun-avatar") {
       this.shadowRoot.append(this.img);
     }
 
-    /**
-     * Renders the avatar based on current attributes
-     */
+
     render() {
       this.pub = this.hasAttribute("pub")
         ? this.getAttribute("pub")
@@ -77,9 +64,6 @@ export function mountElement(elName = "gun-avatar") {
       this.render();
     }
 
-    /**
-     * @returns {string[]} List of observed attributes
-     */
     static get observedAttributes() {
       return ["pub", "round", "size", "dark", "draw", "reflect"];
     }

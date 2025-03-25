@@ -123,6 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
   - [x] `circles`
   - [x] `squares`
   - [ ] `triangles`?
-- [x] Fully [typed](https://www.typescriptlang.org/)
+- [x] Proper rounding with a clipping mask
 - [x] Vitepress [documentation](https://vitepress.vuejs.org/guide/theme-introduction#layout-slots)
-- [ ] dynamic favicon
+- [x] dynamic favicon
