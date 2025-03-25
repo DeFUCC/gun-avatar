@@ -1,4 +1,4 @@
-# Avatar generator for GUN public keys
+# Zero dependency user avatar generator for GUN SEA public keys
 
 <a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
 

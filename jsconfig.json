@@ -1,10 +1,15 @@
 {
 	// Change this to match your project
-	"include": ["src/index.ts"],
-	"exclude": ["node_modules"],
-
+	"include": [
+		"src/*.js"
+	],
+	"exclude": [
+		"node_modules"
+	],
 	"vueCompilerOptions": {
-		"plugins": ["@volar/vue-language-plugin-pug"]
+		"plugins": [
+			"@volar/vue-language-plugin-pug"
+		]
 	},
 	"compilerOptions": {
 		"target": "ESNext",

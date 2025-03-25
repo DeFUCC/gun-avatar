@@ -1,22 +1,26 @@
-const cache = {}; // stores already generated avatars
+const cache = {};
 
-export interface AvatarOptions {
-  pub: string
-  size?: number
-  dark?: boolean
-  draw?: 'circles' | 'squares'
-  reflect?: boolean
-}
+/**
+ * @typedef {Object} AvatarOptions
+ * @property {string} pub - Public key string
+ * @property {number} [size=200] - Avatar size in pixels
+ * @property {boolean} [dark=false] - Dark mode flag
+ * @property {'circles'|'squares'} [draw='circles'] - Drawing style
+ * @property {boolean} [reflect=true] - Whether to reflect the image
+ */
 
-// actual generator function, returns the base64 string
-
+/**
+ * Generate avatar from public key
+ * @param {AvatarOptions} options
+ * @returns {string} Base64 encoded image data URL
+ */
 export function gunAvatar({
   pub,
   size = 200,
   dark = false,
   draw = "circles",
   reflect = true
-}: AvatarOptions): string {
+}) {
 
   if (!validatePub(pub)) return ''
   if (!document) return ''
@@ -57,9 +61,12 @@ export function gunAvatar({
   return cache[key];
 }
 
-// FUNCTIONS
-
-export function validatePub(pub: string): boolean {
+/**
+ * Validates public key format
+ * @param {string} pub - Public key to validate
+ * @returns {boolean}
+ */
+export function validatePub(pub) {
   if (
     pub
     && typeof pub == 'string'
@@ -72,7 +79,12 @@ export function validatePub(pub: string): boolean {
   }
 }
 
-export function parsePub(pub: string) {
+/**
+ * Parse public key into components
+ * @param {string} pub - Public key to parse
+ * @returns {{finals: number[], decoded: number[][], angles: number[], averages: number[], colors: string[]}}
+ */
+export function parsePub(pub) {
   const split = pub.split(".");
   const decoded = split.map((single) => decodeUrlSafeBase64(single));
   const finals = decoded.map(d => d[42])
@@ -92,11 +104,26 @@ export function parsePub(pub: string) {
 const symbols =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
-export function toB64(x: number): string { return x.toString(2).split(/(?=(?:.{6})+(?!.))/g).map(v => symbols[parseInt(v, 2)]).join("") }
+/**
+ * Convert number to base64
+ * @param {number} x - Number to convert
+ * @returns {string}
+ */
+export function toB64(x) { return x.toString(2).split(/(?=(?:.{6})+(?!.))/g).map(v => symbols[parseInt(v, 2)]).join("") }
 
-export function fromB64(x: string): number { return x.split("").reduce((s, v) => s * 64 + symbols.indexOf(v), 0) }
+/**
+ * Convert base64 to number
+ * @param {string} x - Base64 string
+ * @returns {number}
+ */
+export function fromB64(x) { return x.split("").reduce((s, v) => s * 64 + symbols.indexOf(v), 0) }
 
-export function decodeUrlSafeBase64(st: string): number[] {
+/**
+ * Decode URL safe base64 to number array
+ * @param {string} st - Base64 string
+ * @returns {number[]}
+ */
+export function decodeUrlSafeBase64(st) {
   const symbolArray = symbols.split("");
   let arr = [];
   let i = 0;
@@ -106,12 +133,27 @@ export function decodeUrlSafeBase64(st: string): number[] {
   return arr;
 }
 
-export function chunkIt(list: number[], chunkSize = 3) {
+/**
+ * Split array into chunks
+ * @param {number[]} list - Array to chunk
+ * @param {number} [chunkSize=3] - Size of each chunk
+ * @returns {number[][]}
+ */
+export function chunkIt(list, chunkSize = 3) {
   return [...Array(Math.ceil(list.length / chunkSize))].map(() =>
     list.splice(0, chunkSize)
   );
 }
 
+/**
+ * Draw gradient background
+ * @param {Object} params
+ * @param {CanvasRenderingContext2D} params.ctx - Canvas context
+ * @param {number} [params.top=0] - Top color value
+ * @param {number} [params.bottom=150] - Bottom color value
+ * @param {number} [params.size=200] - Canvas size
+ * @param {boolean} [params.dark=false] - Dark mode flag
+ */
 function drawGradient(
   {
     ctx,
@@ -119,12 +161,6 @@ function drawGradient(
     bottom = 150,
     size = 200,
     dark = false,
-  }: {
-    ctx: CanvasRenderingContext2D,
-    top: number,
-    bottom: number,
-    size: number,
-    dark?: boolean
   }) {
   var gradient = ctx.createLinearGradient(0, 0, 0, size);
   let offset = 70;
@@ -136,7 +172,13 @@ function drawGradient(
   ctx.fillRect(0, 0, size, size);
 }
 
-function drawSquares(data: number[], ctx: CanvasRenderingContext2D, size: number,) {
+/**
+ * Draw squares pattern
+ * @param {number[]} data - Pattern data
+ * @param {CanvasRenderingContext2D} ctx - Canvas context
+ * @param {number} size - Canvas size
+ */
+function drawSquares(data, ctx, size) {
   const chunks = chunkIt(data, 14);
   chunks.forEach((chunk) => {
     if (chunk.length == 14) {
@@ -171,7 +213,14 @@ function drawSquares(data: number[], ctx: CanvasRenderingContext2D, size: number
   });
 }
 
-function drawCircles(data: number[], ctx: CanvasRenderingContext2D, size: number, radius: number) {
+/**
+ * Draw circles pattern
+ * @param {number[]} data - Pattern data
+ * @param {CanvasRenderingContext2D} ctx - Canvas context
+ * @param {number} size - Canvas size
+ * @param {number} radius - Circle radius
+ */
+function drawCircles(data, ctx, size, radius) {
 
   const chunks = chunkIt(data, 7);
   chunks.forEach((chunk) => {

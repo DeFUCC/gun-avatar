@@ -35,10 +35,10 @@ const state = useState()
 				.button(
 					@click="state.options.reflect = !state.options.reflect"
 					:style="{opacity: state.options.reflect ? 1 : .4}"						)
-					.i-codicon-mirror
+					.i-la-pause
 				.button(
 					@click="state.options.draw = state.options.draw =='squares'? 'circles': 'squares'"						)
 					transition(name="fade" mode="out-in")
-						.i-ph-squares-four(v-if="state.options.draw =='squares'")
-						.i-ph-circles-four(v-else)
+						.i-la-square(v-if="state.options.draw =='squares'")
+						.i-la-circle(v-else)
 </template>
