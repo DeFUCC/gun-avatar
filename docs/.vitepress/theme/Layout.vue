@@ -40,7 +40,7 @@ Layout
 			.w-2px.rounded.h-8.bg-dark-100.opacity-40
 			button(@click="state.options.dark = !state.options.dark")
 				transition(name="fade" mode="out-in")
-					.i-tabler-moon(v-if="state.options.dark")
+					.i-la-moon(v-if="state.options.dark")
 					.i-la-sun(v-else)
 
 	template(#home-features-after)
