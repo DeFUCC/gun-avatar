@@ -47,19 +47,22 @@ function reset() {
     currentObjectUrl.value = null
   }
 }
+
+const over = ref(false)
 </script>
 
 <template lang='pug'>
-.relative.h-40.break-all.m-4.flex.flex-col.gap-4
+.relative.min-h-40.break-all.m-4.flex.flex-col.gap-4
   .text-3xl.text-center Extract text embedding
   .transition-all.duration-300.inset-0
     //- Upload UI
-    label.p-4.flex.flex-col.items-center.justify-center.gap-4.h-full.border-2.border-dashed.rounded-lg.transition-colors.cursor-pointer.hover-border-primary.dark-border-gray-700.dark-hover-border-primary(
+    label.p-4.flex.flex-col.items-center.justify-center.gap-4.h-full.border-2.border-dashed.rounded-lg.transition-colors.cursor-pointer.border-light-400(
       for="file"
       v-if="!showingResults"
       ref="dropArea"
-      @dragover.prevent="dropArea.classList.add('border-primary')"
-      @dragleave.prevent="dropArea.classList.remove('border-primary')"
+      :class="{ 'border-op-100 bg-light-300/10': over, 'border-op-30': !over }"
+      @dragover.prevent="over = true"
+      @dragleave.prevent="over = false"
       @drop="handleDrop"
     )
       .text-gray-500.dark-text-gray-400 Drop your PNG or SVG here
