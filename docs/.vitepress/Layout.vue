@@ -24,15 +24,15 @@ Layout.overflow-hidden
 				.flex.items-center.image-src(
 					:key="state.pub"
 					)
-					gun-vue-avatar.absolute.transform.scale-700.filter.blur-1000px.z-5.op-5(
+					gun-vue-avatar.rounded-full.absolute.transform.scale-700.filter.blur-1000px.z-5.op-5(
 						:pub="state.pub"
 						:size="300"
 						)
-					gun-vue-avatar.absolute.transform.scale-130.filter.blur-200px.z-10.op-70(
+					gun-vue-avatar.rounded-full.absolute.transform.scale-130.filter.blur-200px.z-10.op-70(
 						:pub="state.pub"
 						:size="300"
 						)
-					gun-vue-avatar.cursor-pointer.z-20(
+					gun-vue-avatar.rounded-full.cursor-pointer.z-20(
 						:pub="state.pub"
 						:size="300"
 						embed

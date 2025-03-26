@@ -159,16 +159,48 @@ function drawCircles(data, ctx, size, radius) {
 // ====
 
 function createFallbackSVG(pub, size = 200, dark = false) {
+  const { decoded, finals } = parsePub(pub)
   const bgColor = dark ? '#333' : '#eee';
-  const textColor = dark ? '#eee' : '#333';
-  const text = pub?.substring(0, 3) || '???';
-  return `data:image/svg+xml;base64,${Buffer.from(`
+
+  // Create gradient background
+  const bgGradient = `
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="hsla(0,0%,${(dark ? 0 : 70) + finals[0] * 30}%)"/>
+      <stop offset="100%" stop-color="hsla(0,0%,${(dark ? 0 : 70) + finals[1] * 30}%)"/>
+    </linearGradient>
+  `;
+
+  // Generate circles for both layers
+  const createCircles = (data, radius, isSecond = false) => {
+    return chunkIt(data, 7).map(chunk => {
+      if (chunk.length !== 7) return '';
+      const [x, y, r, h, s, l, a] = chunk;
+      const cx = size / 2 + (x * size) / 2;
+      const cy = y * size;
+      const rad = r * radius;
+      return `
+        <circle 
+          cx="${cx}" cy="${cy}" r="${rad}"
+          fill="hsla(${h * 360},${s * 100}%,${l * 100}%,${a})"
+          style="${isSecond ? 'mix-blend-mode:multiply;' : ''}"
+        />
+        <circle 
+          cx="${size - cx}" cy="${cy}" r="${rad}"
+          fill="hsla(${h * 360},${s * 100}%,${l * 100}%,${a})"
+          style="${isSecond ? 'mix-blend-mode:multiply;' : ''}"
+        />
+      `;
+    }).join('');
+  };
+
+  const svg = `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${bgColor}"/>
-      <text x="${size / 2}" y="${size / 2}" text-anchor="middle" dominant-baseline="middle" 
-        font-family="monospace" font-size="${size / 3}" fill="${textColor}">
-        ${text}
-      </text>
+      <defs>${bgGradient}</defs>
+      <rect width="${size}" height="${size}" fill="url(#bg)"/>
+      ${createCircles(decoded[0], 0.42 * size)}
+      ${createCircles(decoded[1], 0.125 * size, true)}
     </svg>
-  `).toString('base64')}`;
-};
+  `;
+
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
+}

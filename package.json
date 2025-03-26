@@ -70,6 +70,7 @@
 		],
 		"splitting": false,
 		"sourcemap": true,
+		"minify": true,
 		"clean": true,
 		"dts": true,
 		"outDir": "lib",
