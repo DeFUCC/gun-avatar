@@ -17,7 +17,7 @@ export default defineConfig({
 
 		],
 		footer: {
-			message: 'Released under the MIT License.',
+			message: 'MIT License',
 			copyright: 'Copyright © 2020-PRESENT Davay42',
 		},
 
@@ -26,11 +26,11 @@ export default defineConfig({
 		['meta', { name: 'theme-color', content: '#ffffff' }],
 		['meta', { name: 'author', content: 'Davay42' }],
 		['meta', { property: 'og:title', content: 'Gun-Avatar' }],
-		['meta', { property: 'og:image', content: 'https://gun-avatar.js.org/avatar.png' }],
-		['meta', { property: 'og:description', content: 'Public key  human recognizable visual hash' }],
+		['meta', { property: 'og:image', content: 'https://gun-avatar.js.org/screenshot.png' }],
+		['meta', { property: 'og:description', content: 'Public key human recognizable visual hash' }],
 		['meta', { name: 'twitter:card', content: 'summary_large_image' }],
 		['meta', { name: 'twitter:creator', content: '@davay42' }],
-		['meta', { name: 'twitter:image', content: 'https://gun-avatar.js.org/avatar.png' }],
+		['meta', { name: 'twitter:image', content: 'https://gun-avatar.js.org/screenshot.jpg' }],
 	],
 	vue: {
 		template: {
