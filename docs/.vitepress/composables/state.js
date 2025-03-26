@@ -48,9 +48,6 @@ export function useState() {
 
 
 		onMounted(() => {
-			import('../../../src/index').then(({ gunAvatar, mountElement }) => {
-				state.gunAvatar = gunAvatar
-			})
 			state.loop = useIntervalFn(async () => {
 				await state.generatePair()
 			}, 2000, { immediate: true })

@@ -12,7 +12,7 @@
  **/
 
 export default () => {
-  if (!CanvasRenderingContext2D) return
+  if (typeof window == 'undefined' || typeof window.CanvasRenderingContext2D == 'undefined') return
   if (!needPoly()) return
 
   const proto = CanvasRenderingContext2D.prototype

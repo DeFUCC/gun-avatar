@@ -21,7 +21,7 @@ const state = useState()
 			select.p-2(v-model="state.options.draw")
 				option(value="circles") Circles
 				option(value="squares") Squares
-				.text-lg Draw
+			.text-lg Draw
 			label.flex.gap-2
 				input(type="checkbox" v-model="state.options.dark")
 				.text-lg Dark

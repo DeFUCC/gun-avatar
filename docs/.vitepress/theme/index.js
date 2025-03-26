@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import MyLayout from './Layout.vue'
+import MyLayout from '../Layout.vue'
 
 import "@unocss/reset/tailwind.css";
 import './styles.css'

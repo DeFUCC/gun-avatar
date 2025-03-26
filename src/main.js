@@ -1,3 +1,4 @@
+import { embedInImage } from "./png";
 import { fromB64, decodeUrlSafeBase64, toB64 } from "./utils";
 
 const cache = {};
@@ -12,8 +13,12 @@ export function gunAvatar({
   draw = "circles",
   reflect = true,
   round = true,
+  embed = true,
+  content = 'TEST'
 }) {
-  if (!validatePub(pub) || !document) return ''
+  const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+  if (!validatePub(pub)) return '';
+  if (!isBrowser) return createFallbackSVG(pub, size, dark);
 
   const key = JSON.stringify(arguments[0])
   if (cache?.[key]) return cache[key]
@@ -67,8 +72,20 @@ export function gunAvatar({
     ctx.fill();
   }
 
-  cache[key] = canvas.toDataURL();
-  return cache[key];
+  let image = '';
+
+  if (embed) {
+    const embedBuffer = embedInImage(canvas, { pub, content })
+    if (embedBuffer) {
+      const blob = new Blob([embedBuffer], { type: 'image/png' })
+      image = URL.createObjectURL(blob)
+    }
+  } else {
+    image = canvas.toDataURL("image/png")
+  }
+
+  cache[key] = image;
+  return image;
 }
 
 export function validatePub(pub) {
@@ -138,3 +155,22 @@ function drawCircles(data, ctx, size, radius) {
     }
   });
 }
+
+// ====
+//  Fallback SVG for SSR
+// ====
+
+function createFallbackSVG(pub, size = 200, dark = false) {
+  const bgColor = dark ? '#333' : '#eee';
+  const textColor = dark ? '#eee' : '#333';
+  const text = pub?.substring(0, 3) || '???';
+  return `data:image/svg+xml;base64,${Buffer.from(`
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${bgColor}"/>
+      <text x="${size / 2}" y="${size / 2}" text-anchor="middle" dominant-baseline="middle" 
+        font-family="monospace" font-size="${size / 3}" fill="${textColor}">
+        ${text}
+      </text>
+    </svg>
+  `).toString('base64')}`;
+};

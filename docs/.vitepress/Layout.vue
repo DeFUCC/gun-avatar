@@ -1,23 +1,23 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { computed } from 'vue';
-import GunVueAvatar from '../components/gun-vue-avatar.vue';
-import AvatarPlayground from '../components/avatar-playground.vue'
-import { state } from '../composables/state'
+import { computed, ref } from 'vue';
+import GunVueAvatar from './components/gun-vue-avatar.vue';
+import AvatarPlayground from './components/avatar-playground.vue'
+import { state } from './composables/state'
 import { useFavicon } from '@vueuse/core';
+import ExtractText from './components/extract-text.vue';
+import { gunAvatar } from '../../src';
 
 const { Layout } = DefaultTheme
 
-
 const list = computed(() => [...state.history.history].reverse())
 
-useFavicon(() => state?.gunAvatar?.({ pub: state.pub, size: 256, dark: state.options.dark }))
-
+useFavicon(() => gunAvatar?.({ pub: state.pub, size: 256, dark: state.options.dark }))
 
 </script>
 
 <template lang="pug">
-Layout
+Layout.overflow-hidden
 	template(#home-hero-image)
 		.flex(@click="state.generatePair()")
 			transition(name="fade")
@@ -35,6 +35,8 @@ Layout
 					gun-vue-avatar.cursor-pointer.z-20(
 						:pub="state.pub"
 						:size="300"
+						embed
+						:content="state.pair"
 						)
 	template(#nav-bar-content-before)
 		.flex.items-center.text-4xl.gap-4
@@ -53,7 +55,7 @@ Layout
 	template(#home-features-after)
 		.my-16.w-full.min-h-100vh.bg-cover.bg-fixed.flex.items-center.justify-center.flex-wrap(
 			style="transition: all ease 1s;"
-			:style="{backgroundImage:`url(${state?.gunAvatar?.({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
+			:style="{backgroundImage:`url(${gunAvatar({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
 			)
 			transition(name="fade" mode="out-in")
 				gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
@@ -109,6 +111,7 @@ Layout
 						:class="{'outline':rec.snapshot == state.pair}"
 						@click="state.setPair(rec.snapshot)"
 						) {{ rec.snapshot.pub }}
+		ExtractText
 </template>
 
 <style scoped lang="postcss">
