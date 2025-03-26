@@ -1,8 +1,8 @@
 
-import { reactive, computed, toRef, onMounted } from "vue";
-import { useRefHistory, useIntervalFn, useClipboard, useDark, onKeyStroke } from '@vueuse/core'
+import { reactive, computed, toRef, onMounted, nextTick } from "vue";
+import { useRefHistory, useIntervalFn, useClipboard, onKeyStroke } from '@vueuse/core'
 import { parsePub } from "../../../src/main";
-
+import { useData } from "vitepress";
 
 export const state = reactive({
 	initiated: false,
@@ -17,7 +17,7 @@ export const state = reactive({
 	options: {
 		size: 200,
 		reflect: true,
-		dark: useDark(),
+		dark: false,
 		draw: 'circles',
 		round: true
 	},
@@ -41,16 +41,19 @@ export function useState() {
 			state.generatePair = async function () {
 				state.pair = await SEA.default()
 			}
+			await state.generatePair()
 			onKeyStroke('Enter', () => {
 				state.generatePair()
 			})
 		})
 
 
-		onMounted(() => {
+		onMounted(async () => {
+
 			state.loop = useIntervalFn(async () => {
 				await state.generatePair()
-			}, 2000, { immediate: true })
+			}, 2000)
+
 			onKeyStroke('ArrowLeft', () => {
 				state.history.undo()
 			})

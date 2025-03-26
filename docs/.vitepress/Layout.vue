@@ -38,20 +38,7 @@ Layout.overflow-hidden
 						embed
 						:content="state.pair"
 						)
-	template(#nav-bar-content-before)
-		.flex.items-center.text-4xl.gap-4
-			a(href="https://codepen.io/Davay/pen/eYGeGMZ" title="Codepen playground" target="_blank")
-				.i-la-codepen
-			a(href="https://www.npmjs.com/package/gun-avatar" title="NPM package" target="_blank")
-				.i-la-npm
-			a(href="https://github.com/DeFUCC/gun-avatar" title="GitHub repository" target="_blank")
-				.i-la-github
-			.w-2px.rounded.h-8.bg-dark-100.opacity-40
-			button(@click="state.options.dark = !state.options.dark")
-				transition(name="fade" mode="out-in")
-					.i-la-moon(v-if="state.options.dark")
-					.i-la-sun(v-else)
-
+	
 	template(#home-features-after)
 		.my-16.w-full.min-h-100vh.bg-cover.bg-fixed.flex.items-center.justify-center.flex-wrap(
 			style="transition: all ease 1s;"
@@ -100,6 +87,7 @@ Layout.overflow-hidden
 						)
 						.i-la-clipboard
 		.flex.flex-wrap.items-center.px-12.justify-start.max-w-1200px.m-auto.flex-column-reverse.gap-2.pb-12.flex-wrap-reverse.mt-16
+			
 			transition-group(name="fade")
 				.flex(
 					v-for="rec in list"
@@ -111,12 +99,15 @@ Layout.overflow-hidden
 						:class="{'outline':rec.snapshot == state.pair}"
 						@click="state.setPair(rec.snapshot)"
 						) {{ rec.snapshot.pub }}
+			.button.mb-4.flex.items-center.gap-2.select-none(style="flex: 100 0 100%" @click="state.generatePair()")
+				.i-la-plus
+				.text-lg Generate more
 		ExtractText
 </template>
 
 <style scoped lang="postcss">
 .button {
-	@apply text-2xl rounded-full border border-dark-100 w-12 h-12 flex items-center justify-center opacity-60 hover-opacity-100 transition cursor-pointer dark-border-light-100;
+	@apply text-2xl rounded-full border border-dark-100 w-12 h-12 flex items-center justify-center opacity-60 hover-opacity-100 transition cursor-pointer dark-border-light-100 select-none;
 }
 
 .button.disabled {

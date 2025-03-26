@@ -13,7 +13,7 @@ const props = defineProps({
 	reflect: { type: Boolean, default: true },
 	round: { type: Boolean, default: true },
 	embed: { type: Boolean, default: false },
-	content: { type: String, default: '' },
+	content: { type: Object, default: () => ({}) },
 })
 
 const avatar = computed(() => gunAvatar?.({ ...props }))

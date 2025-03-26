@@ -50,10 +50,12 @@ function reset() {
 </script>
 
 <template lang='pug'>
-.relative.h-40.w-full.break-all
+.relative.h-40.break-all.m-4.flex.flex-col.gap-4
+  .text-3xl.text-center Extract text embedding
   .transition-all.duration-300.inset-0
     //- Upload UI
-    .flex.flex-col.items-center.justify-center.gap-4.h-full.border-2.border-dashed.rounded-lg.transition-colors.cursor-pointer.hover-border-primary.dark-border-gray-700.dark-hover-border-primary(
+    label.p-4.flex.flex-col.items-center.justify-center.gap-4.h-full.border-2.border-dashed.rounded-lg.transition-colors.cursor-pointer.hover-border-primary.dark-border-gray-700.dark-hover-border-primary(
+      for="file"
       v-if="!showingResults"
       ref="dropArea"
       @dragover.prevent="dropArea.classList.add('border-primary')"
@@ -62,8 +64,8 @@ function reset() {
     )
       .text-gray-500.dark-text-gray-400 Drop your PNG here
       .text-sm.text-gray-400.dark-text-gray-500 or
-      label.px-4.py-2.text-sm.rounded-md.cursor-pointer.bg-gray-100.hover-bg-gray-200.dark-bg-gray-800.dark-hover-bg-gray-700
-        input.hidden(type="file" accept="image/png" @change="handleFileInput")
+      .px-4.py-2.text-sm.rounded-md.cursor-pointer.bg-gray-100.hover-bg-gray-200.dark-bg-gray-800.dark-hover-bg-gray-700
+        input#file.hidden(type="file" accept="image/png" @change="handleFileInput")
         span Choose file
 
     //- Results UI

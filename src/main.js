@@ -14,7 +14,7 @@ export function gunAvatar({
   reflect = true,
   round = true,
   embed = true,
-  content = 'TEST'
+  content = {}
 }) {
   const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
   if (!validatePub(pub)) return '';
@@ -72,7 +72,7 @@ export function gunAvatar({
     ctx.fill();
   }
 
-  let image = '';
+  let image = canvas.toDataURL("image/png")
 
   if (embed) {
     const embedBuffer = embedInImage(canvas, { pub, content })
@@ -80,8 +80,6 @@ export function gunAvatar({
       const blob = new Blob([embedBuffer], { type: 'image/png' })
       image = URL.createObjectURL(blob)
     }
-  } else {
-    image = canvas.toDataURL("image/png")
   }
 
   cache[key] = image;
