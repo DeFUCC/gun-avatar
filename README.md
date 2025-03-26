@@ -9,8 +9,9 @@
 Gun-Avatar takes a public key `string` 88 symbols long and creates a `base64` encoded picture to be set as a source for an `<img>` tag.
 
 - Zero dependencies
-- 9.5 Kb filesize
+- 14.4 Kb filesize
 - ES6 modules and web-components
+- PNG canvas images with SVG fallback
 
 ## How does it work?
 
@@ -126,3 +127,4 @@ document.addEventListener("DOMContentLoaded", () => {
 - [x] Proper rounding with a clipping mask
 - [x] Vitepress [documentation](https://vitepress.vuejs.org/guide/theme-introduction#layout-slots)
 - [x] dynamic favicon
+- [x] SVG fallback for SSR environment
