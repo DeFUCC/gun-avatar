@@ -16,6 +16,7 @@ const state = useState()
 						:pub="state.pub"
 						v-bind="state.options"
 						@click="state.generatePair()"
+						:embed="true"
 						)
 		.p-2.flex.flex-col.gap-2.w-80
 			select.p-2(v-model="state.options.draw")

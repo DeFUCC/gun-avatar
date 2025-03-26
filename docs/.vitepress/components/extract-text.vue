@@ -13,7 +13,7 @@ const result = computed(() => { try { return JSON.stringify(message.value) } cat
 async function handleDrop(e) {
   e.preventDefault()
   const file = e.dataTransfer.files[0]
-  if (file?.type === 'image/png') {
+  if (file?.type === 'image/png' || file?.type === 'image/svg+xml') {
     await processFile(file)
   }
 }
@@ -62,10 +62,10 @@ function reset() {
       @dragleave.prevent="dropArea.classList.remove('border-primary')"
       @drop="handleDrop"
     )
-      .text-gray-500.dark-text-gray-400 Drop your PNG here
+      .text-gray-500.dark-text-gray-400 Drop your PNG or SVG here
       .text-sm.text-gray-400.dark-text-gray-500 or
       .px-4.py-2.text-sm.rounded-md.cursor-pointer.bg-gray-100.hover-bg-gray-200.dark-bg-gray-800.dark-hover-bg-gray-700
-        input#file.hidden(type="file" accept="image/png" @change="handleFileInput")
+        input#file.hidden(type="file" accept="image/png,image/svg+xml" @change="handleFileInput")
         span Choose file
 
     //- Results UI

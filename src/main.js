@@ -1,4 +1,4 @@
-import { embedInImage } from "./png";
+import { embedInImage } from "./embed";
 import { fromB64, decodeUrlSafeBase64, toB64 } from "./utils";
 
 const cache = {};
@@ -14,11 +14,10 @@ export function gunAvatar({
   reflect = true,
   round = true,
   embed = true,
-  content = {}
 }) {
   const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
   if (!validatePub(pub)) return '';
-  if (!isBrowser) return createFallbackSVG(pub, size, dark);
+  if (!isBrowser) return createFallbackSVG({ pub, size, dark, embed });
 
   const key = JSON.stringify(arguments[0])
   if (cache?.[key]) return cache[key]
@@ -75,7 +74,11 @@ export function gunAvatar({
   let image = canvas.toDataURL("image/png")
 
   if (embed) {
-    const embedBuffer = embedInImage(canvas, { pub, content })
+    const embedData = {
+      pub,
+    }
+    if (embed && embed == true) { embedData.content = embed }
+    const embedBuffer = embedInImage(canvas, embedData)
     if (embedBuffer) {
       const blob = new Blob([embedBuffer], { type: 'image/png' })
       image = URL.createObjectURL(blob)
@@ -158,7 +161,7 @@ function drawCircles(data, ctx, size, radius) {
 //  Fallback SVG for SSR
 // ====
 
-function createFallbackSVG(pub, size = 200, dark = false) {
+function createFallbackSVG({ pub, size = 200, dark = false, embed = true } = {}) {
   const { decoded, finals } = parsePub(pub)
   const bgColor = dark ? '#333' : '#eee';
 
@@ -193,7 +196,7 @@ function createFallbackSVG(pub, size = 200, dark = false) {
     }).join('');
   };
 
-  const svg = `
+  let svg = `
     <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
       <defs>${bgGradient}</defs>
       <rect width="${size}" height="${size}" fill="url(#bg)"/>
@@ -201,6 +204,11 @@ function createFallbackSVG(pub, size = 200, dark = false) {
       ${createCircles(decoded[1], 0.125 * size, true)}
     </svg>
   `;
+  if (embed) {
+    const embedData = { pub, }
+    if (embed && embed == true) { embedData.content = embed }
+    svg = embedInImage(svg, embedData, 'svg')
+  }
 
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }

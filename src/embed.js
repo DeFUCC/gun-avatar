@@ -20,11 +20,37 @@ function canvasToBuffer(canvas) {
   }
 }
 
-export function embedInImage(canvas, data) {
+function embedInSvg(svgString, data) {
+  try {
+    const metadata = `<metadata>
+      <gun-data>${JSON.stringify(data)}</gun-data>
+    </metadata>`
+    return svgString.replace('</svg>', `${metadata}</svg>`)
+  } catch (e) {
+    error.value = 'Failed to embed data in SVG: ' + e.message
+    return null
+  }
+}
+
+function extractFromSvg(svgString) {
+  try {
+    const match = svgString.match(/<gun-data>(.*?)<\/gun-data>/s)
+    return match ? JSON.parse(match[1]) : null
+  } catch (e) {
+    error.value = 'Failed to extract data from SVG: ' + e.message
+    return null
+  }
+}
+
+export function embedInImage(canvas, data, format = 'png') {
+  if (format === 'svg') {
+    const svgString = canvas.outerHTML || canvas
+    return embedInSvg(svgString, data)
+  }
+  // Default PNG handling
   try {
     const buffer = canvasToBuffer(canvas)
     if (!buffer) return null
-
     const chunks = extract(buffer)
     chunks.splice(-1, 0, text.encode('message', JSON.stringify(data)))
     return encode(chunks)
@@ -34,7 +60,12 @@ export function embedInImage(canvas, data) {
   }
 }
 
-export function extractFromBuffer(buffer) {
+export function extractFromBuffer(buffer, type = 'image/png') {
+  if (type === 'image/svg+xml') {
+    const text = new TextDecoder().decode(buffer)
+    return extractFromSvg(text)
+  }
+  // Default PNG handling
   try {
     const chunks = extract(buffer)
     const textChunks = chunks

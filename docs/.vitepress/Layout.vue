@@ -35,8 +35,7 @@ Layout.overflow-hidden
 					gun-vue-avatar.rounded-full.cursor-pointer.z-20(
 						:pub="state.pub"
 						:size="300"
-						embed
-						:content="state.pair"
+						:embed="state.pair"
 						)
 	
 	template(#home-features-after)

@@ -12,15 +12,11 @@ const props = defineProps({
 	draw: { type: String, default: 'circles' },
 	reflect: { type: Boolean, default: true },
 	round: { type: Boolean, default: true },
-	embed: { type: Boolean, default: false },
-	content: { type: Object, default: () => ({}) },
+	embed: { type: [Boolean, Object, String], default: true },
 })
-
-const avatar = computed(() => gunAvatar?.({ ...props }))
-
 
 </script>
 
 <template>
-	<div class="flex overflow-hidden"><img :src="avatar"></div>
+	<div class="flex overflow-hidden"><img :src="gunAvatar(props)"></div>
 </template>
