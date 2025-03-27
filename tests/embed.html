@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gun-Avatar Test</title>
+  <style>
+    body {
+      font-family: system-ui;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #dropZone {
+      border: 2px dashed #ccc;
+      border-radius: 4px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+      min-height: 100px;
+    }
+
+    #dropZone.dragover {
+      background: #e1e1e1;
+      border-color: #999;
+    }
+
+    #keyOutput {
+      width: 100%;
+      height: 100px;
+      margin-top: 20px;
+    }
+
+    .avatar-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Gun-Avatar Test</h1>
+
+  <button id="generateBtn">Generate New Keypair</button>
+
+  <div class="avatar-container">
+    <gun-avatar id="avatar" size="300" round></gun-avatar>
+  </div>
+
+  <button id="downloadBtn">Download Avatar PNG</button>
+
+  <div id="dropZone">
+    Drop avatar image here to extract embedded keypair
+  </div>
+
+  <textarea id="keyOutput" readonly placeholder="Extracted keypair will appear here"></textarea>
+
+  <script type="module">
+    import { SEA } from 'https://esm.sh/@gun-vue/gun-es/';
+    import { gunAvatar, mountElement, extractFromFile } from 'https://esm.sh/gun-avatar';
+
+    // Mount the gun-avatar custom element
+    mountElement();
+
+    const avatarEl = document.getElementById('avatar');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const dropZone = document.getElementById('dropZone');
+    const keyOutput = document.getElementById('keyOutput');
+
+    let currentPair = null;
+
+    async function generateAndShowAvatar() {
+      currentPair = await SEA.pair();
+      avatarEl.setAttribute('pub', currentPair.pub);
+      avatarEl.setAttribute('embed', JSON.stringify(currentPair));
+    }
+
+    function downloadAvatar() {
+      const link = document.createElement('a');
+      link.download = 'gun-avatar.png';
+      link.href = avatarEl.shadowRoot.querySelector('img').src;
+      link.click();
+    }
+
+    // Event Listeners
+    generateBtn.addEventListener('click', generateAndShowAvatar);
+    downloadBtn.addEventListener('click', downloadAvatar);
+
+    // Drop zone handlers
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+
+      const file = e.dataTransfer.files[0];
+      if (file && file.type === 'image/png') {
+        const data = await extractFromFile(file);
+        if (data?.content) {
+          keyOutput.value = JSON.stringify(data.content, null, 2);
+        } else {
+          console.log(data)
+          keyOutput.value = 'No keypair data found in image';
+        }
+      }
+    });
+
+    // Generate initial avatar
+    generateAndShowAvatar();
+  </script>
+</body>
+
+</html>
