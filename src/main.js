@@ -76,8 +76,8 @@ export function gunAvatar({
   if (embed) {
     const embedData = {
       pub,
+      content: embed
     }
-    if (embed && embed == true) { embedData.content = embed }
     const embedBuffer = embedInImage(canvas, embedData)
     if (embedBuffer) {
       const blob = new Blob([embedBuffer], { type: 'image/png' })
