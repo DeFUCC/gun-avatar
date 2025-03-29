@@ -7,6 +7,7 @@ import { state } from './composables/state'
 import { useFavicon } from '@vueuse/core';
 import ExtractText from './components/extract-text.vue';
 import { gunAvatar } from '../../src';
+import { useShare } from '@vueuse/core';
 
 const { Layout } = DefaultTheme
 
@@ -14,6 +15,49 @@ const list = computed(() => [...state.history.history].reverse())
 
 useFavicon(() => gunAvatar?.({ pub: state.pub, size: 256, dark: state.options.dark }))
 
+const { share, isSupported: isShareSupported } = useShare()
+
+const sharePNG = async () => {
+	const avatarUrl = gunAvatar({
+		pub: state.pub,
+		size: 1024,
+		dark: state.options.dark,
+		embed: state.pair
+	})
+
+	try {
+		const response = await fetch(avatarUrl)
+		const blob = await response.blob()
+		const file = new File([blob], `avatar-${state.pub.slice(0, 8)}.png`, { type: 'image/png' })
+		await share({
+			files: [file]
+		})
+	} catch (e) {
+		console.warn('Share failed', e)
+	}
+}
+
+const downloadPNG = async () => {
+	const avatarUrl = gunAvatar({
+		pub: state.pub,
+		size: 300,
+		dark: state.options.dark,
+		embed: state.pair
+	})
+
+	try {
+		const link = document.createElement('a')
+		link.download = `avatar-${state.pub.slice(0, 8)}.png`
+		link.href = avatarUrl
+		link.target = '_blank'
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+	} catch (e) {
+		// Fallback: Open in new window
+		window.open(avatarUrl, '_blank')
+	}
+}
 </script>
 
 <template lang="pug">
@@ -24,15 +68,15 @@ Layout.overflow-hidden
 				.flex.items-center.image-src(
 					:key="state.pub"
 					)
-					gun-vue-avatar.rounded-full.absolute.transform.scale-700.filter.blur-1000px.z-5.op-5(
+					gun-vue-avatar.rounded-full.absolute.transform.scale-200.filter.blur-40px.z-5.op-80.dark-op-30(
 						:pub="state.pub"
 						:size="300"
 						)
-					gun-vue-avatar.rounded-full.absolute.transform.scale-130.filter.blur-200px.z-10.op-70(
+					gun-vue-avatar.rounded-full.absolute.transform.scale-110.filter.blur-30px.z-10.dark-op-70(
 						:pub="state.pub"
 						:size="300"
 						)
-					gun-vue-avatar.rounded-full.cursor-pointer.z-20(
+					gun-vue-avatar.rounded-full.cursor-pointer.z-20.shadow-2xl(
 						:pub="state.pub"
 						:size="300"
 						:embed="state.pair"
@@ -47,6 +91,8 @@ Layout.overflow-hidden
 				gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
 					@click="state.generatePair()"
 					:size="300"
+					:embed="state.pair"
+					:key="state.pub"
 					:pub="state.pub")
 			.card.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
@@ -85,6 +131,15 @@ Layout.overflow-hidden
 						@click="state.clip.copy()"
 						)
 						.i-la-clipboard
+					.button(
+						@click="downloadPNG()"
+						)
+						.i-la-download
+					.button(
+						v-if="isShareSupported"
+						@click="sharePNG()"
+						)
+						.i-la-share-alt
 		.flex.flex-wrap.items-center.px-12.justify-start.max-w-1200px.m-auto.flex-column-reverse.gap-2.pb-12.flex-wrap-reverse.mt-16
 			
 			transition-group(name="fade")
