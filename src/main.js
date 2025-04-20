@@ -22,7 +22,7 @@ export function gunAvatar({
 } = {}) {
   const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
   if (!validatePub(pub)) return '';
-  if (svg || !isBrowser) return renderSVGAvatar({ pub, size, dark, draw, reflect, round, embed });
+  if (svg || !isBrowser) return renderSVGAvatar({ pub, size, dark, draw, reflect, round, embed, svg });
 
   const key = JSON.stringify(arguments[0])
   if (cache?.[key]) return cache[key]

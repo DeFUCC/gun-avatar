@@ -1,7 +1,7 @@
 import { embedInImage } from "./embed";
 import { chunkIt, parsePub } from "./main";
 
-export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles", reflect = true, round = true, embed = true } = {}) {
+export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles", reflect = true, round = true, embed = true, svg } = {}) {
     const { decoded, finals } = parsePub(pub)
     const bgColor = dark ? '#333' : '#eee';
   
@@ -13,7 +13,101 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
       </linearGradient>
     `;
 
-    // Create squares for both layers
+    // Interactive mode script for mouse tracking
+    const interactiveScript = svg === 'interactive' ? `
+      <script type="text/javascript"><![CDATA[
+        // Store initial positions of all circles
+        let circles = [];
+        let mouseX = 0, mouseY = 0;
+        let avatarRect;
+        let requestId;
+
+        function init() {
+          const avatar = document.currentScript.closest('svg');
+          if (!avatar) return; // Safety check
+          
+          // Update rect on resize
+          function updateRect() {
+            avatarRect = avatar.getBoundingClientRect();
+          }
+          updateRect();
+          window.addEventListener('resize', updateRect);
+
+          // Initialize circles data
+          circles = Array.from(avatar.querySelectorAll('.interactive-circle')).map(circle => ({
+            element: circle,
+            cx: parseFloat(circle.getAttribute('data-cx')),
+            cy: parseFloat(circle.getAttribute('data-cy')),
+            mass: (parseFloat(circle.getAttribute('r')) * parseFloat(circle.getAttribute('data-opacity'))) / ${size},
+            currentX: parseFloat(circle.getAttribute('data-cx')),
+            currentY: parseFloat(circle.getAttribute('data-cy'))
+          }));
+
+          // Global mouse move listener
+          document.addEventListener('mousemove', updateMousePosition);
+          startAnimation();
+        }
+
+        function updateMousePosition(e) {
+          if (!avatarRect) return;
+          const x = e.clientX - avatarRect.left;
+          const y = e.clientY - avatarRect.top;
+          mouseX = (x / avatarRect.width) * ${size};
+          mouseY = (y / avatarRect.height) * ${size};
+        }
+
+        function animate() {
+          circles.forEach(circle => {
+            const dx = mouseX - circle.cx;
+            const dy = mouseY - circle.cy;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxMove = 30 * (1 - circle.mass); // Inverse relationship with mass
+            const angle = Math.atan2(dy, dx);
+            
+            // Smooth movement with mass-based damping
+            const moveX = Math.min(Math.abs(dx), maxMove) * Math.cos(angle);
+            const moveY = Math.min(Math.abs(dy), maxMove) * Math.sin(angle);
+            
+            // Update current position with smooth interpolation
+            circle.currentX += (circle.cx + moveX - circle.currentX) * 0.1;
+            circle.currentY += (circle.cy + moveY - circle.currentY) * 0.1;
+            
+            circle.element.setAttribute('cx', circle.currentX);
+            if (${reflect}) {
+              const mirrorElement = circle.element.nextElementSibling;
+              if (mirrorElement) {
+                mirrorElement.setAttribute('cx', ${size} - circle.currentX);
+              }
+            }
+            circle.element.setAttribute('cy', circle.currentY);
+          });
+          requestId = requestAnimationFrame(animate);
+        }
+
+        function startAnimation() {
+          if (!requestId) {
+            requestId = requestAnimationFrame(animate);
+          }
+        }
+
+        // Cleanup on object removal
+        function cleanup() {
+          if (requestId) {
+            cancelAnimationFrame(requestId);
+            requestId = null;
+          }
+          document.removeEventListener('mousemove', updateMousePosition);
+        }
+
+        // Start the animation
+        init();
+
+        // Cleanup when script is removed
+        document.currentScript.addEventListener('remove', cleanup);
+      ]]></script>
+    ` : '';
+
+    // Create squares for both layers (non-interactive)
     const createSquares = (data, isSecond = false) => {
       return chunkIt(data, 14).map(chunk => {
         if (chunk.length !== 14) return '';
@@ -40,7 +134,7 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
       }).join('');
     };
 
-    // Generate circles for both layers
+    // Generate circles for both layers with interactive attributes
     const createCircles = (data, radius, isSecond = false) => {
       return chunkIt(data, 7).map(chunk => {
         if (chunk.length !== 7) return '';
@@ -48,8 +142,14 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
         const cx = size / 2 + (x * size) / 2;
         const cy = y * size;
         const rad = r * radius;
+        
+        const circleAttrs = svg === 'interactive' 
+          ? `class="interactive-circle" data-cx="${cx}" data-cy="${cy}" data-opacity="${a}"` 
+          : '';
+
         return `
           <circle 
+            ${circleAttrs}
             cx="${cx}" cy="${cy}" r="${rad}"
             fill="hsla(${h * 360},${s * 100}%,${l * 100}%,${a})"
             style="${isSecond ? 'mix-blend-mode:multiply;' : ''}"
@@ -73,8 +173,13 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
       </defs>
     ` : '';
 
-    let svg = `
-      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    let svg_content = `
+      <svg 
+        width="${size}" height="${size}" 
+        viewBox="0 0 ${size} ${size}" 
+        xmlns="http://www.w3.org/2000/svg"
+        style="overflow: visible;"
+      >
         <defs>${bgGradient}</defs>
         ${clipPath}
         <g ${round ? 'clip-path="url(#circle-mask)"' : ''}>
@@ -86,18 +191,24 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
              ${createCircles(decoded[1], 0.125 * size, true)}`
           }
         </g>
+        ${interactiveScript}
       </svg>
     `;
+
+    if (svg === 'interactive') {
+      // For interactive mode, return encoded SVG without base64
+      return `data:image/svg+xml,${encodeURIComponent(svg_content.trim())}`;
+    }
 
     if (embed) {
       const embedData = { pub }
       if (embed && embed === true) { embedData.content = embed }
-      svg = embedInImage(svg, embedData, 'svg')
+      svg_content = embedInImage(svg_content, embedData, 'svg')
     }
   
     // Convert SVG to base64 for better CSS compatibility
     const svgBase64 = typeof btoa === 'function' 
-      ? btoa(svg) 
-      : Buffer.from(svg).toString('base64');
+      ? btoa(svg_content) 
+      : Buffer.from(svg_content).toString('base64');
     return `data:image/svg+xml;base64,${svgBase64}`;
 }
