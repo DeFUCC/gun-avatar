@@ -88,15 +88,16 @@ Layout.overflow-hidden
 			:style="{backgroundImage:`url(${gunAvatar({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
 			)
 			transition(name="fade" mode="out-in")
-				gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
+				//- gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
 					@click="state.generatePair()"
 					:size="300"
 					:embed="state.pair"
 					:key="state.pub"
 					:pub="state.pub")
-			object.rounded-full.h-80.w-80(
-				type="image/svg+xml"
-				:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
+				object.rounded-full.h-80.w-80(
+					:key="state.pub"
+					type="image/svg+xml"
+					:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
 			.card.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(
