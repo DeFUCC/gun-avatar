@@ -60,5 +60,10 @@ export default defineConfig({
 				],
 			}),
 		]
+	},
+	transformHead({ pageData }) {
+		return [
+			process.env.NODE_ENV === "production" && ["script", { async: true, defer: true, "data-website-id": "32f68ceb-030d-4bf9-bb4c-a621ad7e1b54", src: "https://stat.defucc.me/script.js" }],
+		]
 	}
 })
