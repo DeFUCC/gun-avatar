@@ -83,10 +83,15 @@ Layout.overflow-hidden
 						)
 	
 	template(#home-features-after)
-		.my-16.w-full.min-h-100vh.bg-cover.bg-fixed.flex.items-center.justify-center.flex-wrap(
+		.my-16.w-full.min-h-100vh.bg-cover.bg-fixed.flex.items-center.justify-center.flex-wrap.relative(
 			style="transition: all ease 1s;"
-			:style="{backgroundImage:`url(${gunAvatar({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
 			)
+			//- :style="{backgroundImage:`url(${gunAvatar({pub:state.pub, size: 1400, draw:'squares', reflect: false, dark:state.options.dark, round: false})})`}"
+			transition(name="fade")
+				object.absolute.top-0.left-0.right-0.bottom-0.z-1.h-full.w-full(
+						:key="state.pub"
+						type="image/svg+xml"
+						:data="gunAvatar({pub:state.pub, svg:'interactive', size:1200,  draw:'squares', reflect: false, dark:state.options.dark, round: false})")
 			transition(name="fade" mode="out-in")
 				//- gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
 					@click="state.generatePair()"
@@ -94,11 +99,11 @@ Layout.overflow-hidden
 					:embed="state.pair"
 					:key="state.pub"
 					:pub="state.pub")
-				object.rounded-full.h-80.w-80(
+				object.rounded-full.h-80.w-80.z-2.min-h-70(
 					:key="state.pub"
 					type="image/svg+xml"
 					:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
-			.card.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
+			.card.z-2.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(
 						style="font-size: 14px;"

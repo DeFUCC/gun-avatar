@@ -1,5 +1,13 @@
 # gun-avatar changelog
 
+## 2.1.0
+
+Interactive self-embedded SVG data-objects for avatars and rooms.
+
+## 2.0.0
+
+SVG fallback
+
 ## 1.8.0
 
 Typescript is introduced. The internal functions are more clean and readable. And new documentation web-site based on Vitepress is ready for the first deploy.
