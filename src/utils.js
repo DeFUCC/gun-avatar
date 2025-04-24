@@ -15,3 +15,7 @@ export function decodeUrlSafeBase64(st) {
   }
   return arr;
 }
+
+export function encodeUrlSafeBase64(arr) {
+  return arr.map(num => symbols[Math.floor(num * 64)]).join("");
+}

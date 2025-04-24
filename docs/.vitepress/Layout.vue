@@ -8,6 +8,7 @@ import { useFavicon } from '@vueuse/core';
 import ExtractText from './components/extract-text.vue';
 import { gunAvatar } from '../../src';
 import { useShare } from '@vueuse/core';
+import { onKeyStroke } from '@vueuse/core';
 
 const { Layout } = DefaultTheme
 
@@ -58,6 +59,11 @@ const downloadPNG = async () => {
 		window.open(avatarUrl, '_blank')
 	}
 }
+
+onKeyStroke('Enter', () => {
+	state.generatePair()
+})
+
 </script>
 
 <template lang="pug">
@@ -92,17 +98,18 @@ Layout.overflow-hidden
 						:key="state.pub"
 						type="image/svg+xml"
 						:data="gunAvatar({pub:state.pub, svg:'interactive', size:1200,  draw:'squares', reflect: false, dark:state.options.dark, round: false})")
-			transition(name="fade" mode="out-in")
-				//- gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
-					@click="state.generatePair()"
-					:size="300"
-					:embed="state.pair"
-					:key="state.pub"
-					:pub="state.pub")
-				object.rounded-full.h-80.w-80.z-2.min-h-70(
-					:key="state.pub"
-					type="image/svg+xml"
-					:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
+			.h-80.w-80.min-h-70.z-4
+				transition(name="fade" mode="out-in")
+					//- gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
+						@click="state.generatePair()"
+						:size="300"
+						:embed="state.pair"
+						:key="state.pub"
+						:pub="state.pub")
+					object.rounded-full.z-2.w-full(
+						:key="state.pub"
+						type="image/svg+xml"
+						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
 			.card.z-2.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(
