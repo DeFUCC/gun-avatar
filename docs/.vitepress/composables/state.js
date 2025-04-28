@@ -4,6 +4,8 @@ import { useRefHistory, useIntervalFn, useClipboard, onKeyStroke } from '@vueuse
 import { parsePub } from "../../../src/main";
 import { useData } from "vitepress";
 
+import derivePair from '@gun-vue/gun-es/derive'
+
 export const state = reactive({
 	initiated: false,
 	pair: { "pub": "gioAcuL3KHDJFUWzNEkPkcgcw_HwqVv6avvYkBCcvJM.fguD_Qq2cYTrD5yFL29-TfJbnVn0N60PdUALdfKiR-8", "priv": "hIbw7KcuLFWBMvjFiyTm9k7X2lGeKoU4uu1bvBTUzqE", "epub": "gBjaZTpHcnlCLsqtELiH-T6SxaYT5UsNvPbF2MMFLOk.hWoiw7E2eoLtFFsbBDRNPYHX3Db-0AlZTkIMn-3Byy8", "epriv": "GAhTKw1A2yQfpS8nRVE7zKNu4uBCXdRFmRmtMq7j90s" },
@@ -32,18 +34,15 @@ export function useState() {
 	if (import.meta.env.SSR) return state
 	if (!state.initiated) {
 
-		import('gun/sea/pair.js').then(async SEA => {
+		onMounted(async () => {
+
 			state.generatePair = async function () {
-				state.pair = await SEA.default()
+				state.pair = await derivePair("a" + Math.random() * 1000)
 			}
 			await state.generatePair()
 			onKeyStroke('Enter', () => {
 				state.generatePair()
 			})
-		})
-
-
-		onMounted(async () => {
 
 			state.loop = useIntervalFn(async () => {
 				await state.generatePair()

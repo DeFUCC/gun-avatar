@@ -46,6 +46,7 @@ Available attributes:
 - `reflect` - enable symmetrical reflection (default: true)
 - `draw` - rendering mode: "circles" or "squares" (default: "circles")
 - `embed` - enable data embedding or provide data to embed (default: true)
+- `svg` - rendering format. If false renders canvas image, if true - renders static SVG file
 
 ```html
 <gun-avatar pub="your-pub-key" embed='{"name":"John","role":"admin"}' />
@@ -69,6 +70,7 @@ Available attributes:
 	embed='{"name":"John","role":"admin"}'
 	round
 	dark
+	svg
 />
 ```
 
@@ -85,6 +87,7 @@ Available data attributes:
 - `data-reflect` - enable reflection
 - `data-draw` - rendering mode
 - `data-embed` - data embedding
+- `data-svg` - svg format
 
 ```html
 <script type="module">
@@ -97,6 +100,7 @@ Available data attributes:
 	data-size="200"
 	data-draw="squares"
 	data-embed='{"room":"lobby"}'
+	data-svg="false"
 	data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
 />
 ```
@@ -115,6 +119,7 @@ const options = {
 	draw: "circles", // "circles" or "squares"
 	reflect: true, // default: true
 	round: true, // default: false
+	svg: true,
 	embed: {
 		// optional data to embed
 		name: "John",
@@ -200,4 +205,4 @@ fileInput.addEventListener("change", async (e) => {
 - [x] add more draw modes
 - [x] data embedding in PNG/SVG
 - [ ] add more draw modes
-- [ ] animation support
+- [x] animation support

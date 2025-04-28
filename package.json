@@ -30,7 +30,7 @@
 	"files": [
 		"lib"
 	],
-	"packageManager": "pnpm@10.6.5",
+	"packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
 	"scripts": {
 		"dev": "vitepress dev docs",
 		"build": "vitepress build docs",
@@ -42,11 +42,11 @@
 	"dependencies": {
 		"@unocss/reset": "^66.0.0",
 		"@vueuse/core": "^13.0.0",
-		"gun": "^0.2020.1240",
 		"png-chunk-text": "^1.0.0",
 		"png-chunks-encode": "^1.0.0",
 		"png-chunks-extract": "^1.0.0",
-		"vue": "^3.5.13"
+		"vue": "^3.5.13",
+		"@gun-vue/gun-es": "^0.3.1240"
 	},
 	"devDependencies": {
 		"@iconify-json/la": "^1.2.1",

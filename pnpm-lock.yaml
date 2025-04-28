@@ -8,15 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@gun-vue/gun-es':
+        specifier: ^0.3.1240
+        version: 0.3.1240
       '@unocss/reset':
         specifier: ^66.0.0
         version: 66.0.0
       '@vueuse/core':
         specifier: ^13.0.0
         version: 13.0.0(vue@3.5.13(typescript@5.8.2))
-      gun:
-        specifier: ^0.2020.1240
-        version: 0.2020.1240
       png-chunk-text:
         specifier: ^1.0.0
         version: 1.0.0
@@ -470,6 +470,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@gun-vue/gun-es@0.3.1240':
+    resolution: {integrity: sha512-a05ZdoTlZkV54pmUkMNC3fcmVZ38dQ27MZ1EC/UtSY9SHlFNpGqNy7sujUQJOCslz0DI304OeUo/zIwe0izfNA==}
+
   '@iconify-json/la@1.2.1':
     resolution: {integrity: sha512-7VUpZ+E7PfBpCXmAzLEGRR0LqCyFQRJiJTriO/vIZtQ1BLJ4xiDlIQ8gCCQvyTnKPG4IrvencwAxXpJGhk4pYg==}
 
@@ -503,6 +506,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@noble/curves@1.9.0':
+    resolution: {integrity: sha512-7YDlXiNMdO1YZeH6t/kvopHHbIZzlxrCV9WLqCY6QhcXOoXiNCMDqJIglZ9Yjx5+w7Dz30TITFrlTjnRg7sKEg==}
+    engines: {node: ^14.21.3 || >=16}
+
+  '@noble/hashes@1.8.0':
+    resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
+    engines: {node: ^14.21.3 || >=16}
 
   '@peculiar/asn1-schema@2.3.15':
     resolution: {integrity: sha512-QPeD8UA8axQREpgR5UTAfu2mqQmm97oUqahDtNdBcfj3qAnoXzFdQW+aNf/tD2WVXF8Fhmftxoj0eMIT++gX2w==}
@@ -2202,6 +2213,14 @@ snapshots:
   '@esbuild/win32-x64@0.25.1':
     optional: true
 
+  '@gun-vue/gun-es@0.3.1240':
+    dependencies:
+      '@noble/curves': 1.9.0
+      gun: 0.2020.1240
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@iconify-json/la@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -2250,6 +2269,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@noble/curves@1.9.0':
+    dependencies:
+      '@noble/hashes': 1.8.0
+
+  '@noble/hashes@1.8.0': {}
 
   '@peculiar/asn1-schema@2.3.15':
     dependencies:

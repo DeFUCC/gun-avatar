@@ -24,6 +24,8 @@ export function mountClass(elClass = "gun-avatar") {
         dark: Boolean(img.dataset.dark),
         draw: img.dataset.draw,
         reflect: img.dataset.reflect !== "false",
+        svg: img.dataset.svg,
+        round: Boolean(img.dataset.round),
         embed: embed === "false" ? false : embed || true
       });
     }
@@ -49,8 +51,12 @@ export function mountElement(elName = "gun-avatar") {
       this.draw = this.getAttribute("draw") || "circles";
       this.reflect = this.hasAttribute("reflect") ? this.getAttribute("reflect") !== "false" : true;
       this.round = this.hasAttribute("round") || this.getAttribute("round") === "";
-      this.dark = this.hasAttribute("dark") || this.getAttribute("dark") === "";
+      this.dark = this.hasAttribute("dark") ? this.getAttribute("dark") != "" : false;
       this.embed = this.hasAttribute("embed") ? this.getAttribute("embed") !== "false" : true;
+
+      this.svg = this.hasAttribute("dark") && this.getAttribute("dark");
+
+      this.p3 = this.hasAttribute("p3") ? this.getAttribute("p3") !== "false" : true;
 
       let embed = this.getAttribute("embed");
       if (this.getAttribute("embed")) {
@@ -69,7 +75,10 @@ export function mountElement(elName = "gun-avatar") {
         dark: this.dark,
         draw: this.draw,
         reflect: this.reflect,
-        embed: embed === "false" ? false : embed || true
+        round: this.round,
+        svg: this.svg,
+        embed: embed === "false" ? false : embed || true,
+        p3: this.p3
       });
     }
 
@@ -78,7 +87,7 @@ export function mountElement(elName = "gun-avatar") {
     }
 
     static get observedAttributes() {
-      return ["pub", "round", "size", "dark", "draw", "reflect", "embed"];
+      return ["pub", "round", "size", "dark", "draw", "reflect", "embed", "p3"];
     }
 
     attributeChangedCallback() {
