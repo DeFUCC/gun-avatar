@@ -68,6 +68,8 @@ onKeyStroke('Enter', () => {
 
 <template lang="pug">
 Layout.overflow-hidden
+	template(#home-hero-before)
+		img.absolute.top-0.bottom-0.left-0.right-0.bg-red.w-full.op-10(inert :src="gunAvatar({pub:state.pub, svg:false, size:1400,  draw:'squares', reflect: false, dark:state.options.dark, round: false,})" )
 	template(#home-hero-image)
 		.flex(@click="state.generatePair()")
 			transition(name="fade")

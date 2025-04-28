@@ -10,24 +10,26 @@ const cache = {};
 /**
  * Generate avatar from public key
  */
-export function gunAvatar({
-  pub,
-  size = 200,
-  dark = false,
-  draw = "circles",
-  reflect = true,
-  round = true,
-  embed = true,
-  svg = true,
-} = {}) {
+export function gunAvatar(options = {}) {
+  const {
+    pub,
+    size = 200,
+    dark = false,
+    draw = "circles",
+    reflect = true,
+    round = true,
+    embed = true,
+    svg = false,
+    p3 = true,
+  } = options
   const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
   if (!validatePub(pub)) return '';
-  if (svg || !isBrowser) return renderSVGAvatar({ pub, size, dark, draw, reflect, round, embed, svg });
+  if (svg || !isBrowser) return renderSVGAvatar(options);
 
   const key = JSON.stringify(arguments[0])
   if (cache?.[key]) return cache[key]
 
-  const image = renderCanvasAvatar({ pub, size, dark, draw, reflect, round, embed });
+  const image = renderCanvasAvatar(options);
   cache[key] = image;
   return image;
 }

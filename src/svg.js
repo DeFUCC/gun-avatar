@@ -32,8 +32,8 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
       return `
           <defs>
             <linearGradient id="${gradientId}" x1="${x1}" y1="0" x2="${x2}" y2="1">
-              <stop offset="0%" stop-color="hsla(${h1 * 360},${s1 * 100}%,${l1 * 100}%,${a1})"/>
-              <stop offset="100%" stop-color="hsla(${h2 * 360},${s2 * 100}%,${l2 * 100}%,${a2})"/>
+              <stop offset="0%" stop-color="color(display-p3 ${h1} ${s1} ${l1} / ${a1})"/>
+              <stop offset="100%" stop-color="color(display-p3 ${h2} ${s2} ${l2} / ${a2})"/>
             </linearGradient>
           </defs>
           <g ${squareAttrs} transform="translate(${centerX} ${centerY}) rotate(${angle * 180})">
@@ -53,10 +53,10 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
   const createCircles = (data, radius, isSecond = false) => {
     return chunkIt(data, 7).map(chunk => {
       if (chunk.length !== 7) return '';
-      const [x, y, r, h, s, l, a] = chunk;
+      const [x, y, radi, r, g, b, a] = chunk;
       const cx = size / 2 + (x * size) / 2;
       const cy = y * size;
-      const rad = r * radius;
+      const rad = radi * radius;
 
       const circleAttrs = svg === 'interactive'
         ? `class="interactive-circle" data-cx="${cx}" data-cy="${cy}" data-opacity="${a}"`
@@ -66,13 +66,15 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
           <circle 
             ${circleAttrs}
             cx="${cx}" cy="${cy}" r="${rad}"
-            fill="hsla(${h * 360},${s * 100}%,${l * 100}%,${a})"
+            fill="color(display-p3 ${r} ${g} ${b} / ${a})"
+
             style="${isSecond ? 'mix-blend-mode:multiply;' : ''}"
           />
           ${reflect ? `
           <circle 
             cx="${size - cx}" cy="${cy}" r="${rad}"
-            fill="hsla(${h * 360},${s * 100}%,${l * 100}%,${a})"
+            fill="color(display-p3 ${r} ${g} ${b} / ${a})"
+
             style="${isSecond ? 'mix-blend-mode:multiply;' : ''}"
           />` : ''}
         `;
