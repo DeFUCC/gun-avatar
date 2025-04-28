@@ -1,4 +1,3 @@
-import { extractPubFromSVG } from "./decoder";
 import { embedInSvg } from "./embed";
 import { interactiveScriptGen } from "./interactive";
 import { chunkIt, parsePub } from "./pub";
@@ -125,7 +124,6 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
     svg_content = embedInSvg(svg_content, embedData)
   }
 
-  // console.log(extractPubFromSVG(svg_content))
   const svgBase64 = typeof btoa === 'function'
     ? btoa(svg_content)
     : Buffer.from(svg_content).toString('base64');
