@@ -1,7 +1,7 @@
 import { extractPubFromSVG } from "./decoder";
-import { embedInImage } from "./embed";
+import { embedInSvg } from "./embed";
 import { interactiveScriptGen } from "./interactive";
-import { chunkIt, parsePub } from "./main";
+import { chunkIt, parsePub } from "./pub";
 
 export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles", reflect = true, round = true, embed = true, svg } = {}) {
   const { decoded, finals } = parsePub(pub)
@@ -121,21 +121,10 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
 
   if (embed) {
     const embedData = { pub }
-    if (embed && embed === true) { embedData.content = embed }
-    svg_content = embedInSvg(svg_content, pub)
+    if (embed) { embedData.content = embed }
+    svg_content = embedInSvg(svg_content, embedData)
   }
 
-  function embedInSvg(svgString, data) {
-    try {
-      const metadata = `<metadata>
-        <gun-data>${JSON.stringify(data)}</gun-data>
-      </metadata>`
-      return svgString.replace('</svg>', `${metadata}</svg>`)
-    } catch (e) {
-      error.value = 'Failed to embed data in SVG: ' + e.message
-      return null
-    }
-  }
   // console.log(extractPubFromSVG(svg_content))
   const svgBase64 = typeof btoa === 'function'
     ? btoa(svg_content)

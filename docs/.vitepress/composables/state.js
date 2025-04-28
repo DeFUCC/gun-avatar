@@ -1,7 +1,7 @@
 
 import { reactive, computed, toRef, onMounted, nextTick } from "vue";
 import { useRefHistory, useIntervalFn, useClipboard, onKeyStroke } from '@vueuse/core'
-import { parsePub } from "../../../src/main";
+import { parsePub } from "../../../src/pub";
 import { useData } from "vitepress";
 
 import derivePair from '@gun-vue/gun-es/derive'
@@ -46,7 +46,7 @@ export function useState() {
 
 			state.loop = useIntervalFn(async () => {
 				await state.generatePair()
-			}, 2000)
+			}, 4000, { immediate: false })
 
 			onKeyStroke('ArrowLeft', () => {
 				state.history.undo()

@@ -2,6 +2,7 @@ import patchSafari from "./patch.js";
 
 patchSafari()
 
-export { gunAvatar, parsePub } from './main'
+export { gunAvatar } from './main'
+export { parsePub } from './pub'
 export { mountClass, mountElement } from './mount'
 export { embedInImage, extractFromFile, error } from './embed'

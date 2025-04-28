@@ -5,6 +5,16 @@ import text from 'png-chunk-text'
 
 export const error = ref(null)
 
+
+export function embedInImage(canvas, data, format = 'png') {
+  if (format === 'svg') {
+    const svgString = canvas.outerHTML || canvas
+    return embedInSvg(svgString, data)
+  } else {
+    return embedInPNG(canvas, data)
+  }
+}
+
 function canvasToBuffer(canvas) {
   try {
     const base64 = canvas.toDataURL('image/png').split(',')[1]
@@ -20,7 +30,7 @@ function canvasToBuffer(canvas) {
   }
 }
 
-function embedInSvg(svgString, data) {
+export function embedInSvg(svgString, data) {
   try {
     const metadata = `<metadata>
       <gun-data>${JSON.stringify(data)}</gun-data>
@@ -32,22 +42,22 @@ function embedInSvg(svgString, data) {
   }
 }
 
-function extractFromSvg(svgString) {
+export function extractFromSvg(svgString) {
   try {
-    const match = svgString.match(/<gun-data>(.*?)<\/gun-data>/s)
-    return match ? JSON.parse(match[1]) : null
+    const metadataMatch = svgString.match(/<metadata>\s*<gun-data>(.*?)<\/gun-data>\s*<\/metadata>/s)
+    if (!metadataMatch || !metadataMatch[1]) {
+      error.value = 'No embedded data found in SVG'
+      return null
+    }
+
+    return JSON.parse(metadataMatch[1])
   } catch (e) {
     error.value = 'Failed to extract data from SVG: ' + e.message
     return null
   }
 }
 
-export function embedInImage(canvas, data, format = 'png') {
-  if (format === 'svg') {
-    const svgString = canvas.outerHTML || canvas
-    return embedInSvg(svgString, data)
-  }
-  // Default PNG handling
+export function embedInPNG(canvas, data) {
   try {
     const buffer = canvasToBuffer(canvas)
     if (!buffer) return null
@@ -59,6 +69,9 @@ export function embedInImage(canvas, data, format = 'png') {
     return null
   }
 }
+
+
+
 
 export function extractFromBuffer(buffer, type = 'image/png') {
   if (type === 'image/svg+xml') {
@@ -80,7 +93,6 @@ export function extractFromBuffer(buffer, type = 'image/png') {
   }
 }
 
-// Keep this async function for File inputs only
 export async function extractFromFile(file) {
   try {
     if (!(file instanceof File)) {
@@ -88,10 +100,9 @@ export async function extractFromFile(file) {
     }
     const arrayBuffer = await file.arrayBuffer()
     const buffer = new Uint8Array(arrayBuffer)
-    return await extractFromBuffer(buffer)
+    return await extractFromBuffer(buffer, file.type)
   } catch (e) {
     error.value = e.message
     return null
   }
 }
-

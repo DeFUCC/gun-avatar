@@ -1,4 +1,4 @@
-import { chunkIt, parsePub } from "./main";
+import { chunkIt, parsePub } from "./pub";
 import { embedInImage } from "./embed";
 
 

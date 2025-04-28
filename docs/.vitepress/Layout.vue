@@ -69,7 +69,7 @@ onKeyStroke('Enter', () => {
 <template lang="pug">
 Layout.overflow-hidden
 	template(#home-hero-before)
-		img.absolute.top-0.bottom-0.left-0.right-0.bg-red.w-full.op-10(inert :src="gunAvatar({pub:state.pub, svg:false, size:1400,  draw:'squares', reflect: false, dark:state.options.dark, round: false,})" )
+		img.absolute.top-0.bottom-0.left-0.right-0.bg-red.w-full.op-10(inert :key="state.pub" :src="gunAvatar({pub:state.pub, svg:false, size:1400,  draw:'squares', reflect: false, dark:state.options.dark, round: false,})" )
 	template(#home-hero-image)
 		.flex(@click="state.generatePair()")
 			transition(name="fade")
@@ -79,15 +79,18 @@ Layout.overflow-hidden
 					gun-vue-avatar.rounded-full.absolute.transform.scale-200.filter.blur-40px.z-5.op-80.dark-op-30(
 						:pub="state.pub"
 						:size="300"
+						:svg="true"
 						)
 					gun-vue-avatar.rounded-full.absolute.transform.scale-110.filter.blur-30px.z-10.dark-op-70(
 						:pub="state.pub"
 						:size="300"
+						:svg="true"
 						)
 					gun-vue-avatar.rounded-full.cursor-pointer.z-20.shadow-2xl(
 						:pub="state.pub"
 						:size="300"
 						:embed="state.pair"
+						:svg="false"
 						)
 	
 	template(#home-features-after)
@@ -102,16 +105,10 @@ Layout.overflow-hidden
 						:data="gunAvatar({pub:state.pub, svg:'interactive', size:1200,  draw:'squares', reflect: false, dark:state.options.dark, round: false})")
 			.h-80.w-80.min-h-70.z-4
 				transition(name="fade" mode="out-in")
-					//- gun-vue-avatar.rounded-full.shadow-xl.cursor-pointer(
-						@click="state.generatePair()"
-						:size="300"
-						:embed="state.pair"
-						:key="state.pub"
-						:pub="state.pub")
-					object.rounded-full.z-2.w-full(
+					object.shadow-2xl.rounded-full.z-2.w-full(
 						:key="state.pub"
 						type="image/svg+xml"
-						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1400, dark:state.options.dark})")
+						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1000, dark:state.options.dark})")
 			.card.z-2.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(

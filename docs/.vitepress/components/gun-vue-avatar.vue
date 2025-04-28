@@ -12,6 +12,8 @@ const props = defineProps({
 	draw: { type: String, default: 'circles' },
 	reflect: { type: Boolean, default: true },
 	round: { type: Boolean, default: true },
+	svg: { type: Boolean, default: true },
+	p3: { type: Boolean, default: true },
 	embed: { type: [Boolean, Object, String], default: true },
 })
 
