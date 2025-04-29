@@ -43,7 +43,8 @@ const downloadPNG = async () => {
 		pub: state.pub,
 		size: 300,
 		dark: state.options.dark,
-		embed: state.pair
+		embed: state.pair,
+		reflect: true
 	})
 
 	try {
