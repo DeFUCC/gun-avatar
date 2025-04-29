@@ -1,5 +1,9 @@
 # gun-avatar changelog
 
+## 2.2.0
+
+P3 colors and SVG by default
+
 ## 2.1.0
 
 Interactive self-embedded SVG data-objects for avatars and rooms.
