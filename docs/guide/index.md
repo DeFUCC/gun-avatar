@@ -1,188 +1,133 @@
----
-title: Guide
----
-
-# Avatar generator for GUN public keys
-
-![avatar](/avatars.gif)
-
-<a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
+# Avatar generator for GUN SEA public keys
 
 Gun-Avatar takes a public key `string` 88 symbols long and creates a `base64` encoded picture to be set as a source for an `<img>` tag.
 
+- Very few dependencies
+- < 30 Kb filesize
+- ES6 modules and web-components
+- PNG canvas images with SVG fallback
+- Data embedding
+
+<a href="https://www.npmjs.com/package/gun-avatar" target="_blank"><img src="https://img.shields.io/npm/v/gun-avatar?color=E23C92&logo=npm&style=for-the-badge" alt="NPM version"></a>
+
+![Gun-avatar](/avatars-l.jpg)
+
+## How does it work?
+
 SEA public key consists of 87 symbols including a dot in the middle, so we can consider it as `(7*4+1)*2`. So the steps to generate a unique picture for the key are like that:
 
-1. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
-2. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the HSLA model (h,s,l,a). We place these circles on one side of a square canvas.
-3. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
-4. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
+1. We split the public key in two halves by the dot `.`.
+2. We cut one digit from each part of the key. It gives us a pair of numbers, that we use to generate a grayscale vertical background gradient (light or dark)
+3. Then we break the remaining 42 characters of each part into 4 groups of 7 numbers. Each group describes a circle: it's coordinates (x,y), it's radius (r) and 4 color parameters in the RGBA model (r,g,b,a). We place these circles on one side of a square canvas.
+4. Circles from the first part of the key are bigger and are placed with normal composite mode. Circles from the second part are smaller and placed with 'lighten' composite mode.
+5. Then half of the canvas gets reflected to create a nice symmetric 'portrait' to be used as an avatar of a SEA public key.
 
-![avatars](/avatar-list.png)
+## How to use Gun-Avatar?
 
-## How to install?
-
-### npm / pnpm / yarn
-
-Install the script from `npm` with a tool of your choice.
-
-```shell
-npm i gun-avatar
-```
-
-Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or simply `import 'gun-avatar'` for custom element use.
-
-## How to use?
+There are multiple ways to convert you keys into visual representations. The easiest and most cross-platform is to mount a custom element and
 
 ### 1. Custom HTML element
 
-After you add the script to the page you get a custom element `<gun-avatar />` for ease of use. The attributes are reactive to changes.
-
-Available attributes:
-
-- `pub` - GUN public key (required)
-- `size` - size in pixels (default: 400)
-- `dark` - enable dark mode
-- `round` - make avatar circular
-- `reflect` - enable symmetrical reflection (default: true)
-- `draw` - rendering mode: "circles" or "squares" (default: "circles")
-- `embed` - enable data embedding or provide data to embed (default: true)
-- `svg` - rendering format. If false renders canvas image, if true - renders static SVG file
+After you add the script to the page you get a custom element `<gun-avatar />` for ease of use. The attributes are reactive to changes. Set `dark` attribute if you need a dark version of the avatar. Set `round` attribute to get a rounded image. Also `size` in pixels is available.
 
 ```html
-<gun-avatar pub="your-pub-key" embed='{"name":"John","role":"admin"}' />
-
-<!-- Just embed the pub key -->
-<gun-avatar pub="your-pub-key" embed />
-
-<!-- Disable embedding -->
-<gun-avatar pub="your-pub-key" embed="false" />
+<html>
+	<script type="module">
+		import { mountElement } from "https://cdn.skypack.dev/gun-avatar";
+		mountElement();
+	</script>
+	<body>
+		<gun-avatar
+			pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+			size="300"
+			round
+			dark
+			reflect
+			draw="circles"
+		/>
+	</body>
+</html>
 ```
+
+You can set up a custom element name with `mountElement('avatar')`
+
+### 2. HTML img tag with `data-pub` attribute
+
+Add the script to the page and then add `gun-avatar` class to an img tag along with add `data-pub` attribute with the pub key. `gun-avatar` automatically finds them on page and fills with corresponding base64 picture data. You can set `data-size` in px and style the avatar with css as you want. Also there's `data-dark` option to generate a dark version of the same avatar. You can add `.gun-avatar {border-radius: 100%}` to tour css to make it round.
 
 ```html
-<script type="module">
-	import { mountElement } from "gun-avatar";
-	mountElement();
-</script>
-
-<gun-avatar
-	pub="0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
-	size="300"
-	embed='{"name":"John","role":"admin"}'
-	round
-	dark
-	svg
-/>
+<html>
+	<script type="module">
+		import { mountClass } from "https://cdn.skypack.dev/gun-avatar";
+		mountClass();
+	</script>
+	<body>
+		<img
+			class="gun-avatar"
+			data-size="200"
+			data-draw="squares"
+			data-reflect="false"
+			data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
+		/>
+	</body>
+</html>
 ```
 
-### 2. HTML img tag with class
-
-Add the script and use the `gun-avatar` class with data attributes:
-
-Available data attributes:
-
-- `data-pub` - GUN public key (required)
-- `data-size` - size in pixels
-- `data-dark` - enable dark mode
-- `data-round` - make avatar circular
-- `data-reflect` - enable reflection
-- `data-draw` - rendering mode
-- `data-embed` - data embedding
-- `data-svg` - svg format
-
-```html
-<script type="module">
-	import { mountClass } from "gun-avatar";
-	mountClass();
-</script>
-
-<img
-	class="gun-avatar"
-	data-size="200"
-	data-draw="squares"
-	data-embed='{"room":"lobby"}'
-	data-svg="false"
-	data-pub="YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8"
-/>
-```
+You can set up a custom class name with `mountClass('avatar')`
 
 ### 3. JS function
 
-The `gunAvatar` function accepts an options object:
+Install the NPM script from with a tool of your choice. Then you can `import {gunAvatar} from 'gun-avatar'` and use the function to render the avatar. Or simply `import 'gun-avatar'` for custom element use.
 
-```javascript
-import { gunAvatar, extractFromFile } from "gun-avatar";
-
-const options = {
-	pub: "your-pub-key", // required
-	size: 200, // default: 400
-	dark: false, // default: false
-	draw: "circles", // "circles" or "squares"
-	reflect: true, // default: true
-	round: true, // default: false
-	svg: true,
-	embed: {
-		// optional data to embed
-		name: "John",
-		role: "admin",
-	},
-};
-
-const avatarSrc = gunAvatar(options);
+```shell
+pnpm i gun-avatar
 ```
 
-### Data Embedding
+Import the `gunAvatar` function from 'gun-avatar'. Then you can use it to generate the base64 string to place into the src attribute with your favourite library or vanilla js. Function gets an object with options: `pub` , `size` in px, `draw` mode, `dark` of not, `reflect` or not.
 
-Gun-Avatar supports embedding data within the generated images:
+```html
+<html>
+	<script type="module">
+		import { gunAvatar } from "https://cdn.skypack.dev/gun-avatar";
 
-```javascript
-// Embed just the pub key
-const avatar1 = gunAvatar({
-	pub: "your-pub-key",
-	embed: true,
-});
+		const pub =
+			"YZOBPSkw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8";
 
-// Embed custom data
-const avatar2 = gunAvatar({
-	pub: "your-pub-key",
-	embed: { name: "John", role: "admin" },
-});
-
-// No embedding
-const avatar3 = gunAvatar({
-	pub: "your-pub-key",
-	embed: false,
-});
+		document.addEventListener("DOMContentLoaded", () => {
+			document.getElementById("avatar").src = gunAvatar({ pub, size: 200 });
+		});
+	</script>
+	<body>
+		<img id="avatar" />
+	</body>
+</html>
 ```
 
-1. Embedding during generation:
+## Full function options
 
-```javascript
-const avatar = gunAvatar({
-	pub: "your-pub-key",
-	embed: { custom: "data" },
-});
+With graceful defaults
+
+```js
+const imageBase64 =  gunAvatar({
+    pub, // 88 symbols standard SEA public key
+    size = 200, // square side size in pixels
+    draw = "circles", // or 'squares'
+    reflect = true, // vertical symmetry for more life-like look
+    round = true, // applies circular tranparency mask
+	dark = false, // global gradient can be darker
+    embed = true, // or any string data to embed into the PNG or SVG file, can be extracted later. Very convenient place for storing encrypted keys right in the avatar file.
+    svg = true, // or true or 'interactive'
+    p3 = true, // disable P3 color space to get back to  rgb color values
+  })
 ```
 
-2. Extracting data from images:
+### Draw modes
 
-```javascript
-import { extractFromFile } from "gun-avatar";
+1. **Circles** - the default mode. Suitable for generating personal avatars. Assumes `reflect = true`.
 
-// From File input
-fileInput.addEventListener("change", async (e) => {
-	const file = e.target.files[0];
-	const data = await extractFromFile(file);
-	console.log(data); // { pub: "...", content: { custom: "data" } }
-});
-```
+2. **Squares** - gradient squares over blurred ones. Useful for rooms backgrounds. Assumes `reflect = false`.
 
-### MODES
-
-1. **Circles** - the default mode.
-
-2. **Squares** - gradient squares over blurred ones (useful for rooms)
-
-![rooms](/rooms.gif)
+![rooms](https://raw.githubusercontent.com/DeFUCC/gun-avatar/master/rooms.gif)
 
 ```html
 <gun-avatar
@@ -193,16 +138,58 @@ fileInput.addEventListener("change", async (e) => {
 ></gun-avatar>
 ```
 
-### ROAD MAP
+### P3 colors
 
-- [x] make the mirroring canvas work in Safari
-- [x] make adjustable canvas size with consistent result
-- [x] clipping mask rounding
-- [x] add more options to customize the view of the avatars
-- [x] custom element mount
-- [x] dark mode
-- [x] editable class and element to mount
-- [x] add more draw modes
-- [x] data embedding in PNG/SVG
-- [ ] add more draw modes
-- [x] animation support
+With v.2.2.0 we switched to high dynamic range P3 colors that are now widely supported by modern device screens. Almost everyone will notice the vivid and captivating new color combinations. For fallback we still provide an RGB color option - good for older devices and export file compatibility.
+
+### SVG format
+
+Vector format output format. Infinite resolution, pure geometry, server side generation compatible, smaller in size. Optimal solution, became default with v.2.2.0. And also now we can attach encrypted metadata to SVG images as well.
+
+### Interactive SVG
+
+```vue
+<object
+	class="shadow-2xl rounded-full z-2 w-full"
+	type="image/svg+xml"
+	:key="state.pub"
+	:data="
+		gunAvatar({
+			pub: state.pub,
+			svg: 'interactive',
+			size: 1000,
+			dark: state.options.dark,
+		})
+	"
+></object>
+```
+
+From version 2.2.0+ we now have full roadmap complete with amazing smooth animated reactions of both circles and squares backgrounds. Set `svg: 'interactive'` and embed the output in an `<object>` tag to add those subtle reactive movements to your avatars and rooms.
+
+### PNG format
+
+Heavier and more prone to strange overlay artifacts and there is certain beauty to it! Especially given the control you have on the size. Generate just enough pixel as get minimal memory footprint where needed. And may be you would enjoy some of those really beautiful ones rendered as high resolution wallpapers. Needs HTML Canvas to generate pictures and thus works only in browsers.
+
+### Data embedding
+
+You can embed any arbitrary string into both SVG and PNG images - very useful for an storing encrypted keypair right in the user's avatar. Just drop the image to the auth form and you're logged in. Data is stored in JSON format. Data is stored as plain text and has to be encrypted/decrypted by yourself.
+
+```json
+{
+	"pub": "0000000kw75Ute2tFhdjDQgzR-GsGhlfSlZxgEZKuquI.2F-j9ItJY44U8vcRAsj-5lxnECG5TDyuPD8gEiuInp8",
+	"content": "your data provided to the embed"
+}
+```
+
+An async `extractFromFile()` function is provided to get the embedded content back. For SVG we use simple metadata tags, for PNG we use tEXT chunks created for that purpose.
+
+```js
+import { extractFromFile } from "https://cdn.skypack.dev/gun-avatar";
+
+document.getElementById("input").addEventListener("change", async (event) => {
+	let content = await extractFromFile(event.target.files[0]);
+	console.log(content);
+});
+```
+
+![avatars](/avatars.jpg)

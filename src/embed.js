@@ -43,6 +43,7 @@ export function embedInSvg(svgString, data) {
 }
 
 export function extractFromSvg(svgString) {
+  console.log(svgString)
   try {
     const metadataMatch = svgString.match(/<metadata>\s*<gun-data>(.*?)<\/gun-data>\s*<\/metadata>/s)
     if (!metadataMatch || !metadataMatch[1]) {

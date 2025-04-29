@@ -109,7 +109,7 @@ Layout.overflow-hidden
 					object.shadow-2xl.rounded-full.z-2.w-full(
 						:key="state.pub"
 						type="image/svg+xml"
-						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 1000, dark:state.options.dark})")
+						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 200, dark:state.options.dark})")
 			.card.z-2.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
 					.text-center.font-mono.break-all(
@@ -163,12 +163,11 @@ Layout.overflow-hidden
 					v-for="rec in list"
 					:key="rec"
 					@click="state.clip.copy()")
-					gun-vue-avatar.rounded-full.cursor-pointer.shadow-lg(
-						:pub="rec.snapshot.pub"
-						:size="60"
+					object.rounded-full.cursor-pointer.shadow-lg(
+						:data="gunAvatar({pub:rec.snapshot.pub, svg:'interactive', size: 60})"
 						:class="{'outline':rec.snapshot == state.pair}"
 						@click="state.setPair(rec.snapshot)"
-						) {{ rec.snapshot.pub }}
+						) 
 			.button.mb-4.flex.items-center.gap-2.select-none(style="flex: 100 0 100%" @click="state.generatePair()")
 				.i-la-plus
 				.text-lg Generate more

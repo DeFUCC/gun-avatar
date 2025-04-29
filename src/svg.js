@@ -3,7 +3,7 @@ import { interactiveScriptGen } from "./interactive";
 import { chunkIt, parsePub } from "./pub";
 
 export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles", reflect = true, round = true, embed = true, svg } = {}) {
-  const { decoded, finals } = parsePub(pub)
+  const { decoded, finals, averages } = parsePub(pub)
   const bgColor = dark ? '#333' : '#eee';
 
   // Create gradient background
@@ -89,7 +89,7 @@ export function renderSVGAvatar({ pub, size = 200, dark = false, draw = "circles
     ` : '';
 
   // Interactive mode script for mouse tracking
-  const interactiveScript = svg === 'interactive' ? interactiveScriptGen({ size, reflect, finals }) : '';
+  const interactiveScript = svg === 'interactive' ? interactiveScriptGen({ size, reflect, finals, averages }) : '';
 
   let svg_content = `
       <svg 

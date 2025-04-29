@@ -18,11 +18,6 @@ async function handleDrop(e) {
   }
 }
 
-async function handleFileInput(e) {
-  const file = e.target.files[0]
-  if (file) await processFile(file)
-}
-
 async function processFile(file) {
   try {
     message.value = await extractFromFile(file)
@@ -68,7 +63,7 @@ const over = ref(false)
       .text-gray-500.dark-text-gray-400 Drop your PNG or SVG here
       .text-sm.text-gray-400.dark-text-gray-500 or
       .px-4.py-2.text-sm.rounded-md.cursor-pointer.bg-gray-100.hover-bg-gray-200.dark-bg-gray-800.dark-hover-bg-gray-700
-        input#file.hidden(type="file" accept="image/png,image/svg+xml" @change="handleFileInput")
+        input#file.hidden(type="file" accept="image/png,image/svg+xml" @change="processFile($event.target.files[0])")
         span Choose file
 
     //- Results UI

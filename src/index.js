@@ -5,4 +5,4 @@ patchSafari()
 export { gunAvatar } from './main'
 export { parsePub } from './pub'
 export { mountClass, mountElement } from './mount'
-export { embedInImage, extractFromFile, error } from './embed'
+export { extractFromFile, error } from './embed'
