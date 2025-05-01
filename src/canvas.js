@@ -1,5 +1,5 @@
 import { chunkIt, parsePub } from "./pub";
-import { embedInImage } from "./embed";
+import { embedInPNG } from "./embed";
 
 
 export function renderCanvasAvatar({ pub, size, dark, draw, reflect, round, embed, p3 }) {
@@ -61,7 +61,7 @@ export function renderCanvasAvatar({ pub, size, dark, draw, reflect, round, embe
       pub,
       content: embed
     }
-    const embedBuffer = embedInImage(canvas, embedData)
+    const embedBuffer = embedInPNG(canvas, embedData)
     if (embedBuffer) {
       const blob = new Blob([embedBuffer], { type: 'image/png' })
       image = URL.createObjectURL(blob)

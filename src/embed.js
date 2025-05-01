@@ -8,8 +8,7 @@ export const error = ref(null)
 
 export function embedInImage(canvas, data, format = 'png') {
   if (format === 'svg') {
-    const svgString = canvas.outerHTML || canvas
-    return embedInSvg(svgString, data)
+    return embedInSvg(canvas, data)
   } else {
     return embedInPNG(canvas, data)
   }
