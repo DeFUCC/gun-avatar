@@ -114,7 +114,7 @@ Layout.overflow-hidden
 						:data="gunAvatar({pub:state.pub, svg:'interactive', size: 200, dark:state.options.dark})")
 			.card.z-2.flex.flex-col.items-center.gap-2.px-2.py-8.rounded-40px.bg-light-100.max-w-120.m-8.bg-opacity-50.backdrop-filter.backdrop-blur-2xl.dark-bg-dark-100.dark-bg-opacity-50.shadow-lg
 				.flex.flex-col.items-center.gap-8
-					.text-center.font-mono.break-all(
+					.text-center.font-mono.break-all.select-all(
 						style="font-size: 14px;"
 						)
 						span.inline-block {{ state.pub.split('.')[0] }}
