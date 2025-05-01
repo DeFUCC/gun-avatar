@@ -19,7 +19,7 @@ hero:
       text: Repo
       link: https://github.com/defucc/gun-avatar
     - theme: alt
-      text: Playground
+      text: Codepen
       link: https://codepen.io/Davay/pen/eYGeGMZ
 
 features:
