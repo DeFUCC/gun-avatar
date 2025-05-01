@@ -57,7 +57,7 @@ export function interactiveScriptGen({ size, reflect, finals, averages, breathVe
           s.p = true;
           s.pt = performance.now();
           // Don't prevent default on mousedown to maintain normal behavior
-          if (e.type === 'touchstart') e.preventDefault();
+          // if (e.type === 'touchstart') e.preventDefault();
         };
         
         // Pulse end handler for mouseup/touchend

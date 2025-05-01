@@ -21,9 +21,10 @@ const { share, isSupported: isShareSupported } = useShare()
 const sharePNG = async () => {
 	const avatarUrl = gunAvatar({
 		pub: state.pub,
-		size: 1024,
+		size: 512,
 		dark: state.options.dark,
-		embed: state.pair
+		embed: state.pair,
+		svg: false,
 	})
 
 	try {
@@ -44,7 +45,8 @@ const downloadPNG = async () => {
 		size: 300,
 		dark: state.options.dark,
 		embed: state.pair,
-		reflect: true
+		reflect: true,
+		svg: false,
 	})
 
 	try {
@@ -146,7 +148,8 @@ Layout.overflow-hidden
 						:style="{transform:`scale(${state.clip.copied ? 1.2 : 1})`}"
 						@click="state.clip.copy()"
 						)
-						.i-la-clipboard
+						.i-la-clipboard(v-if="!state.clip.copied")
+						.i-la-clipboard-check(v-else)
 					.button(
 						@click="downloadPNG()"
 						)
@@ -156,21 +159,26 @@ Layout.overflow-hidden
 						@click="sharePNG()"
 						)
 						.i-la-share-alt
-		.flex.flex-wrap.items-center.px-12.justify-start.max-w-1200px.m-auto.flex-column-reverse.gap-2.pb-12.flex-wrap-reverse.mt-16
-			
-			transition-group(name="fade")
-				.flex(
-					v-for="rec in list"
-					:key="rec"
-					@click="state.clip.copy()")
-					object.rounded-full.cursor-pointer.shadow-lg(
-						:data="gunAvatar({pub:rec.snapshot.pub, svg:'interactive', size: 60})"
-						:class="{'outline':rec.snapshot == state.pair}"
-						@click="state.setPair(rec.snapshot)"
-						) 
-			.button.mb-4.flex.items-center.gap-2.select-none(style="flex: 100 0 100%" @click="state.generatePair()")
+		
+		.flex.flex-wrap.items-center.px-6.md-px-16.justify-start.max-w-1200px.m-auto.flex-column-reverse.gap-2.pb-12.gap-8
+			.button.flex.items-center.gap-2.select-none(style="flex: 100 0 100%" @click="state.generatePair()")
 				.i-la-plus
 				.text-lg Generate more
+			.flex.flex-wrap.flex-wrap-reverse.gap-2
+			
+				transition-group(name="fade")
+					.flex(
+						v-for="rec in list"
+						:key="rec.snapshot.pub"
+						@click="state.clip.copy()"
+						)
+						object.rounded-full.cursor-pointer.shadow-lg.w-60px.h-60px(
+							
+							:data="gunAvatar({pub:rec.snapshot.pub, svg:'interactive', size: 60})"
+							:class="{'outline':rec.snapshot == state.pair}"
+							@click="state.setPair(rec.snapshot)"
+							) 
+
 		ExtractText
 </template>
 
