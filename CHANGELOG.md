@@ -1,5 +1,9 @@
 # gun-avatar changelog
 
+## 2.2.3
+
+Smooth pointer follow animation
+
 ## 2.2.0
 
 P3 colors and SVG by default
