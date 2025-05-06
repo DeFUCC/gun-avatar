@@ -21,14 +21,14 @@ export function interactiveScriptGen({ size = 300, reflect = true, follow = true
         mv: (0.1 + 0.05*${averages[0]}) * Math.max(0.8, Math.min(4.4, 200/${size})),
         bs: 0.1 * Math.max(0.8, Math.min(1.4, 200/${size})),
         bv: ${breathVert} * Math.max(0.8, Math.min(1.4, 200/${size})),
-        bd: 4500 + ${averages[1]}*1000,
+        bd: 4500 + ${averages[0]}*1000,
         pa: 0.6 * Math.max(0.8, Math.min(1.4, 200/${size})),
         pr: 200,
         pf: 700,
         rf: ${follow},
         d: 900,
-        td: 1000,
-        pp: 0.12
+        td: 1500000,
+        pp: 0.5+ 0.5*${averages[1]}
       };
 
       // Init using IIFE

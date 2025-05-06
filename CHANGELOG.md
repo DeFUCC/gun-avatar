@@ -1,5 +1,9 @@
 # gun-avatar changelog
 
+## 2.2.4
+
+Reaction genetic tuning - now reaction time varies for each avatar, brings so much character. Cleaner export function options for import from NPM package
+
 ## 2.2.3
 
 Smooth pointer follow animation
@@ -15,6 +19,10 @@ Interactive self-embedded SVG data-objects for avatars and rooms.
 ## 2.0.0
 
 SVG fallback
+
+## 1.9.0
+
+Typescript removed
 
 ## 1.8.0
 
